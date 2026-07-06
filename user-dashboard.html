@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | Stackly NGO</title>
+    <meta name="description" content="Manage your donations, track your impact, and connect with the Stackly NGO community.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #1abc9c; --teal-dark: #16a085;
+            --yellow: #f1c40f; --red: #e74c3c;
+            --blue: #3498db; --purple: #9b59b6; --green: #2ecc71;
+            --text-dark: #1a1a2e; --text-gray: #64748b; --text-light: #94a3b8;
+            --bg: #f0f4f8; --card: #ffffff;
+            --sidebar-bg: #1a1a2e; --sidebar-active: rgba(26,188,156,0.15);
+            --border: #e2e8f0; --font: 'Manrope', sans-serif;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font); background: var(--bg); color: var(--text-dark); display: flex; min-height: 100vh; overflow-x: hidden; }
+
+        /* SIDEBAR */
+        .sidebar { width: 260px; min-height: 100vh; background: var(--sidebar-bg); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; z-index: 100; }
+        .sidebar-logo { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        .sidebar-logo a { font-size: 1.7rem; font-weight: 800; color: white; text-decoration: none; }
+        .sidebar-logo a span { color: var(--teal); }
+        .sidebar-logo small { display: block; color: var(--text-light); font-size: 0.72rem; margin-top: 2px; }
+        .sidebar-user { display: flex; align-items: center; gap: 13px; padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        .user-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--blue)); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: white; flex-shrink: 0; }
+        .user-meta h4 { color: white; font-size: 0.9rem; font-weight: 700; }
+        .user-meta p { color: var(--text-light); font-size: 0.72rem; display: flex; align-items: center; gap: 5px; }
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pd 2s infinite; display: inline-block; }
+        @keyframes pd { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .sidebar-nav { flex: 1; padding: 16px 0; overflow-y: auto; }
+        .nav-section { font-size: 0.67rem; font-weight: 800; color: rgba(255,255,255,0.28); text-transform: uppercase; letter-spacing: 1.5px; padding: 14px 24px 6px; }
+        .nav-item { display: flex; align-items: center; gap: 13px; padding: 12px 24px; color: rgba(255,255,255,0.5); font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: 0.25s; text-decoration: none; border-left: 3px solid transparent; }
+        .nav-item:hover { color: white; background: rgba(255,255,255,0.05); }
+        .nav-item.active { color: var(--teal); background: var(--sidebar-active); border-left-color: var(--teal); }
+        .nav-item i { width: 18px; text-align: center; }
+        .nav-badge { margin-left: auto; background: var(--red); color: white; font-size: 0.68rem; font-weight: 800; padding: 2px 6px; border-radius: 20px; }
+        .sidebar-footer { padding: 18px 24px; border-top: 1px solid rgba(255,255,255,0.07); }
+        .logout-btn { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.4); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: 0.2s; text-decoration: none; }
+        .logout-btn:hover { color: var(--red); }
+
+        /* MAIN */
+        .main-content { margin-left: 260px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+        .topbar { background: white; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 0 var(--border); position: sticky; top: 0; z-index: 50; }
+        .topbar-left h1 { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); }
+        .topbar-left p { font-size: 0.8rem; color: var(--text-gray); margin-top: 2px; }
+        .topbar-right { display: flex; align-items: center; gap: 14px; }
+        .tb-btn { width: 38px; height: 38px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-gray); font-size: 0.95rem; transition: 0.2s; position: relative; }
+        .tb-btn:hover { background: var(--teal); color: white; border-color: var(--teal); }
+        .notif-dot { position: absolute; top: 7px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--red); border: 2px solid white; }
+        .page-body { padding: 28px 32px; flex: 1; }
+
+        /* STAT CARDS */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 24px; }
+        .stat-card { background: var(--card); border-radius: 16px; padding: 24px 20px; box-shadow: var(--shadow); position: relative; overflow: hidden; transition: 0.3s; animation: fsu 0.6s ease both; }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .stat-card:nth-child(1){animation-delay:.05s} .stat-card:nth-child(2){animation-delay:.1s} .stat-card:nth-child(3){animation-delay:.15s} .stat-card:nth-child(4){animation-delay:.2s}
+        @keyframes fsu { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+        .stat-card::before { content:''; position:absolute; top:0; right:0; width:70px; height:70px; border-radius:0 16px 0 100%; opacity:0.08; }
+        .c1::before{background:var(--teal)} .c2::before{background:var(--yellow)} .c3::before{background:var(--red)} .c4::before{background:var(--purple)}
+        .stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 14px; }
+        .c1 .stat-icon{background:rgba(26,188,156,.12);color:var(--teal)} .c2 .stat-icon{background:rgba(241,196,15,.12);color:var(--yellow)} .c3 .stat-icon{background:rgba(231,76,60,.12);color:var(--red)} .c4 .stat-icon{background:rgba(155,89,182,.12);color:var(--purple)}
+        .stat-val { font-size: 2rem; font-weight: 800; color: var(--text-dark); line-height: 1; }
+        .stat-lbl { font-size: 0.78rem; color: var(--text-gray); font-weight: 600; margin-top: 7px; }
+        .stat-chg { margin-top: 12px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 5px; color: var(--green); }
+
+        /* CONTENT GRID */
+        .content-grid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; margin-bottom: 20px; }
+        .card { background: var(--card); border-radius: 16px; padding: 24px; box-shadow: var(--shadow); animation: fsu 0.7s ease both; }
+        .card-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .card-title { font-size: 1rem; font-weight: 800; color: var(--text-dark); }
+        .card-sub { font-size: 0.75rem; color: var(--text-gray); margin-top: 3px; }
+        .card-act { font-size: 0.8rem; color: var(--teal); font-weight: 700; cursor: pointer; text-decoration: none; transition: 0.2s; }
+        .card-act:hover { color: var(--teal-dark); }
+
+        /* BAR CHART */
+        .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 170px; border-bottom: 2px solid var(--border); margin-bottom: 8px; }
+        .bar-grp { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; }
+        .bar-inner { display: flex; align-items: flex-end; gap: 2px; width: 100%; height: 100%; }
+        .bar { border-radius: 6px 6px 0 0; flex: 1; transition: height 1.2s cubic-bezier(.34,1.56,.64,1); cursor: pointer; position: relative; }
+        .bar:hover { filter: brightness(1.12); }
+        .bar-tip { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: var(--text-dark); color: white; font-size: 0.68rem; font-weight: 700; padding: 3px 7px; border-radius: 5px; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.2s; }
+        .bar:hover .bar-tip { opacity: 1; }
+        .bar-lbl { font-size: 0.65rem; color: var(--text-gray); font-weight: 600; margin-top: 6px; }
+        .chart-legend { display: flex; gap: 18px; margin-top: 14px; }
+        .leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-gray); font-weight: 600; }
+        .leg-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+        /* DONUT */
+        .donut-wrap { display: flex; align-items: center; gap: 20px; }
+        .donut-leg { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .donut-row { display: flex; align-items: center; justify-content: space-between; }
+        .donut-left { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-gray); font-weight: 600; }
+        .d-dot { width: 9px; height: 9px; border-radius: 50%; }
+        .d-pct { font-size: 0.8rem; font-weight: 800; color: var(--text-dark); }
+
+        /* LOWER */
+        .lower-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+        /* CAUSE PROGRESS */
+        .cause-item { margin-bottom: 18px; }
+        .cause-hdr { display: flex; justify-content: space-between; margin-bottom: 7px; }
+        .cause-name { font-size: 0.84rem; font-weight: 700; color: var(--text-dark); }
+        .cause-pct { font-size: 0.8rem; font-weight: 700; }
+        .cause-bar { height: 7px; background: var(--bg); border-radius: 10px; overflow: hidden; }
+        .cause-fill { height: 100%; border-radius: 10px; width: 0; transition: width 1.4s cubic-bezier(.34,1.56,.64,1); }
+
+        /* ACTIVITY */
+        .act-list { display: flex; flex-direction: column; }
+        .act-item { display: flex; gap: 13px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .act-item:last-child { border-bottom: none; }
+        .act-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
+        .ai-t{background:rgba(26,188,156,.1);color:var(--teal)} .ai-y{background:rgba(241,196,15,.1);color:var(--yellow)} .ai-r{background:rgba(231,76,60,.1);color:var(--red)} .ai-b{background:rgba(52,152,219,.1);color:var(--blue)} .ai-p{background:rgba(155,89,182,.1);color:var(--purple)}
+        .act-body strong { font-size: 0.84rem; color: var(--text-dark); font-weight: 700; }
+        .act-body p { font-size: 0.77rem; color: var(--text-gray); margin-top: 2px; }
+        .act-time { font-size: 0.7rem; color: var(--text-light); font-weight: 600; white-space: nowrap; }
+
+        /* EVENT */
+        .evt-item { display: flex; gap: 13px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--border); }
+        .evt-item:last-child { border-bottom: none; }
+        .evt-date { width: 42px; height: 42px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+        .evt-detail strong { font-size: 0.82rem; font-weight: 700; display: block; color: var(--text-dark); }
+        .evt-detail span { font-size: 0.7rem; color: var(--text-gray); }
+
+        /* QUICK ACTIONS */
+        .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .q-btn { display: flex; align-items: center; gap: 11px; padding: 14px; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); cursor: pointer; transition: 0.2s; text-decoration: none; color: var(--text-dark); }
+        .q-btn:hover { background: white; border-color: var(--teal); box-shadow: 0 4px 14px rgba(26,188,156,.12); }
+        .q-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+        .q-text strong { font-size: 0.82rem; font-weight: 700; display: block; }
+        .q-text span { font-size: 0.7rem; color: var(--text-gray); }
+
+        /* CHAT */
+        .chat-card { display: flex; flex-direction: column; height: 410px; }
+        .chat-msgs { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 11px; padding: 2px 0; margin-bottom: 14px; }
+        .chat-msgs::-webkit-scrollbar { width: 3px; }
+        .chat-msgs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        .bubble { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 0.84rem; line-height: 1.5; animation: bi .3s ease; }
+        @keyframes bi { from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)} }
+        .bubble.in { background: var(--bg); color: var(--text-dark); border-bottom-left-radius: 4px; align-self: flex-start; }
+        .bubble.out { background: linear-gradient(135deg, var(--teal), var(--teal-dark)); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
+        .bm { font-size: 0.68rem; color: var(--text-light); margin-top: 2px; }
+        .bm.r { text-align: right; }
+        .chat-inp-row { display: flex; gap: 9px; align-items: center; background: var(--bg); border-radius: 12px; padding: 7px 7px 7px 14px; }
+        .chat-inp { flex: 1; border: none; background: transparent; outline: none; font-family: var(--font); font-size: 0.85rem; color: var(--text-dark); }
+        .chat-inp::placeholder { color: var(--text-light); }
+        .chat-snd { width: 36px; height: 36px; border-radius: 9px; background: var(--teal); color: white; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        .chat-snd:hover { background: var(--teal-dark); transform: scale(1.05); }
+
+        /* BADGES */
+        .bdg-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+        .bdg-card { flex: 1; min-width: 90px; background: var(--bg); border-radius: 12px; padding: 16px 10px; text-align: center; border: 2px solid transparent; cursor: pointer; transition: 0.3s; }
+        .bdg-card:hover { border-color: var(--teal); }
+        .bdg-card i { font-size: 1.6rem; margin-bottom: 7px; display: block; }
+        .bdg-card p { font-size: 0.72rem; font-weight: 700; color: var(--text-dark); }
+        .bdg-card small { font-size: 0.65rem; color: var(--text-gray); }
+
+        /* LINE CHART */
+        .line-svg { width: 100%; height: 100px; overflow: visible; }
+
+        @media(max-width:1200px){.stats-grid{grid-template-columns:1fr 1fr}.content-grid{grid-template-columns:1fr}.lower-grid{grid-template-columns:1fr}}
+        @media(max-width:768px){.sidebar{width:0;overflow:hidden}.main-content{margin-left:0}.page-body{padding:18px 14px}.topbar{padding:12px 14px}.stats-grid{grid-template-columns:1fr 1fr}}
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <a href="index.html">Stackly<span>.</span></a>
+        <small>NGO Management Platform</small>
+    </div>
+    <div class="sidebar-user">
+        <div class="user-avatar">JD</div>
+        <div class="user-meta">
+            <h4>John Doe</h4>
+            <p><span class="status-dot"></span> Active Donor</p>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-section">Main</div>
+        <a href="#" class="nav-item active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-heart"></i> My Donations <span class="nav-badge">3</span></a>
+        <a href="causes.html" class="nav-item"><i class="fa-solid fa-hand-holding-heart"></i> Browse Causes</a>
+        <a href="events.html" class="nav-item"><i class="fa-solid fa-calendar-days"></i> Events</a>
+        <div class="nav-section">Account</div>
+        <a href="#" class="nav-item"><i class="fa-solid fa-user-circle"></i> My Profile</a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-bell"></i> Notifications <span class="nav-badge">5</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-certificate"></i> My Badges</a>
+    </nav>
+    <div class="sidebar-footer">
+        <a href="login.html" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+    </div>
+</aside>
+
+<div class="main-content">
+    <div class="topbar">
+        <div class="topbar-left">
+            <h1>Welcome back, John &#128075;</h1>
+            <p id="topDate">Loading...</p>
+        </div>
+        <div class="topbar-right">
+            <div class="tb-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="tb-btn"><i class="fa-solid fa-bell"></i><div class="notif-dot"></div></div>
+            <div class="tb-btn"><i class="fa-solid fa-envelope"></i></div>
+            <div class="user-avatar" style="width:36px;height:36px;font-size:0.95rem;">JD</div>
+        </div>
+    </div>
+
+    <div class="page-body">
+
+        <!-- STAT CARDS -->
+        <div class="stats-grid">
+            <div class="stat-card c1">
+                <div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                <div class="stat-val" data-count="12450">0</div>
+                <div class="stat-lbl">Total Donated</div>
+                <div class="stat-chg"><i class="fa-solid fa-arrow-trend-up"></i> +18% this month</div>
+            </div>
+            <div class="stat-card c2">
+                <div class="stat-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
+                <div class="stat-val" data-count="23">0</div>
+                <div class="stat-lbl">Causes Supported</div>
+                <div class="stat-chg"><i class="fa-solid fa-arrow-trend-up"></i> +4 new causes</div>
+            </div>
+            <div class="stat-card c3">
+                <div class="stat-icon"><i class="fa-solid fa-people-group"></i></div>
+                <div class="stat-val" data-count="134">0</div>
+                <div class="stat-lbl">Lives Impacted</div>
+                <div class="stat-chg"><i class="fa-solid fa-arrow-trend-up"></i> +22 this week</div>
+            </div>
+            <div class="stat-card c4">
+                <div class="stat-icon"><i class="fa-solid fa-medal"></i></div>
+                <div class="stat-val" data-count="7">0</div>
+                <div class="stat-lbl">Badges Earned</div>
+                <div class="stat-chg"><i class="fa-solid fa-star"></i> Gold Donor status</div>
+            </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="content-grid">
+            <div class="card" style="animation-delay:.25s">
+                <div class="card-hdr">
+                    <div><div class="card-title">Donation History</div><div class="card-sub">Monthly breakdown &mdash; 2025</div></div>
+                    <a href="#" class="card-act">View All</a>
+                </div>
+                <div class="bar-chart" id="barChart"></div>
+                <div style="display:flex;justify-content:space-between" id="barLabels"></div>
+                <div class="chart-legend">
+                    <div class="leg-item"><div class="leg-dot" style="background:var(--teal)"></div> Donations</div>
+                    <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div> Events</div>
+                </div>
+            </div>
+            <div class="card" style="animation-delay:.3s">
+                <div class="card-hdr"><div><div class="card-title">Cause Breakdown</div><div class="card-sub">Where your impact goes</div></div></div>
+                <div class="donut-wrap">
+                    <svg width="136" height="136" viewBox="0 0 136 136" id="donutSvg" style="flex-shrink:0">
+                        <circle cx="68" cy="68" r="52" fill="none" stroke="#f0f4f8" stroke-width="22"/>
+                    </svg>
+                    <div class="donut-leg" id="donutLeg"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOWER 3-COL -->
+        <div class="lower-grid">
+            <div class="card" style="animation-delay:.35s">
+                <div class="card-hdr"><div><div class="card-title">Active Causes</div><div class="card-sub">Your contributions</div></div><a href="causes.html" class="card-act">Browse</a></div>
+                <div class="cause-item">
+                    <div class="cause-hdr"><span class="cause-name">Clean Water Initiative</span><span class="cause-pct" style="color:var(--teal)">78%</span></div>
+                    <div class="cause-bar"><div class="cause-fill" data-fill="78" style="background:var(--teal)"></div></div>
+                </div>
+                <div class="cause-item">
+                    <div class="cause-hdr"><span class="cause-name">Education for All</span><span class="cause-pct" style="color:var(--blue)">54%</span></div>
+                    <div class="cause-bar"><div class="cause-fill" data-fill="54" style="background:var(--blue)"></div></div>
+                </div>
+                <div class="cause-item">
+                    <div class="cause-hdr"><span class="cause-name">Emergency Food Relief</span><span class="cause-pct" style="color:var(--red)">91%</span></div>
+                    <div class="cause-bar"><div class="cause-fill" data-fill="91" style="background:var(--red)"></div></div>
+                </div>
+                <div class="cause-item">
+                    <div class="cause-hdr"><span class="cause-name">Women Empowerment</span><span class="cause-pct" style="color:var(--purple)">43%</span></div>
+                    <div class="cause-bar"><div class="cause-fill" data-fill="43" style="background:var(--purple)"></div></div>
+                </div>
+            </div>
+
+            <div class="card" style="animation-delay:.4s">
+                <div class="card-hdr"><div><div class="card-title">Recent Activity</div><div class="card-sub">Your latest actions</div></div></div>
+                <div class="act-list">
+                    <div class="act-item"><div class="act-icon ai-t"><i class="fa-solid fa-heart"></i></div><div class="act-body"><strong>Donated &#8377;2,000</strong><p>Clean Water Initiative</p></div><div class="act-time">2h ago</div></div>
+                    <div class="act-item"><div class="act-icon ai-y"><i class="fa-solid fa-calendar-check"></i></div><div class="act-body"><strong>Registered for Event</strong><p>Community Clean-Up Drive</p></div><div class="act-time">1d ago</div></div>
+                    <div class="act-item"><div class="act-icon ai-p"><i class="fa-solid fa-medal"></i></div><div class="act-body"><strong>Badge Unlocked!</strong><p>Compassion Champion</p></div><div class="act-time">3d ago</div></div>
+                    <div class="act-item"><div class="act-icon ai-b"><i class="fa-solid fa-share-nodes"></i></div><div class="act-body"><strong>Shared a Cause</strong><p>Education for All</p></div><div class="act-time">5d ago</div></div>
+                    <div class="act-item"><div class="act-icon ai-r"><i class="fa-solid fa-hand-holding-heart"></i></div><div class="act-body"><strong>Donated &#8377;5,000</strong><p>Emergency Food Relief</p></div><div class="act-time">1w ago</div></div>
+                </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:20px">
+                <div class="card" style="animation-delay:.45s">
+                    <div class="card-hdr"><div class="card-title">Upcoming Events</div><a href="events.html" class="card-act">All</a></div>
+                    <div class="evt-item">
+                        <div class="evt-date" style="background:rgba(26,188,156,.1);color:var(--teal)"><div style="font-size:1rem">15</div><div style="font-size:0.58rem;text-transform:uppercase;letter-spacing:1px">Jul</div></div>
+                        <div class="evt-detail"><strong>Food Distribution Drive</strong><span><i class="fa-solid fa-location-dot"></i> Salem Main Market</span></div>
+                    </div>
+                    <div class="evt-item">
+                        <div class="evt-date" style="background:rgba(52,152,219,.1);color:var(--blue)"><div style="font-size:1rem">22</div><div style="font-size:0.58rem;text-transform:uppercase;letter-spacing:1px">Jul</div></div>
+                        <div class="evt-detail"><strong>Community Health Camp</strong><span><i class="fa-solid fa-location-dot"></i> District Hospital</span></div>
+                    </div>
+                    <div class="evt-item">
+                        <div class="evt-date" style="background:rgba(155,89,182,.1);color:var(--purple)"><div style="font-size:1rem">01</div><div style="font-size:0.58rem;text-transform:uppercase;letter-spacing:1px">Aug</div></div>
+                        <div class="evt-detail"><strong>Youth Skills Workshop</strong><span><i class="fa-solid fa-location-dot"></i> Stackly Center</span></div>
+                    </div>
+                </div>
+                <div class="card" style="animation-delay:.5s">
+                    <div class="card-hdr"><div class="card-title">Quick Actions</div></div>
+                    <div class="quick-grid">
+                        <a href="causes.html" class="q-btn"><div class="q-icon" style="background:rgba(26,188,156,.1);color:var(--teal)"><i class="fa-solid fa-plus"></i></div><div class="q-text"><strong>Donate</strong><span>Support a cause</span></div></a>
+                        <a href="events.html" class="q-btn"><div class="q-icon" style="background:rgba(52,152,219,.1);color:var(--blue)"><i class="fa-solid fa-calendar-plus"></i></div><div class="q-text"><strong>Register</strong><span>Join an event</span></div></a>
+                        <a href="#" class="q-btn"><div class="q-icon" style="background:rgba(155,89,182,.1);color:var(--purple)"><i class="fa-solid fa-share-nodes"></i></div><div class="q-text"><strong>Share</strong><span>Spread the word</span></div></a>
+                        <a href="contact.html" class="q-btn"><div class="q-icon" style="background:rgba(231,76,60,.1);color:var(--red)"><i class="fa-solid fa-headset"></i></div><div class="q-text"><strong>Support</strong><span>Get help</span></div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT + BADGES -->
+        <div class="content-grid">
+            <div class="card chat-card" style="animation-delay:.55s">
+                <div class="card-hdr">
+                    <div><div class="card-title"><i class="fa-solid fa-comments" style="color:var(--teal);margin-right:7px"></i>Community Chat</div><div class="card-sub">Connect with other donors</div></div>
+                    <div style="display:flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--green);font-weight:700"><span class="status-dot"></span> 24 online</div>
+                </div>
+                <div class="chat-msgs" id="chatMsgs">
+                    <div><div class="bubble in">Hi John! Welcome to the Stackly community &#127881;</div><div class="bm">Stackly Bot &bull; 10:00 AM</div></div>
+                    <div><div class="bubble in">The food drive last week was a huge success! Thank you all &#128591;</div><div class="bm">Priya S. &bull; 10:05 AM</div></div>
+                    <div><div class="bubble out">Happy to be part of this! When's the next event?</div><div class="bm r">You &bull; 10:07 AM</div></div>
+                    <div><div class="bubble in">July 15th &mdash; Food Distribution at Salem Market. Hope to see you there!</div><div class="bm">Rajan K. &bull; 10:09 AM</div></div>
+                </div>
+                <div class="chat-inp-row">
+                    <input type="text" class="chat-inp" id="chatIn" placeholder="Type a message...">
+                    <button class="chat-snd" id="chatSnd"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+            <div class="card" style="animation-delay:.6s">
+                <div class="card-hdr"><div><div class="card-title">My Badges</div><div class="card-sub">7 of 12 earned</div></div></div>
+                <div class="bdg-row">
+                    <div class="bdg-card"><i class="fa-solid fa-star" style="color:var(--yellow)"></i><p>Gold Donor</p><small>Earned</small></div>
+                    <div class="bdg-card"><i class="fa-solid fa-trophy" style="color:var(--yellow)"></i><p>Top Supporter</p><small>Earned</small></div>
+                    <div class="bdg-card"><i class="fa-solid fa-seedling" style="color:var(--green)"></i><p>Eco Hero</p><small>Earned</small></div>
+                </div>
+                <div class="bdg-row">
+                    <div class="bdg-card"><i class="fa-solid fa-shield-heart" style="color:var(--red)"></i><p>Life Saver</p><small>Earned</small></div>
+                    <div class="bdg-card" style="opacity:.4"><i class="fa-solid fa-crown" style="color:var(--purple)"></i><p>Champion</p><small>Locked</small></div>
+                    <div class="bdg-card" style="opacity:.4"><i class="fa-solid fa-rocket" style="color:var(--blue)"></i><p>Trailblazer</p><small>Locked</small></div>
+                </div>
+                <div style="margin-top:10px">
+                    <div style="font-size:0.75rem;font-weight:700;color:var(--text-gray);margin-bottom:8px">Impact Score This Year</div>
+                    <svg class="line-svg" id="lineSvg" viewBox="0 0 280 80" preserveAspectRatio="none"></svg>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// Date
+document.getElementById('topDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// Counters
+document.querySelectorAll('[data-count]').forEach(el=>{
+    const t=parseInt(el.dataset.count); let c=0;
+    const step=Math.ceil(t/60);
+    const ti=setInterval(()=>{ c=Math.min(c+step,t); el.textContent=c.toLocaleString(); if(c>=t)clearInterval(ti); },25);
+});
+
+// Bar Chart
+const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const don=[800,1200,950,1800,1100,2200,1600,2900,2100,3400,2800,4500];
+const evts=[200,400,300,600,350,700,500,900,650,1100,900,1400];
+const maxV=Math.max(...don);
+const bc=document.getElementById('barChart'), bl=document.getElementById('barLabels');
+months.forEach((m,i)=>{
+    const grp=document.createElement('div'); grp.className='bar-grp';
+    const inner=document.createElement('div'); inner.className='bar-inner';
+    [[don[i],'#1abc9c'],[evts[i],'#3498db']].forEach(([v,col])=>{
+        const bar=document.createElement('div'); bar.className='bar';
+        const h=Math.round((v/maxV)*150);
+        bar.style.cssText=`background:${col};height:0;flex:1;opacity:0.85`;
+        bar.innerHTML=`<span class="bar-tip">&#8377;${v.toLocaleString()}</span>`;
+        setTimeout(()=>{ bar.style.height=h+'px'; },300+i*55);
+        inner.appendChild(bar);
+    });
+    grp.appendChild(inner);
+    const lbl=document.createElement('div'); lbl.className='bar-lbl'; lbl.textContent=m;
+    grp.appendChild(lbl);
+    bc.appendChild(grp);
+});
+
+// Donut Chart
+const ds=[{l:'Clean Water',p:35,c:'#1abc9c'},{l:'Education',p:28,c:'#3498db'},{l:'Food Relief',p:22,c:'#e74c3c'},{l:'Empowerment',p:15,c:'#9b59b6'}];
+const svg=document.getElementById('donutSvg'); let ang=-90; const cx=68,cy=68,r=52;
+ds.forEach(d=>{
+    const a=(d.p/100)*360, sr=(ang*Math.PI)/180, er=((ang+a)*Math.PI)/180;
+    const x1=cx+r*Math.cos(sr),y1=cy+r*Math.sin(sr),x2=cx+r*Math.cos(er),y2=cy+r*Math.sin(er);
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',`M ${x1} ${y1} A ${r} ${r} 0 ${a>180?1:0} 1 ${x2} ${y2}`);
+    p.setAttribute('fill','none'); p.setAttribute('stroke',d.c); p.setAttribute('stroke-width','22'); p.setAttribute('stroke-linecap','butt');
+    svg.appendChild(p); ang+=a;
+});
+const t1=document.createElementNS('http://www.w3.org/2000/svg','text');
+t1.setAttribute('x',cx);t1.setAttribute('y',cy-7);t1.setAttribute('font-size','15');t1.setAttribute('font-weight','800');t1.setAttribute('fill','#1a1a2e');t1.setAttribute('text-anchor','middle');t1.setAttribute('dominant-baseline','middle');t1.textContent='₹12k'; svg.appendChild(t1);
+const t2=document.createElementNS('http://www.w3.org/2000/svg','text');
+t2.setAttribute('x',cx);t2.setAttribute('y',cy+12);t2.setAttribute('font-size','8.5');t2.setAttribute('fill','#64748b');t2.setAttribute('text-anchor','middle');t2.textContent='donated'; svg.appendChild(t2);
+const leg=document.getElementById('donutLeg');
+ds.forEach(d=>{ leg.innerHTML+=`<div class="donut-row"><div class="donut-left"><div class="d-dot" style="background:${d.c}"></div>${d.l}</div><span class="d-pct">${d.p}%</span></div>`; });
+
+// Cause bars
+setTimeout(()=>{ document.querySelectorAll('.cause-fill').forEach(el=>{ el.style.width=el.dataset.fill+'%'; }); },400);
+
+// Line chart
+const pts=[20,45,30,70,55,90,65,85,50,95,75,100];
+const svgL=document.getElementById('lineSvg');
+const pStr=pts.map((v,i)=>`${(i/(pts.length-1))*280},${80-(v/100)*65}`).join(' ');
+svgL.innerHTML=`<defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1abc9c" stop-opacity="0.3"/><stop offset="100%" stop-color="#1abc9c" stop-opacity="0"/></linearGradient></defs>
+<path d="M ${pStr}" stroke="#1abc9c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M ${pStr} L 280,80 L 0,80 Z" fill="url(#lg)"/>
+${pts.map((v,i)=>`<circle cx="${(i/(pts.length-1))*280}" cy="${80-(v/100)*65}" r="2.5" fill="#1abc9c"/>`).join('')}`;
+
+// Chat
+const cm=document.getElementById('chatMsgs'), ci=document.getElementById('chatIn'), cs=document.getElementById('chatSnd');
+const replies=["Great to hear from you! We appreciate your support 🙏","The next event is July 15th at Salem Market. Hope to see you!","You can check your donations in the 'My Donations' section.","Thank you for being part of Stackly NGO! 💚","Feel free to share our causes with your friends and family!"];
+let ri=0;
+function sendMsg(){
+    const msg=ci.value.trim(); if(!msg)return;
+    const t=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    cm.innerHTML+=`<div><div class="bubble out">${msg}</div><div class="bm r">You &bull; ${t}</div></div>`;
+    ci.value=''; cm.scrollTop=cm.scrollHeight;
+    setTimeout(()=>{ cm.innerHTML+=`<div><div class="bubble in">${replies[ri++%replies.length]}</div><div class="bm">Stackly Bot &bull; ${t}</div></div>`; cm.scrollTop=cm.scrollHeight; },900);
+}
+cs.addEventListener('click',sendMsg);
+ci.addEventListener('keydown',e=>{ if(e.key==='Enter')sendMsg(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Stackly NGO Salem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal:#1abc9c; --teal-dark:#16a085;
+            --yellow:#f1c40f; --yellow-dark:#d4ac0d;
+            --red:#e74c3c; --red-dark:#c0392b;
+            --text-dark:#222; --text-gray:#666; --text-light:#999;
+            --bg-light:#f9f9f9; --bg-dark:#1a1a1a;
+            --border:#e5e5e5; --font:'Manrope',sans-serif;
+            --green:#2ecc71;
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth}
+        html,body{overflow-x:hidden}
+        body{color:var(--text-gray);line-height:1.6;font-family:var(--font)}
+
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:all .3s;border-radius:4px}
+        .btn-teal{background:var(--teal);color:#fff}
+        .btn-teal:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(26,188,156,.3)}
+
+        /* ===== AUTH PAGE ===== */
+        .auth-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1920') center/cover no-repeat;
+            position: relative;
+        }
+        .auth-overlay {
+            position: absolute; inset: 0; background: linear-gradient(135deg, rgba(20,20,20,0.85), rgba(52,152,219,0.5));
+        }
+        .auth-card {
+            position: relative; z-index: 10;
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px 45px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            animation: fadeUp 0.8s ease both;
+        }
+        .auth-head { text-align: center; margin-bottom: 25px; }
+        .auth-head h2 { font-size: 2rem; color: var(--text-dark); margin-bottom: 6px; }
+        .auth-head p { color: var(--text-gray); font-size: 0.95rem; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .input-group { margin-bottom: 16px; text-align: left; position: relative; }
+        .input-group label { font-size: 0.85rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; display: block; }
+        .input-group input { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px; font-size: 0.92rem; font-family: var(--font); transition: 0.3s; background: #fff; }
+        .input-group input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(26,188,156,0.1); }
+        .input-group input.is-invalid { border-color: var(--red); }
+        
+        .field-error { color: var(--red); font-size: 0.8rem; font-weight: 600; margin-top: 4px; display: none; }
+        .field-error.active { display: block; }
+        
+        .terms { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 0.85rem; color: var(--text-gray); }
+        .terms a { color: var(--teal); font-weight: 700; }
+        .terms a:hover { text-decoration: underline; }
+        
+        .submit-btn { width: 100%; padding: 16px; border-radius: 10px; font-size: 1rem; }
+        .auth-footer { text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--text-gray); }
+        .auth-footer a { color: var(--teal); font-weight: 800; transition: 0.3s; }
+        .auth-footer a:hover { color: var(--teal-dark); }
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+        @media(max-width:560px){
+            .auth-card { padding: 30px 20px; }
+            .form-grid { grid-template-columns: 1fr; gap:0;}
+        }
+    </style>
+</head>
+<body>
+
+<section class="auth-section">
+    <div class="auth-overlay"></div>
+    <div class="auth-card">
+        <div class="auth-head">
+            <h2>Create an Account</h2>
+            <p>Join our community of changemakers.</p>
+        </div>
+        
+        <form id="signupForm" onsubmit="handleSignup(event)" novalidate>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>First Name *</label>
+                    <input type="text" id="fname" required placeholder="John">
+                    <span class="field-error" id="fnameErr">Please enter first name</span>
+                </div>
+                <div class="input-group">
+                    <label>Last Name *</label>
+                    <input type="text" id="lname" required placeholder="Doe">
+                    <span class="field-error" id="lnameErr">Please enter last name</span>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Email Address *</label>
+                <input type="email" id="email" required placeholder="you@example.com">
+                <span class="field-error" id="emailErr">Please enter a valid email address</span>
+            </div>
+            
+            <div class="input-group">
+                <label>Phone Number *</label>
+                <input type="tel" id="phone" required maxlength="10" placeholder="10-digit mobile number" oninput="handlePhoneInput(this)">
+                <span class="field-error" id="phoneErr">Use 10 digits</span>
+            </div>
+            
+            <div class="input-group">
+                <label>Password *</label>
+                <input type="password" id="pass" required minlength="8" placeholder="At least 8 characters">
+                <span class="field-error" id="passErr">Password must be at least 8 characters</span>
+            </div>
+            
+            <div class="input-group">
+                <label>Confirm Password *</label>
+                <input type="password" id="cpass" required placeholder="Repeat your password">
+                <span class="field-error" id="cpassErr">Passwords do not match</span>
+            </div>
+            
+            <label class="terms">
+                <input type="checkbox" id="termsCheck" required style="margin-top:4px;">
+                <span>I agree to the <a href="404.html">Terms of Service</a> and <a href="404.html">Privacy Policy</a>.</span>
+            </label>
+            <span class="field-error" id="termsErr" style="margin-top:-15px; margin-bottom:15px;">You must accept the terms</span>
+            
+            <button type="submit" class="btn btn-teal submit-btn" id="signupBtn">
+                Sign Up <i class="fa-solid fa-user-plus"></i>
+            </button>
+            
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Log In</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    function handlePhoneInput(input) {
+        input.value = input.value.replace(/[^0-9]/g, '');
+        if (input.value.length > 10) {
+            input.value = input.value.slice(0, 10);
+        }
+        const err = document.getElementById('phoneErr');
+        if (input.value.length > 0 && input.value.length < 10) {
+            err.textContent = "Use 10 digits";
+            err.classList.add('active');
+            input.classList.add('is-invalid');
+        } else {
+            err.classList.remove('active');
+            input.classList.remove('is-invalid');
+        }
+    }
+
+    function handleSignup(e) {
+        e.preventDefault();
+        let valid = true;
+
+        // Fname
+        const fname = document.getElementById('fname');
+        const fnameErr = document.getElementById('fnameErr');
+        if (!fname.value.trim()) {
+            fnameErr.classList.add('active'); fname.classList.add('is-invalid'); valid = false;
+        } else {
+            fnameErr.classList.remove('active'); fname.classList.remove('is-invalid');
+        }
+
+        // Lname
+        const lname = document.getElementById('lname');
+        const lnameErr = document.getElementById('lnameErr');
+        if (!lname.value.trim()) {
+            lnameErr.classList.add('active'); lname.classList.add('is-invalid'); valid = false;
+        } else {
+            lnameErr.classList.remove('active'); lname.classList.remove('is-invalid');
+        }
+
+        // Email
+        const email = document.getElementById('email');
+        const emailErr = document.getElementById('emailErr');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+            emailErr.classList.add('active'); email.classList.add('is-invalid'); valid = false;
+        } else {
+            emailErr.classList.remove('active'); email.classList.remove('is-invalid');
+        }
+
+        // Phone
+        const phone = document.getElementById('phone');
+        const phoneErr = document.getElementById('phoneErr');
+        if (phone.value.length !== 10) {
+            phoneErr.textContent = "Use 10 digits";
+            phoneErr.classList.add('active'); phone.classList.add('is-invalid'); valid = false;
+        } else {
+            phoneErr.classList.remove('active'); phone.classList.remove('is-invalid');
+        }
+
+        // Pass
+        const pass = document.getElementById('pass');
+        const passErr = document.getElementById('passErr');
+        if (pass.value.length < 8) {
+            passErr.classList.add('active'); pass.classList.add('is-invalid'); valid = false;
+        } else {
+            passErr.classList.remove('active'); pass.classList.remove('is-invalid');
+        }
+
+        // Confirm Pass
+        const cpass = document.getElementById('cpass');
+        const cpassErr = document.getElementById('cpassErr');
+        if (cpass.value !== pass.value || !cpass.value) {
+            cpassErr.classList.add('active'); cpass.classList.add('is-invalid'); valid = false;
+        } else {
+            cpassErr.classList.remove('active'); cpass.classList.remove('is-invalid');
+        }
+
+        // Terms
+        const terms = document.getElementById('termsCheck');
+        const termsErr = document.getElementById('termsErr');
+        if (!terms.checked) {
+            termsErr.classList.add('active'); valid = false;
+        } else {
+            termsErr.classList.remove('active');
+        }
+
+        if (!valid) return;
+
+        const btn = document.getElementById('signupBtn');
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...';
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1200);
+    }
+</script>
+</body>
+</html>

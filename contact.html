@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Stackly NGO Salem</title>
+    <meta name="description" content="Get in touch with Stackly NGO Salem. Contact us for donations, volunteering opportunities, partnership programs, or any inquiries. We are here to help.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <!-- Leaflet JS for Interactive Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        :root {
+            --teal:#1abc9c; --teal-dark:#16a085;
+            --yellow:#f1c40f; --yellow-dark:#d4ac0d;
+            --red:#e74c3c; --red-dark:#c0392b;
+            --blue:#3498db; --purple:#9b59b6; --green:#2ecc71;
+            --text-dark:#222; --text-gray:#666; --text-light:#999;
+            --bg-light:#f9f9f9; --bg-dark:#1a1a1a;
+            --border:#e5e5e5; --font-main:'Manrope',sans-serif;
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth}
+        html,body{overflow-x:hidden}
+        body,button,input,select,textarea{font-family:var(--font-main)}
+        body{color:var(--text-gray);line-height:1.6}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+        h1,h2,h3,h4,h5,h6{color:var(--text-dark);font-weight:700;line-height:1.2}
+        a{text-decoration:none;color:inherit}
+        ul{list-style:none}
+        img{display:block}
+
+        /* BUTTONS */
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:all .3s;border-radius:4px}
+        .btn-teal{background:var(--teal);color:#fff}
+        .btn-teal:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(26,188,156,.3)}
+        .btn-yellow{background:var(--yellow);color:var(--text-dark)}
+        .btn-yellow:hover{background:var(--yellow-dark);transform:translateY(-2px)}
+        .btn-outline-w{background:transparent;border:2px solid rgba(255,255,255,.5);color:#fff}
+        .btn-outline-w:hover{background:#fff;color:var(--text-dark)}
+
+        /* SECTION TAG */
+        .section-tag{display:inline-block;font-size:.82rem;text-transform:uppercase;font-weight:800;letter-spacing:2.5px;color:var(--teal);margin-bottom:14px}
+        .section-tag::before{content:'— '}
+        .section-tag::after{content:' —'}
+
+        /* ===== HEADER ===== */
+        .main-header{position:absolute;top:0;left:0;width:100%;padding:25px 0;z-index:1000;background:transparent;border-bottom:1px solid rgba(255,255,255,.15);font-family:"Times New Roman",Times,serif}
+        .header-container{display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.5px}
+        .logo span{color:var(--yellow)}
+        .nav-menu{display:flex;align-items:center;gap:40px}
+        .nav-list{display:flex;gap:30px}
+        .nav-list a{color:#fff;font-weight:600;font-size:1rem;transition:.3s;position:relative}
+        .nav-list a::after{content:'';position:absolute;width:0;height:2px;bottom:-5px;left:0;background:var(--yellow);transition:width .3s}
+        .nav-list a:hover::after,.nav-list a.active::after{width:100%}
+        .nav-list a:hover,.nav-list a.active{color:var(--yellow)}
+        .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer}
+
+        /* ===== HERO ===== */
+        .contact-hero{height:60vh;min-height:480px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+        .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=1920') center/cover no-repeat;transform:scale(1.1);will-change:transform}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(15,15,15,.88) 0%,rgba(26,188,156,.2) 100%)}
+        .hero-content{position:relative;z-index:2;color:#fff;max-width:820px;padding:0 20px}
+        .hero-breadcrumb{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);padding:8px 20px;border-radius:50px;font-size:.9rem;font-weight:600;margin-bottom:30px;animation:fadeDown .8s ease both}
+        .hero-breadcrumb a{color:var(--yellow)}
+        .hero-breadcrumb i{font-size:.7rem;color:rgba(255,255,255,.4)}
+        .contact-hero h1{font-size:clamp(2.8rem,6vw,5rem);color:#fff;font-weight:800;line-height:1.08;margin-bottom:22px;animation:fadeUp .9s ease .2s both}
+        .contact-hero h1 em{font-style:italic;color:var(--yellow);font-family:'Playfair Display',serif}
+        .contact-hero p{font-size:1.15rem;color:rgba(255,255,255,.8);max-width:560px;margin:0 auto 40px;animation:fadeUp .9s ease .4s both}
+
+        .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2}
+        .scroll-wheel{width:26px;height:44px;border:2px solid rgba(255,255,255,.35);border-radius:13px;position:relative;animation:bounce 2s infinite}
+        .scroll-wheel::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:#fff;border-radius:2px;animation:dotScroll 2s infinite}
+
+        /* ===== CONTACT INFO CARDS ===== */
+        .info-section{padding:100px 0 60px;background:#fff;position:relative;z-index:10}
+        .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+        .info-card{background:var(--bg-light);border-radius:22px;padding:45px 35px;text-align:center;box-shadow:0 6px 25px rgba(0,0,0,.04);transition:all .4s cubic-bezier(.165,.84,.44,1);border:1px solid transparent}
+        .info-card:hover{background:#fff;transform:translateY(-10px);box-shadow:0 25px 60px rgba(0,0,0,.08);border-color:rgba(26,188,156,.15)}
+        .info-icon{width:68px;height:68px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 28px;transition:transform .4s}
+        .info-card:hover .info-icon{transform:scale(1.1) rotate(5deg)}
+        .info-card:nth-child(1) .info-icon{background:rgba(26,188,156,.1);color:var(--teal)}
+        .info-card:nth-child(2) .info-icon{background:rgba(241,196,15,.15);color:var(--yellow-dark)}
+        .info-card:nth-child(3) .info-icon{background:rgba(231,76,60,.1);color:var(--red)}
+        .info-card h3{font-size:1.25rem;margin-bottom:12px;color:var(--text-dark)}
+        .info-card p{font-size:.9rem;color:var(--text-gray);line-height:1.7}
+        .info-card a{display:inline-block;margin-top:16px;font-weight:700;font-size:.9rem;color:var(--teal);transition:.3s}
+        .info-card a:hover{color:var(--teal-dark)}
+
+        /* ===== CONTACT FORM + MAP ===== */
+        .form-section{padding:60px 0 100px;background:var(--bg-light)}
+        .form-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:stretch}
+        .form-card{background:#fff;border-radius:28px;padding:50px;box-shadow:0 15px 40px rgba(0,0,0,.05)}
+        .form-card h2{font-size:2rem;margin-bottom:12px}
+        .form-card > p{color:var(--text-gray);font-size:.95rem;margin-bottom:35px}
+        .input-group{margin-bottom:22px;position:relative}
+        .input-group label{font-size:.85rem;font-weight:800;color:var(--text-dark);margin-bottom:8px;display:block}
+        .input-group input,.input-group select,.input-group textarea{width:100%;padding:14px 18px;border:2px solid var(--border);border-radius:10px;font-size:.92rem;font-family:var(--font);transition:.3s;background:#fff}
+        .input-group input:focus,.input-group select:focus,.input-group textarea:focus{outline:none;border-color:var(--teal)}
+        .input-group textarea{resize:vertical;min-height:120px}
+        .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+        .submit-btn{width:100%;padding:16px;background:var(--teal);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:800;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+        .submit-btn:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(26,188,156,.3)}
+        .form-success-message{display:none;color:var(--green);font-weight:700;font-size:.95rem;margin-top:15px;align-items:center;gap:8px}
+
+        /* map wrapper */
+        .map-wrapper{border-radius:28px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.05);display:flex;flex-direction:column;position:relative;min-height:480px;height:100%}
+        #map{flex:1;width:100%;height:100%;min-height:400px}
+        .map-details{background:var(--bg-dark);color:#fff;padding:24px 30px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+        .map-details h4{color:#fff;font-size:1rem;margin-bottom:4px}
+        .map-details p{color:rgba(255,255,255,.6);font-size:.82rem;margin:0}
+        .map-dir-btn{background:var(--yellow);color:var(--text-dark);padding:10px 20px;border-radius:50px;font-weight:800;font-size:.8rem;transition:.3s}
+        .map-dir-btn:hover{background:var(--yellow-dark)}
+
+        /* ===== FAQ ACCORDION ===== */
+        .faq-section{padding:100px 0;background:#fff}
+        .faq-head{text-align:center;max-width:580px;margin:0 auto 70px}
+        .faq-head h2{font-size:clamp(2rem,4vw,3.2rem);margin-top:14px}
+        .faq-wrap{max-width:850px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+        .faq-item{border-radius:18px;background:var(--bg-light);border:1px solid transparent;overflow:hidden;transition:all .3s}
+        .faq-item:hover{border-color:rgba(26,188,156,.15);box-shadow:0 5px 15px rgba(0,0,0,.03)}
+        .faq-trigger{padding:24px 30px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
+        .faq-trigger h4{font-size:1.05rem;color:var(--text-dark);font-weight:700;transition:.3s}
+        .faq-item.active .faq-trigger h4{color:var(--teal)}
+        .faq-icon-indicator{width:28px;height:28px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--text-gray);transition:.3s}
+        .faq-item.active .faq-icon-indicator{background:var(--teal);color:#fff;transform:rotate(180deg)}
+        .faq-content{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(0,1,0,1)}
+        .faq-item.active .faq-content{max-height:1000px;transition:max-height .45s cubic-bezier(1,0,1,0)}
+        .faq-content p{padding:0 30px 24px;font-size:.92rem;line-height:1.75;color:var(--text-gray)}
+
+        /* ===== SOCIAL CONNECT ===== */
+        .social-strip{padding:80px 0;background:linear-gradient(135deg,#0f1923,#1a2a3a);position:relative;overflow:hidden}
+        .social-strip::before{content:'';position:absolute;top:-30%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(26,188,156,.1) 0%,transparent 70%);border-radius:50%}
+        .social-strip-inner{position:relative;z-index:1;text-align:center}
+        .social-strip-inner .section-tag{color:var(--yellow)}
+        .social-strip-inner h2{font-size:clamp(1.8rem,3vw,2.8rem);color:#fff;margin-top:12px;margin-bottom:30px}
+        .social-icons-row{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+        .soc-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:24px 35px;display:flex;align-items:center;gap:14px;color:#fff;min-width:180px;cursor:pointer;transition:all .3s}
+        .soc-card:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);transform:translateY(-5px)}
+        .soc-card i{font-size:1.6rem}
+        .soc-card.fb i{color:#1877f2}
+        .soc-card.ig i{color:#e1306c}
+        .soc-card.tw i{color:#1da1f2}
+        .soc-card.yt i{color:#ff0000}
+        .soc-card.ln i{color:#0077b5}
+        .soc-card-info{text-align:left}
+        .soc-card-info .name{font-weight:800;font-size:.9rem}
+        .soc-card-info .handle{font-size:.75rem;color:rgba(255,255,255,.5);font-weight:600}
+
+        /* ===== FOOTER ===== */
+        .footer-wave{line-height:0;background:white}
+        .footer-wave svg{display:block;width:100%;height:60px}
+        footer{background:var(--bg-dark);color:var(--text-light);padding:60px 0 30px}
+        .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:50px}
+        .footer-col h3{color:#fff;font-size:1.8rem;margin-bottom:20px}
+        .footer-col h4{color:#fff;font-size:1.2rem;margin-bottom:20px}
+        .footer-col p{margin-bottom:15px;font-size:.95rem}
+        .footer-col ul li{margin-bottom:12px}
+        .footer-col ul a{transition:.3s;display:flex;align-items:center;gap:8px}
+        .footer-col ul a:hover{color:var(--teal)}
+        .footer-col ul a i{font-size:.7rem}
+        .f-newsletter{display:flex;margin-top:20px}
+        .f-newsletter input{flex:1;padding:12px 15px;background:transparent;border:1px solid #333;color:#fff;border-right:none}
+        .f-newsletter button{background:var(--yellow);color:var(--text-dark);border:none;padding:0 20px;font-weight:700;cursor:pointer}
+        .footer-bottom{border-top:1px solid #333;padding-top:25px;display:flex;justify-content:space-between;font-size:.9rem}
+
+        /* ANIMATIONS */
+        @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes dotScroll{0%{top:6px;opacity:1}100%{top:22px;opacity:0}}
+        @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+        .reveal{opacity:0;transform:translateY(40px);transition:opacity .75s ease,transform .75s cubic-bezier(.165,.84,.44,1)}
+        .reveal.in-view{opacity:1;transform:translateY(0)}
+        .reveal-l{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s cubic-bezier(.165,.84,.44,1)}
+        .reveal-l.in-view{opacity:1;transform:translateX(0)}
+        .reveal-r{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s cubic-bezier(.165,.84,.44,1)}
+        .reveal-r.in-view{opacity:1;transform:translateX(0)}
+
+        /* RESPONSIVE */
+        @media(max-width:1100px){.info-grid{grid-template-columns:repeat(2,1fr)}.info-card:nth-child(3){grid-column:span 2}.form-layout{grid-template-columns:1fr}}
+        @media(max-width:992px){
+            .footer-grid{grid-template-columns:1fr}
+            .nav-menu{position:fixed;top:0;right:-100%;width:300px;height:100vh;background:#fff;flex-direction:column;align-items:flex-start;padding:100px 30px;box-shadow:-5px 0 15px rgba(0,0,0,.1);transition:.4s cubic-bezier(.77,0,.175,1);z-index:1000}
+            .nav-menu.active{right:0}
+            .nav-list{flex-direction:column;width:100%;gap:20px;margin-bottom:30px}
+            .nav-list a{color:var(--text-dark);font-size:1.2rem}
+            .menu-toggle{display:block;z-index:1001}
+        }
+        @media(max-width:768px){.info-grid{grid-template-columns:1fr}.info-card:nth-child(3){grid-column:1}.form-grid{grid-template-columns:1fr}}
+        @media(max-width:560px){.form-card{padding:30px 20px}}
+    </style>
+</head>
+<body>
+
+<!-- ============================= HEADER ============================= -->
+<header class="main-header">
+    <div class="container header-container">
+        <a href="index.html" class="logo">Stackly<span>.</span></a>
+        
+        <nav class="nav-menu" id="navMenu">
+            <ul class="nav-list">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li><a href="causes.html"><i class="fa-solid fa-hand-holding-heart"></i> Causes</a></li>
+                <li><a href="events.html"><i class="fa-solid fa-calendar-days"></i> Events</a></li>
+                <li><a href="blog.html"><i class="fa-solid fa-newspaper"></i> Blog</a></li>
+                <li><a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                <li><a href="login.html"><i class="fa-solid fa-user"></i> Login</a></li>
+            </ul>
+            <div class="nav-action">
+                <a href="404.html" class="btn btn-teal" style="padding: 10px 24px; text-decoration: none;">Donate Now</a>
+            </div>
+        </nav>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+</header>
+
+<!-- ============================= HERO ============================= -->
+<section class="contact-hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-breadcrumb">
+            <a href="index.html">Home</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Contact Us</span>
+        </div>
+        <h1>Get in <em>Touch</em> with Us</h1>
+        <p>Whether you want to donate, volunteer, share feedback, or ask a question, we are here and ready to listen.</p>
+    </div>
+    <div class="scroll-hint"><div class="scroll-wheel"></div></div>
+</section>
+
+<!-- ============================= CONTACT INFO CARDS ============================= -->
+<section class="info-section">
+    <div class="container">
+        <div class="info-grid">
+            <!-- Card 1 -->
+            <div class="info-card reveal" style="transition-delay:.05s">
+                <div class="info-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <h3>Our Office</h3>
+                <p>12, MG Road, near Old Bus Stand,<br>Salem, Tamil Nadu 636001</p>
+                <a href="#map" onclick="document.getElementById('map').scrollIntoView({behavior:'smooth'})">View on map <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <!-- Card 2 -->
+            <div class="info-card reveal" style="transition-delay:.15s">
+                <div class="info-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                <h3>Call Us</h3>
+                <p>Mon - Sat: 9:00 AM - 6:00 PM<br>Emergency: 24/7 Helpline Available</p>
+                <a href="tel:+123358736">+1 233 587 36</a>
+            </div>
+            <!-- Card 3 -->
+            <div class="info-card reveal" style="transition-delay:.25s">
+                <div class="info-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <h3>Email Us</h3>
+                <p>For inquiries, volunteering &amp; support:<br>General: contact@stacklyngo.org</p>
+                <a href="mailto:contact@stacklyngo.org">Send Email <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================= FORM + MAP ============================= -->
+<section class="form-section">
+    <div class="container">
+        <div class="form-layout">
+            <!-- Left Card: Contact Form -->
+            <div class="form-card reveal-l">
+                <h2>Send Us a Message</h2>
+                <p>Fill out the form below and our team will get back to you within 24 hours.</p>
+                <form id="contactForm" onsubmit="handleFormSubmit(event)" novalidate>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>First Name *</label>
+                            <input type="text" placeholder="Priya" id="formFname" required>
+                            <span class="field-error" id="fnameErr" style="color:#e74c3c;font-size:0.8rem;font-weight:600;margin-top:4px;display:none;">Please enter first name</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Last Name *</label>
+                            <input type="text" placeholder="Krishnan" id="formLname" required>
+                            <span class="field-error" id="lnameErr" style="color:#e74c3c;font-size:0.8rem;font-weight:600;margin-top:4px;display:none;">Please enter last name</span>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Email Address *</label>
+                            <input type="email" placeholder="priya@example.com" id="formEmail" required>
+                            <span class="field-error" id="emailErr" style="color:#e74c3c;font-size:0.8rem;font-weight:600;margin-top:4px;display:none;">Please enter a valid email address</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" placeholder="10-digit mobile number" id="formPhone" required maxlength="10" oninput="handleContactPhone(this)">
+                            <span class="field-error" id="phoneErr" style="color:#e74c3c;font-size:0.8rem;font-weight:600;margin-top:4px;display:none;">Use 10 digits</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>What are you inquiring about?</label>
+                        <select id="formSubject">
+                            <option value="general">General Inquiry</option>
+                            <option value="volunteer">Volunteering Opportunities</option>
+                            <option value="donation">Donations &amp; Sponsorships</option>
+                            <option value="partnership">Corporate Partnerships</option>
+                            <option value="media">Media &amp; Press Relations</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Message *</label>
+                        <textarea placeholder="Write your message here..." id="formMessage" required></textarea>
+                        <span class="field-error" id="msgErr" style="color:#e74c3c;font-size:0.8rem;font-weight:600;margin-top:4px;display:none;">Please write your message</span>
+                    </div>
+                    <button class="btn btn-teal submit-btn" type="submit" id="formSubmitBtn">
+                        <i class="fa-solid fa-paper-plane"></i> Send Message
+                    </button>
+                    <div class="form-success-message" id="formSuccessMsg">
+                        <i class="fa-solid fa-circle-check"></i> Thank you! Your message was sent successfully. We'll reply soon.
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Card: Leaflet Map -->
+            <div class="map-wrapper reveal-r">
+                <div id="map"></div>
+                <div class="map-details">
+                    <div>
+                        <h4>Main Office Location</h4>
+                        <p>Salem, Tamil Nadu, India</p>
+                    </div>
+                    <a href="https://maps.google.com/?q=Salem,+Tamil+Nadu" target="_blank" class="map-dir-btn">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================= FAQ ACCORDION ============================= -->
+<section class="faq-section">
+    <div class="container">
+        <div class="faq-head reveal">
+            <span class="section-tag">Common Inquiries</span>
+            <h2>Frequently Asked Questions</h2>
+            <p>Here are answers to the most common questions our team receives.</p>
+        </div>
+        <div class="faq-wrap reveal">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+                <div class="faq-trigger" onclick="toggleFaq(this)">
+                    <h4>Are donations made to Stackly NGO tax-exempt?</h4>
+                    <div class="faq-icon-indicator"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-content">
+                    <p>Yes, all financial donations made to Stackly NGO are eligible for tax deductions under Section 80G of the Income Tax Act. A valid receipt along with our 80G registration certificate is sent directly to your registered email address right after a successful transaction.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+                <div class="faq-trigger" onclick="toggleFaq(this)">
+                    <h4>How can I apply to become a field volunteer?</h4>
+                    <div class="faq-icon-indicator"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-content">
+                    <p>You can head over to our events page and register for any upcoming drive, or choose "Volunteering Opportunities" in the contact form above. Our volunteer coordination team will contact you to align on your skills, schedule, and interests.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+                <div class="faq-trigger" onclick="toggleFaq(this)">
+                    <h4>Can I visit Stackly's active projects on the ground?</h4>
+                    <div class="faq-icon-indicator"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-content">
+                    <p>Absolutely! We value transparency above all. Contact us via the form above with your proposed travel dates and the specific initiatives (e.g., mobile clinics, education centers) you'd like to visit, and we'll arrange a hosted field visit.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+                <div class="faq-trigger" onclick="toggleFaq(this)">
+                    <h4>How does Stackly ensure the transparency of funds?</h4>
+                    <div class="faq-icon-indicator"><i class="fa-solid fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-content">
+                    <p>We undergo strict external financial audits twice a year and publish detailed financial reports on our blog and annual impact reports. Over 94% of collected funds go directly to community resources, with only 6% used to cover essential logistics.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================= SOCIAL CONNECT ============================= -->
+<section class="social-strip">
+    <div class="container social-strip-inner">
+        <span class="section-tag">Direct Updates</span>
+        <h2>Connect With Us on Social</h2>
+        <div class="social-icons-row reveal">
+            <a href="https://facebook.com" target="_blank" class="soc-card fb">
+                <i class="fa-brands fa-facebook"></i>
+                <div class="soc-card-info">
+                    <div class="name">Facebook</div>
+                    <div class="handle">@stacklyngo</div>
+                </div>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="soc-card ig">
+                <i class="fa-brands fa-instagram"></i>
+                <div class="soc-card-info">
+                    <div class="name">Instagram</div>
+                    <div class="handle">@stackly.ngo</div>
+                </div>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="soc-card tw">
+                <i class="fa-brands fa-twitter"></i>
+                <div class="soc-card-info">
+                    <div class="name">Twitter / X</div>
+                    <div class="handle">@StacklyNGO</div>
+                </div>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="soc-card yt">
+                <i class="fa-brands fa-youtube"></i>
+                <div class="soc-card-info">
+                    <div class="name">YouTube</div>
+                    <div class="handle">Stackly NGO Salem</div>
+                </div>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="soc-card ln">
+                <i class="fa-brands fa-linkedin"></i>
+                <div class="soc-card-info">
+                    <div class="name">LinkedIn</div>
+                    <div class="handle">Stackly NGO</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<div class="footer-wave"><svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#1a1a1a" fill-opacity="1" d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg></div>
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Hope in Action</h3>
+                <p>Together, we can rebuild lives and restore dignity.</p>
+                <h4 style="font-size:1rem;margin:30px 0 10px;">Our Mission:</h4>
+                <p>We provide immediate and long-term support, offering essential resources — food, water, medical care, and shelter.</p>
+                <div style="display:flex;gap:15px;align-items:center;margin-top:20px;">
+                    <i class="fa-solid fa-phone" style="color:var(--yellow);font-size:1.5rem;"></i>
+                    <div><span style="display:block;font-size:.8rem;color:#999;">Call Us</span><strong style="color:#fff;">+ 1 233 587 36</strong></div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Info :</h4>
+                <ul>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Emergency Aid</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Medical Assistance</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Psychosocial Support</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Education for Children</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Sustainable Solutions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacts :</h4>
+                <ul>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Assistance</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> contact@stacklyngo.org</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Donate Online</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> donation@stacklyngo.org</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Salem, Tamil Nadu</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Recent News :</h4>
+                <div style="display:flex;gap:15px;margin-bottom:20px;align-items:center;">
+                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=100" alt="" style="width:60px;height:60px;object-fit:cover;">
+                    <div><h4 style="margin:0;font-size:.95rem;color:#fff;">Make an Impact</h4><p style="font-size:.8rem;">Lorem ipsum dolor sit...</p></div>
+                </div>
+                <div style="display:flex;gap:15px;align-items:center;">
+                    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=100" alt="" style="width:60px;height:60px;object-fit:cover;">
+                    <div><h4 style="margin:0;font-size:.95rem;color:#fff;">Join the Cause</h4><p style="font-size:.8rem;">Lorem ipsum dolor sit...</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
+            <div class="f-newsletter" style="margin:0;"><input type="email" placeholder="Email"><button>Send</button></div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================= SCRIPTS ============================= -->
+<!-- Leaflet JS Map Engine -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ---- Mobile Menu ---- */
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+const toggleIcon = menuToggle.querySelector('i');
+menuToggle.addEventListener('click', () => {
+    const open = navMenu.classList.toggle('active');
+    toggleIcon.className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    menuToggle.style.color = open ? 'var(--text-dark)' : '#fff';
+});
+document.addEventListener('click', e => {
+    if (!navMenu.contains(e.target) && !menuToggle.contains(e.target) && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        toggleIcon.className = 'fa-solid fa-bars';
+        menuToggle.style.color = '#fff';
+    }
+});
+
+/* ---- Sticky Header + Parallax ---- */
+const header = document.querySelector('.main-header');
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight)
+        heroBg.style.transform = `scale(1.1) translateY(${window.scrollY * .2}px)`;
+}, { passive: true });
+
+/* ---- IntersectionObserver (Scroll reveals) ---- */
+const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+/* ---- FAQ Accordion Toggle ---- */
+function toggleFaq(element) {
+    const parent = element.parentElement;
+    const isActive = parent.classList.contains('active');
+    
+    // Close all other FAQs
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Toggle active on clicked element
+    if (!isActive) {
+        parent.classList.add('active');
+    }
+}
+
+/* ---- Leaflet Map Integration ---- */
+document.addEventListener('DOMContentLoaded', () => {
+    // Coordinates for Salem, Tamil Nadu, India [Latitude, Longitude]
+    const salemCoords = [11.6643, 78.1460];
+    
+    // Create the map container object
+    const map = L.map('map', {
+        center: salemCoords,
+        zoom: 13,
+        zoomControl: false // Disable default zoom control for cleaner UI
+    });
+
+    // Add zoom control at bottom-right
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+    // Apply clean OpenStreetMap CartoDB Voyager tiles (premium styling without API key)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+    }).addTo(map);
+
+    // Create custom pin icon
+    const customIcon = L.divIcon({
+        className: 'custom-map-pin',
+        html: `<div style="background-color: var(--teal); width: 18px; height: 18px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,0.3); animation: pulse 2s infinite;"></div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+    });
+
+    // Add marker to map
+    const marker = L.marker(salemCoords, { icon: customIcon }).addTo(map);
+    marker.bindPopup(`<strong>Stackly NGO Main Office</strong><br>12, MG Road, near Old Bus Stand, Salem.`).openPopup();
+});
+
+function handleContactPhone(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+    if (input.value.length > 10) {
+        input.value = input.value.slice(0, 10);
+    }
+    const err = document.getElementById('phoneErr');
+    if (input.value.length > 0 && input.value.length < 10) {
+        err.style.display = 'block';
+        input.style.borderColor = '#e74c3c';
+    } else {
+        err.style.display = 'none';
+        input.style.borderColor = '';
+    }
+}
+
+/* ---- Form Submission Handler ---- */
+function handleFormSubmit(e) {
+    e.preventDefault();
+    let valid = true;
+
+    const fname = document.getElementById('formFname');
+    const fnameErr = document.getElementById('fnameErr');
+    if (!fname.value.trim()) { fnameErr.style.display = 'block'; fname.style.borderColor = '#e74c3c'; valid = false; }
+    else { fnameErr.style.display = 'none'; fname.style.borderColor = ''; }
+
+    const lname = document.getElementById('formLname');
+    const lnameErr = document.getElementById('lnameErr');
+    if (!lname.value.trim()) { lnameErr.style.display = 'block'; lname.style.borderColor = '#e74c3c'; valid = false; }
+    else { lnameErr.style.display = 'none'; lname.style.borderColor = ''; }
+
+    const email = document.getElementById('formEmail');
+    const emailErr = document.getElementById('emailErr');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value.trim())) { emailErr.style.display = 'block'; email.style.borderColor = '#e74c3c'; valid = false; }
+    else { emailErr.style.display = 'none'; email.style.borderColor = ''; }
+
+    const phone = document.getElementById('formPhone');
+    const phoneErr = document.getElementById('phoneErr');
+    if (phone.value.length !== 10) { phoneErr.style.display = 'block'; phone.style.borderColor = '#e74c3c'; valid = false; }
+    else { phoneErr.style.display = 'none'; phone.style.borderColor = ''; }
+
+    const msg = document.getElementById('formMessage');
+    const msgErr = document.getElementById('msgErr');
+    if (!msg.value.trim()) { msgErr.style.display = 'block'; msg.style.borderColor = '#e74c3c'; valid = false; }
+    else { msgErr.style.display = 'none'; msg.style.borderColor = ''; }
+
+    if (!valid) return;
+
+    const btn = document.getElementById('formSubmitBtn');
+    const successMsg = document.getElementById('formSuccessMsg');
+    
+    // Loading State
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending message...';
+    btn.disabled = true;
+
+    // Simulate Server Request
+    setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Sent Successfully';
+        btn.style.background = 'var(--green)';
+        successMsg.style.display = 'flex';
+        
+        // Reset form inputs after delay
+        setTimeout(() => {
+            document.getElementById('contactForm').reset();
+            btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+            btn.style.background = '';
+            btn.disabled = false;
+            successMsg.style.display = 'none';
+        }, 3000);
+    }, 1500);
+}
+</script>
+</body>
+</html>
