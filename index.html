@@ -200,7 +200,7 @@
 
         /* --- 1. HERO SECTION --- */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./images/hero.webp') center/cover;
             display: flex;
             flex-direction: column;
@@ -208,8 +208,9 @@
             justify-content: center;
             text-align: center;
             color: white;
-        
-            padding-top: 100px;}
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
 
         .hero h1 {
             font-size: 5.5rem;
@@ -967,11 +968,6 @@
             will-change: opacity, transform;
         }
 
-        @media (max-width: 768px) {
-            .scroll-text {
-                font-size: 3rem;
-            }
-        }
 
         /* --- 9. $120 TRANSFORM SECTION --- */
         .transform-section {
@@ -1431,15 +1427,40 @@
         }
 
         @media (max-width: 992px) {
+            /* General Typography Reset on Mobile to prevent overflow */
+            h1 {
+                font-size: 2.8rem !important;
+            }
+            h2 {
+                font-size: 2.2rem !important;
+            }
+            h3 {
+                font-size: 1.6rem !important;
+            }
 
-            .compassion-grid,
+            .compassion-grid {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+
             .donation-grid,
             .helps-grid,
             .transform-grid,
             .progress-grid,
             .blog-layout,
+            .blog-cards,
             .footer-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .tags {
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-bottom: 40px;
+            }
+
+            .scroll-text {
+                font-size: 2.2rem !important;
             }
             .donation-area::before {
                 display: none;
@@ -1457,26 +1478,43 @@
                 grid-template-columns: 1fr;
                 gap: 25px;
             }
+            /* --- Mobile Fixes for Hero & Yellow Strip --- */
+            .hero {
+                min-height: auto;
+                padding-top: 140px;
+                padding-bottom: 100px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                line-height: 1.2;
+            }
 
-            /* --- Mobile Fixes for Yellow Strip --- */
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+
             .yellow-strip {
                 flex-direction: column;
-                padding: 20px;
+                padding: 25px;
                 text-align: center;
                 gap: 20px;
-                border-radius: 12px;
+                border-radius: 16px;
             }
 
             .yellow-strip-left {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
                 width: 100%;
             }
 
             .yellow-strip-left img {
                 width: 100%;
-                height: 200px;
-                border-radius: 8px;
+                height: 220px;
+                border-radius: 12px;
             }
 
             .yellow-strip .btn {
@@ -1485,6 +1523,7 @@
 
             .yellow-strip-wrapper {
                 padding: 0 15px;
+                margin-top: -80px;
             }
 
             /* --- Mobile Fixes for Compassion Section --- */
@@ -1500,6 +1539,7 @@
 
             .left-stats {
                 display: flex;
+                flex-wrap: wrap;
                 gap: 20px;
                 margin-bottom: 30px;
             }
@@ -1579,13 +1619,6 @@
                 margin: 0 auto;
             }
 
-            .hero h1 {
-                font-size: 3.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-                line-height: 1.1;
-            }
-
             /* Responsive Header Logic */
             .nav-menu {
                 position: fixed;
@@ -1622,6 +1655,19 @@
                 display: block;
                 z-index: 1001;
                 /* Must sit on top of the menu */
+            }
+
+            /* --- Footer Bottom Mobile stacking --- */
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                align-items: center;
+            }
+
+            .footer-bottom .newsletter {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>

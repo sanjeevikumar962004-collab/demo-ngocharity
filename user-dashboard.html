@@ -20,6 +20,17 @@
             --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Global Mobile Overflow Fix */
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
         body { font-family: var(--font); background: var(--bg); color: var(--text-dark); display: flex; min-height: 100vh; overflow-x: hidden; }
 
         /* SIDEBAR */
