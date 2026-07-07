@@ -7,7 +7,7 @@
     <title>Our Causes | Stackly NGO Salem</title>
     <meta name="description"
         content="Explore Stackly NGO's active causes — from emergency relief and education to healthcare and environmental sustainability. Every donation creates real impact.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap"
         rel="stylesheet">
@@ -895,8 +895,8 @@
 
         /* color coding */
         .cc-emergency .cause-cat {
-            background: rgba(231, 76, 60, 0.15);
-            color: var(--red);
+            background: var(--red);
+            color: white;
         }
 
         .cc-emergency .cp-fill {
@@ -904,8 +904,8 @@
         }
 
         .cc-education .cause-cat {
-            background: rgba(52, 152, 219, 0.12);
-            color: var(--blue);
+            background: var(--blue);
+            color: white;
         }
 
         .cc-education .cp-fill {
@@ -913,8 +913,8 @@
         }
 
         .cc-health .cause-cat {
-            background: rgba(26, 188, 156, 0.12);
-            color: var(--teal);
+            background: var(--teal);
+            color: white;
         }
 
         .cc-health .cp-fill {
@@ -922,8 +922,8 @@
         }
 
         .cc-environment .cause-cat {
-            background: rgba(46, 204, 113, 0.12);
-            color: var(--green);
+            background: var(--green);
+            color: white;
         }
 
         .cc-environment .cp-fill {
@@ -931,8 +931,8 @@
         }
 
         .cc-community .cause-cat {
-            background: rgba(155, 89, 182, 0.12);
-            color: var(--purple);
+            background: var(--purple);
+            color: white;
         }
 
         .cc-community .cp-fill {
@@ -940,8 +940,8 @@
         }
 
         .cc-food .cause-cat {
-            background: rgba(241, 196, 15, 0.15);
-            color: var(--yellow-dark);
+            background: var(--yellow-dark);
+            color: white;
         }
 
         .cc-food .cp-fill {
@@ -1528,7 +1528,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+            grid-template-columns: 1.2fr 1fr 1fr;
             gap: 40px;
             margin-bottom: 50px;
         }
@@ -1710,10 +1710,24 @@
         }
 
         @media (max-width: 992px) {
+            .causes-hero {
+                min-height: auto;
+                height: auto;
+                padding-top: 140px;
+                padding-bottom: 80px;
+            }
+
+            .hero-floating-cards {
+                display: none;
+            }
 
             .featured-grid,
             .footer-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .featured-img-wrap {
+                height: 300px;
             }
 
             .impact-grid {
@@ -1806,7 +1820,8 @@
             }
 
             .featured-stats {
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: 1fr;
+                gap: 12px;
             }
 
             .hero-cta-row {
@@ -1920,7 +1935,7 @@
                 <!-- CARD 1 - Emergency -->
                 <div class="cause-card cc-emergency reveal" data-cat="emergency" style="transition-delay:.05s">
                     <div class="cause-img">
-                        <img src="images/pexels-tkirkgoz-11576242.webp"
+                        <img src="./images/hero.webp"
                             alt="Flood Relief">
                         <div class="cause-overlay"></div>
                         <span class="cause-cat">Emergency</span>
@@ -2066,9 +2081,8 @@
                                 <img class="avatar" src="images/sarah.webp" alt="">
                                 <span class="cause-donor-txt">+208 donors</span>
                             </div>
-                            <button class="btn btn-teal cause-btn" onclick="openDonateModal(" Women's Skill
-                                Development", 'images/pexels-milan-rout-1620544-5829607.webp'
-                                )">Donate</button>
+                            <button class="btn btn-teal cause-btn"
+                                onclick="openDonateModal('Mid-Day Meal Program', 'images/photo-1502086223501-7ea6ecd79368.webp')">Donate</button>
                         </div>
                     </div>
                 </div>
@@ -2136,7 +2150,7 @@
                 <!-- CARD 8 - Health -->
                 <div class="cause-card cc-health reveal" data-cat="health" style="transition-delay:.4s">
                     <div class="cause-img">
-                        <img src="images/p3.webp"
+                        <img src="./images/contact_hero.webp"
                             alt="Clean Water">
                         <div class="cause-overlay"></div>
                         <span class="cause-cat">Health</span>
@@ -2166,7 +2180,7 @@
                 <!-- CARD 9 - Community -->
                 <div class="cause-card cc-community reveal" data-cat="community" style="transition-delay:.45s">
                     <div class="cause-img">
-                        <img src="images/p3.webp"
+                        <img src="./images/contact.webp"
                             alt="Elderly Care">
                         <div class="cause-overlay"></div>
                         <span class="cause-cat">Community</span>
@@ -2454,54 +2468,46 @@
                     <ul>
                         <ul class="social-links">
     <li>
-        <a href="https://facebook.com" target="_blank">
+        <a href="404.html">
             <i class="fa-brands fa-facebook-f"></i> Facebook
         </a>
     </li>
 
     <li>
-        <a href="https://instagram.com" target="_blank">
+        <a href="404.html">
             <i class="fa-brands fa-instagram"></i> Instagram
         </a>
     </li>
 
     <li>
-        <a href="https://linkedin.com" target="_blank">
+        <a href="404.html">
             <i class="fa-brands fa-linkedin-in"></i> LinkedIn
         </a>
     </li>
 
     <li>
-        <a href="https://youtube.com" target="_blank">
+        <a href="404.html">
             <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+    </li>
+
+    <li>
+        <a href="404.html">
+            <i class="fa-brands fa-x-twitter"></i> X
+        </a>
+    </li>
+
+    <li>
+        <a href="404.html">
+            <i class="fa-brands fa-threads"></i> Threads
         </a>
     </li>
 </ul>
                     </ul>
                 </div>
 
-                <div class="footer-col">
-                    <h4>Recent News :</h4>
-                    <div class="l-post">
-                        <img src="./images/pexels-tkirkgoz-11576242.webp" alt="News"
-                            style="width: 60px; height: 60px;">
-                        <div>
-                            <h4 style="margin: 0; font-size: 0.95rem;">Make an Impact</h4>
-                            <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
-                        </div>
-                    </div>
-                    <div class="l-post">
-                        <img src="images/photo-1542810634-71277d95dcbb.webp" alt="News"
-                            style="width: 60px; height: 60px;">
-                        <div>
-                            <h4 style="margin: 0; font-size: 0.95rem;">Join the Cause</h4>
-                            <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
-                        </div>
-                    </div>
                 </div>
-            </div>
-
-            <div class="footer-bottom">
+<div class="footer-bottom">
                 <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
                 <div class="newsletter" style="margin: 0; display: flex; align-items: center;">
                     <input type="email" placeholder="Email" class="footer-nl-email" style="padding: 8px 12px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: white; outline: none; width: 200px;">
@@ -2523,7 +2529,7 @@
             </div>
             <div class="modal-body">
                 <div class="modal-cause-info">
-                    <img src="images/photo-1488521787991-ed7bbaae773c.webp" alt=""
+                    <img src="./images/contact_hero.webp" alt=""
                         id="modalCauseImg" style="border-radius:10px;object-fit:cover;width:60px;height:60px;">
                     <div>
                         <h4 id="modalCauseName2">Active Cause</h4>
