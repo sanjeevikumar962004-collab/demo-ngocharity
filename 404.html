@@ -24,7 +24,7 @@
         ul{list-style:none}
         
         /* ===== HEADER ===== */
-        .main-header{position:fixed;top:0;left:0;width:100%;padding:25px 0;z-index:1000;background:rgba(26,26,26,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.15);box-shadow:0 4px 30px rgba(0,0,0,.3);}
+        .main-header {position:fixed;top:0;left:0;width:100%;padding: 15px 0;z-index:1000;background:rgba(26,26,26,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.15);box-shadow:0 4px 30px rgba(0,0,0,.3);}
         .header-container{display:flex;justify-content:space-between;align-items:center}
         .logo{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.5px}
         .logo span{color:var(--yellow)}
@@ -112,5 +112,24 @@
 
 
 </script>
+
+<script>
+function validateFooterNL(btn) {
+    const container = btn.closest('.newsletter');
+    const input = container.querySelector('.footer-nl-email');
+    const val = input.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(val)) {
+        alert('Please enter a valid email address.');
+        input.style.borderColor = 'var(--red)';
+        input.focus();
+    } else {
+        input.style.borderColor = '';
+        alert('Thank you for subscribing! Redirecting to confirmation page...');
+        window.location.href = '404.html';
+    }
+}
+</script>
+
 </body>
 </html>

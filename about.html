@@ -53,13 +53,19 @@
 
         /* ===================== HEADER ===================== */
         .main-header {
-            position: absolute;
-            top: 0; left: 0; width: 100%;
-            padding: 25px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
             z-index: 1000;
-            background: transparent;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(15, 15, 15, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
             font-family: "Times New Roman", Times, serif;
+            transition: background 0.3s ease;
         }
         .header-container {
             display: flex;
@@ -96,10 +102,11 @@
             overflow: hidden;
             display: flex; align-items: center; justify-content: center;
             text-align: center;
-        }
+        
+            padding-top: 120px;}
         .hero-bg {
             position: absolute; inset: 0;
-            background: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1920') center/cover no-repeat;
+            background: url('images/about hero.webp') center/cover no-repeat;
             transform: scale(1.1);
             transition: transform 0.1s linear;
         }
@@ -475,7 +482,7 @@
         /* ===================== CTA BANNER ===================== */
         .cta-section {
             padding: 120px 0;
-            background: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1920') center/cover no-repeat;
+            background: url('./images/pexels-milan-rout-1620544-5829607.webp') center/cover no-repeat;
             position: relative; text-align: center;
         }
         .cta-overlay {
@@ -620,7 +627,7 @@
     <!-- ============ HEADER ============ -->
     <header class="main-header" id="main-header">
         <div class="container header-container">
-            <a href="index.html" class="logo">Stackly<span>.</span></a>
+            <a href="index.html" class="logo"><img src="images/whitelogo.webp" alt="Stackly Logo" style="height: 40px; vertical-align: middle;"></a>
 
             <nav class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
@@ -653,16 +660,14 @@
                 <i class="fa-solid fa-chevron-right"></i>
                 <span>About Us</span>
             </div>
-            <h1>Our Story of <em>Hope</em><br>& Transformation</h1>
+            <h1>Our Story </h1>
             <p>For over a decade, Stackly NGO has been turning compassion into action — one life, one community, one future at a time.</p>
             <div class="hero-cta-group">
-                <button class="btn btn-teal"><i class="fa-solid fa-heart"></i>&nbsp; Join Our Mission</button>
-                <button class="btn-outline-white"><i class="fa-solid fa-play"></i>&nbsp; Watch Our Story</button>
+                <a href="404.html" class="btn btn-teal" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-heart"></i>&nbsp; Join Our Mission</a>
+                <a href="404.html" class="btn-outline-white" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-play"></i>&nbsp; Watch Our Story</a>
             </div>
         </div>
-        <div class="hero-scroll-indicator">
-            <span></span>
-        </div>
+       
     </section>
 
     <!-- ============ STORY SECTION ============ -->
@@ -670,7 +675,7 @@
         <div class="container story-grid">
             <div class="story-img-wrap reveal-left">
                 <div class="story-img-accent"></div>
-                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=900" alt="Our Story" class="story-img-main">
+                <img src="images/pexels-tkirkgoz-11576242.webp" alt="Our Story" class="story-img-main">
                 <div class="story-img-badge">
                     <span class="big-year">12+</span>
                     <span class="label">Years of Impact</span>
@@ -704,7 +709,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-red">Read Full Story &nbsp;<i class="fa-solid fa-arrow-right"></i></button>
+                <a href="404.html" class="btn btn-red" style="text-decoration: none; display: inline-block;">Read Full Story &nbsp;<i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
@@ -892,11 +897,11 @@
             <div class="team-grid">
                 <div class="team-card reveal" style="transition-delay: 0.05s;">
                     <div class="team-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1531123414780-fee6a849b2db?q=80&w=500" alt="Priya Krishnamurthy">
+                        <img src="images/p1.webp" alt="Priya Krishnamurthy">
                         <div class="team-socials">
-                            <div class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
-                            <div class="team-social-btn"><i class="fa-brands fa-twitter"></i></div>
-                            <div class="team-social-btn"><i class="fa-solid fa-envelope"></i></div>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-solid fa-envelope"></i></a>
                         </div>
                     </div>
                     <div class="team-info">
@@ -907,11 +912,11 @@
                 </div>
                 <div class="team-card reveal" style="transition-delay: 0.15s;">
                     <div class="team-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=500" alt="Arjun Menon">
+                        <img src="images/p2.webp" alt="Arjun Menon">
                         <div class="team-socials">
-                            <div class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
-                            <div class="team-social-btn"><i class="fa-brands fa-twitter"></i></div>
-                            <div class="team-social-btn"><i class="fa-solid fa-envelope"></i></div>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-solid fa-envelope"></i></a>
                         </div>
                     </div>
                     <div class="team-info">
@@ -922,11 +927,11 @@
                 </div>
                 <div class="team-card reveal" style="transition-delay: 0.25s;">
                     <div class="team-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=500" alt="Deepika Rao">
+                        <img src="images/p3.webp" alt="Deepika Rao">
                         <div class="team-socials">
-                            <div class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
-                            <div class="team-social-btn"><i class="fa-brands fa-twitter"></i></div>
-                            <div class="team-social-btn"><i class="fa-solid fa-envelope"></i></div>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-solid fa-envelope"></i></a>
                         </div>
                     </div>
                     <div class="team-info">
@@ -937,11 +942,11 @@
                 </div>
                 <div class="team-card reveal" style="transition-delay: 0.35s;">
                     <div class="team-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=500" alt="Karthik Subramanian">
+                        <img src="images/david.webp" alt="Karthik Subramanian">
                         <div class="team-socials">
-                            <div class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></div>
-                            <div class="team-social-btn"><i class="fa-brands fa-twitter"></i></div>
-                            <div class="team-social-btn"><i class="fa-solid fa-envelope"></i></div>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="404.html" class="team-social-btn"><i class="fa-solid fa-envelope"></i></a>
                         </div>
                     </div>
                     <div class="team-info">
@@ -977,25 +982,31 @@
                 <h2>Ready to Make a<br>Real Difference?</h2>
                 <p>Join thousands of changemakers who have already chosen to stand on the right side of history. Every action — big or small — matters.</p>
                 <div class="cta-btn-group">
-                    <button class="btn btn-teal"><i class="fa-solid fa-heart"></i>&nbsp; Donate Today</button>
-                    <button class="btn btn-yellow"><i class="fa-solid fa-handshake"></i>&nbsp; Volunteer With Us</button>
+                    <a href="404.html" class="btn btn-teal" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-heart"></i>&nbsp; Donate Today</a>
+                    <a href="404.html" class="btn btn-yellow" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-handshake"></i>&nbsp; Volunteer With Us</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============ FOOTER ============ -->
+        <!-- 12. FOOTER -->
     <div class="footer-wave">
-        <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#1a1a1a" fill-opacity="1" d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="#1a1a1a" fill-opacity="1"
+                d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+            </path>
+        </svg>
     </div>
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>Hope in Action</h3>
+                    <a href="index.html" class="footer-logo-link" style="display: inline-block; margin-bottom: 15px;"><img src="images/whitelogo.webp" alt="Stackly Logo" class="footer-logo" style="height: 45px; width: auto; vertical-align: middle;"></a>
                     <p>Together, we can rebuild lives and restore dignity.</p>
                     <h4 style="font-size: 1rem; margin: 30px 0 10px;">Our Mission:</h4>
-                    <p>We provide immediate and long-term support to communities, offering essential resources — food, water, medical care, and shelter.</p>
+                    <p>We provide immediate and long-term support to refugees, offering essential resources food, water,
+                        medical care, and shelter.</p>
                     <div style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
                         <i class="fa-solid fa-phone" style="color: var(--yellow); font-size: 1.5rem;"></i>
                         <div>
@@ -1008,38 +1019,61 @@
                 <div class="footer-col">
                     <h4>Info :</h4>
                     <ul>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Emergency Aid</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Medical Assistance</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Psychosocial Support</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Education for Children</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Sustainable Solutions</a></li>
+                        <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> HOME</a></li>
+                        <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> ABOUT</a></li>
+                        <li><a href="causes.html"><i class="fa-solid fa-chevron-right"></i> CAUSES</a></li>
+                        <li><a href="events.html"><i class="fa-solid fa-chevron-right"></i> EVENTS</a></li>
+                        <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> BLOG</a></li>
+                        <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> CONTACT</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Contacts :</h4>
                     <ul>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Assistance</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> contact@stacklyngo.org</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Donate Online</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> donation@stacklyngo.org</a></li>
-                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Salem, Tamil Nadu</a></li>
+                        <ul class="social-links">
+    <li>
+        <a href="https://facebook.com" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+    </li>
+
+    <li>
+        <a href="https://instagram.com" target="_blank">
+            <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+    </li>
+
+    <li>
+        <a href="https://linkedin.com" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+        </a>
+    </li>
+
+    <li>
+        <a href="https://youtube.com" target="_blank">
+            <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+    </li>
+</ul>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Recent News :</h4>
-                    <div class="l-post" style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=100" alt="News" style="width: 60px; height: 60px; object-fit: cover;">
+                    <div class="l-post">
+                        <img src="./images/pexels-tkirkgoz-11576242.webp" alt="News"
+                            style="width: 60px; height: 60px;">
                         <div>
-                            <h4 style="margin: 0; font-size: 0.95rem; color: white;">Make an Impact</h4>
+                            <h4 style="margin: 0; font-size: 0.95rem;">Make an Impact</h4>
                             <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
                         </div>
                     </div>
-                    <div class="l-post" style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center;">
-                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=100" alt="News" style="width: 60px; height: 60px; object-fit: cover;">
+                    <div class="l-post">
+                        <img src="images/photo-1542810634-71277d95dcbb.webp" alt="News"
+                            style="width: 60px; height: 60px;">
                         <div>
-                            <h4 style="margin: 0; font-size: 0.95rem; color: white;">Join the Cause</h4>
+                            <h4 style="margin: 0; font-size: 0.95rem;">Join the Cause</h4>
                             <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
                         </div>
                     </div>
@@ -1048,9 +1082,9 @@
 
             <div class="footer-bottom">
                 <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
-                <div class="newsletter" style="margin: 0;">
-                    <input type="email" placeholder="Email">
-                    <button>Send</button>
+                <div class="newsletter" style="margin: 0; display: flex; align-items: center;">
+                    <input type="email" placeholder="Email" class="footer-nl-email" style="padding: 8px 12px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: white; outline: none; width: 200px;">
+                    <button class="footer-nl-btn" style="background: var(--yellow); color: var(--text-dark); border: none; padding: 10px 18px; font-weight: 700; border-radius: 4px; cursor: pointer; margin-left: 8px; font-size: 0.85rem;" onclick="const inp=this.previousElementSibling; if(inp && inp.value && inp.value.includes('@')){window.location.href='404.html'}else{alert('Please enter a valid email address.')}">Send</button>
                 </div>
             </div>
         </div>

@@ -44,7 +44,21 @@
         .section-tag::after{content:' —'}
 
         /* ===== HEADER ===== */
-        .main-header{position:absolute;top:0;left:0;width:100%;padding:25px 0;z-index:1000;background:transparent;border-bottom:1px solid rgba(255,255,255,.15);font-family:"Times New Roman",Times,serif}
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1000;
+            background: rgba(15, 15, 15, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            font-family: "Times New Roman", Times, serif;
+            transition: background 0.3s ease;
+        }
         .header-container{display:flex;justify-content:space-between;align-items:center}
         .logo{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.5px}
         .logo span{color:var(--yellow)}
@@ -57,8 +71,9 @@
         .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer}
 
         /* ===== HERO ===== */
-        .blog-hero{height:80vh;min-height:560px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
-        .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1456324504439-367cee3b3c32?q=80&w=1920') center/cover no-repeat;transform:scale(1.1);will-change:transform}
+        .blog-hero{height:80vh;min-height:560px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center
+            padding-top: 120px;}
+        .hero-bg{position:absolute;inset:0;background:url('images/about hero.webp') center/cover no-repeat;transform:scale(1.1);will-change:transform}
         .hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(15,15,15,.88) 0%,rgba(155,89,182,.2) 100%)}
         .hero-content{position:relative;z-index:2;color:#fff;max-width:820px;padding:0 20px}
         .hero-breadcrumb{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);padding:8px 20px;border-radius:50px;font-size:.9rem;font-weight:600;margin-bottom:30px;animation:fadeDown .8s ease both}
@@ -219,7 +234,7 @@
         .nl-badge i{color:var(--teal)}
 
         /* ===== CTA ===== */
-        .cta-section{padding:120px 0;background:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1920') center/cover no-repeat;position:relative;text-align:center}
+        .cta-section{padding:120px 0;background:url('./images/photo-1531266752426-aad472b7bbf4.webp') center/cover no-repeat;position:relative;text-align:center}
         .cta-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(20,20,20,.9) 0%,rgba(26,188,156,.4) 100%)}
         .cta-content{position:relative;z-index:1;max-width:700px;margin:0 auto}
         .cta-content .section-tag{color:var(--yellow)}
@@ -283,7 +298,7 @@
 <!-- ============================= HEADER ============================= -->
 <header class="main-header">
     <div class="container header-container">
-        <a href="index.html" class="logo">Stackly<span>.</span></a>
+        <a href="index.html" class="logo"><img src="images/whitelogo.webp" alt="Stackly Logo" style="height: 40px; vertical-align: middle;"></a>
         
         <nav class="nav-menu" id="navMenu">
             <ul class="nav-list">
@@ -318,12 +333,9 @@
         </div>
         <h1>Stories That <em>Inspire</em><br>Action &amp; Hope</h1>
         <p>Field updates, impact reports, expert insights, and human stories from the frontlines of community development.</p>
-        <div class="hero-search">
-            <input type="text" placeholder="Search articles, topics, stories..." id="heroSearchInput">
-            <button onclick="searchBlog()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-        </div>
+       
     </div>
-    <div class="scroll-hint"><div class="scroll-wheel"></div></div>
+   
 </section>
 
 <!-- ============================= FEATURED POST ============================= -->
@@ -331,7 +343,7 @@
     <div class="container">
         <div class="featured-grid reveal">
             <div class="feat-img">
-                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=900" alt="Featured Post">
+                <img src="images/pexels-tkirkgoz-11576242.webp" alt="Featured Post">
                 <span class="feat-cat-badge impact"><i class="fa-solid fa-chart-line"></i> Impact Report</span>
                 <span class="feat-trending"><i class="fa-solid fa-arrow-trend-up"></i> Trending</span>
             </div>
@@ -340,7 +352,7 @@
                 <h2><a href="404.html">How 50,000 Lives Were Changed: Stackly NGO's 2025 Annual Impact Report</a></h2>
                 <p class="feat-excerpt">From feeding 2,000 families during the drought to sending 100 students to university — a deep dive into our most impactful year yet, told through the voices of the communities we serve.</p>
                 <div class="feat-meta">
-                    <img src="https://images.unsplash.com/photo-1531123414780-fee6a849b2db?q=80&w=100" alt="Author" class="feat-avatar">
+                    <img src="images/p1.webp" alt="Author" class="feat-avatar">
                     <div>
                         <div class="feat-author-name">Priya Krishnamurthy</div>
                         <div class="feat-date">3 July 2026 · 12 min read</div>
@@ -352,7 +364,7 @@
                     <span class="feat-stat"><i class="fa-solid fa-comment"></i> 52 comments</span>
                     <span class="feat-stat"><i class="fa-solid fa-share"></i> 128 shares</span>
                 </div>
-                <button class="feat-read-btn">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
+                <a href="404.html" class="feat-read-btn" style="text-decoration: none; display: inline-block;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -363,13 +375,13 @@
     <div class="container">
         <div class="cat-inner">
             <div class="cat-tabs" id="catTabs">
-                <button class="cat-tab active" data-cat="all">All Posts</button>
-                <button class="cat-tab" data-cat="impact"><i class="fa-solid fa-chart-line"></i> Impact</button>
-                <button class="cat-tab" data-cat="story"><i class="fa-solid fa-book-open"></i> Stories</button>
-                <button class="cat-tab" data-cat="education"><i class="fa-solid fa-graduation-cap"></i> Education</button>
-                <button class="cat-tab" data-cat="health"><i class="fa-solid fa-heart-pulse"></i> Health</button>
-                <button class="cat-tab" data-cat="environment"><i class="fa-solid fa-leaf"></i> Environment</button>
-                <button class="cat-tab" data-cat="community"><i class="fa-solid fa-people-group"></i> Community</button>
+                <a href="#" class="cat-tab active" data-cat="all" style="text-decoration: none; display: inline-block;">All Posts</a>
+                <a href="#" class="cat-tab" data-cat="impact" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-chart-line"></i> Impact</a>
+                <a href="#" class="cat-tab" data-cat="story" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-book-open"></i> Stories</a>
+                <a href="#" class="cat-tab" data-cat="education" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+                <a href="#" class="cat-tab" data-cat="health" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-heart-pulse"></i> Health</a>
+                <a href="#" class="cat-tab" data-cat="environment" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-leaf"></i> Environment</a>
+                <a href="#" class="cat-tab" data-cat="community" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-people-group"></i> Community</a>
             </div>
             <select class="sort-select" id="sortSelect">
                 <option>Latest First</option>
@@ -391,7 +403,7 @@
                     <!-- POST 1 -->
                     <div class="post-card reveal" data-cat="story" style="transition-delay:.05s">
                         <div class="post-img">
-                            <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=600" alt="Post">
+                            <img src="images/photo-1509099836639-18ba1795216d.webp" alt="Post">
                             <div class="post-overlay"></div>
                             <span class="post-cat-tag story">Story</span>
                             <span class="post-read-time"><i class="fa-solid fa-clock"></i> 6 min</span>
@@ -401,12 +413,12 @@
                             <p>When the wells ran dry in Kunnathur village, 200 families lost their livelihoods overnight. This is the story of how community resilience and donor generosity turned devastation into renewal.</p>
                             <div class="post-footer">
                                 <div class="post-author">
-                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=60" alt="">
+                                    <img src="images/p3.webp" alt="">
                                     <div><div class="post-author-name">Deepika Rao</div><div class="post-author-date">28 Jun 2026</div></div>
                                 </div>
                                 <div class="post-actions">
-                                    <button><i class="fa-regular fa-heart"></i> 94</button>
-                                    <button><i class="fa-regular fa-comment"></i> 18</button>
+                                    <a href="404.html" class="fa-regular fa-heart" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-heart"></i> 94</a>
+                                    <a href="404.html" class="fa-regular fa-comment" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-comment"></i> 18</a>
                                 </div>
                             </div>
                         </div>
@@ -415,7 +427,7 @@
                     <!-- POST 2 -->
                     <div class="post-card reveal" data-cat="education" style="transition-delay:.1s">
                         <div class="post-img">
-                            <img src="https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?q=80&w=600" alt="Post">
+                            <img src="images/photo-1489710437720-ebb67ec84dd2.webp" alt="Post">
                             <div class="post-overlay"></div>
                             <span class="post-cat-tag education">Education</span>
                             <span class="post-read-time"><i class="fa-solid fa-clock"></i> 8 min</span>
@@ -425,12 +437,12 @@
                             <p>Our scholarship programme doesn't just educate individuals — it transforms entire families. Data from 5 years of tracking shows generational impact that multiplies over decades.</p>
                             <div class="post-footer">
                                 <div class="post-author">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=60" alt="">
+                                    <img src="images/p2.webp" alt="">
                                     <div><div class="post-author-name">Arjun Menon</div><div class="post-author-date">22 Jun 2026</div></div>
                                 </div>
                                 <div class="post-actions">
-                                    <button><i class="fa-regular fa-heart"></i> 162</button>
-                                    <button><i class="fa-regular fa-comment"></i> 34</button>
+                                    <a href="404.html" class="fa-regular fa-heart" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-heart"></i> 162</a>
+                                    <a href="404.html" class="fa-regular fa-comment" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-comment"></i> 34</a>
                                 </div>
                             </div>
                         </div>
@@ -439,7 +451,7 @@
                     <!-- POST 3 -->
                     <div class="post-card reveal" data-cat="health" style="transition-delay:.15s">
                         <div class="post-img">
-                            <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600" alt="Post">
+                            <img src="images/photo-1516627145497-ae6968895b74.webp" alt="Post">
                             <div class="post-overlay"></div>
                             <span class="post-cat-tag health">Health</span>
                             <span class="post-read-time"><i class="fa-solid fa-clock"></i> 5 min</span>
@@ -449,12 +461,12 @@
                             <p>In villages where the nearest hospital is 40km away, our mobile clinics have become a lifeline. Meet the doctors who travel through dust and monsoon to save lives.</p>
                             <div class="post-footer">
                                 <div class="post-author">
-                                    <img src="https://images.unsplash.com/photo-1531123414780-fee6a849b2db?q=80&w=60" alt="">
+                                    <img src="images/p1.webp" alt="">
                                     <div><div class="post-author-name">Priya K.</div><div class="post-author-date">15 Jun 2026</div></div>
                                 </div>
                                 <div class="post-actions">
-                                    <button><i class="fa-regular fa-heart"></i> 210</button>
-                                    <button><i class="fa-regular fa-comment"></i> 42</button>
+                                    <a href="404.html" class="fa-regular fa-heart" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-heart"></i> 210</a>
+                                    <a href="404.html" class="fa-regular fa-comment" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-comment"></i> 42</a>
                                 </div>
                             </div>
                         </div>
@@ -463,7 +475,7 @@
                     <!-- POST 4 -->
                     <div class="post-card reveal" data-cat="environment" style="transition-delay:.2s">
                         <div class="post-img">
-                            <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=600" alt="Post">
+                            <img src="images/photo-1542810634-71277d95dcbb.webp" alt="Post">
                             <div class="post-overlay"></div>
                             <span class="post-cat-tag environment">Environment</span>
                             <span class="post-read-time"><i class="fa-solid fa-clock"></i> 4 min</span>
@@ -473,12 +485,12 @@
                             <p>Our reforestation programme has planted 8,000 native trees in 2025 alone — but the real success metric is the 91% survival rate that's setting national benchmarks.</p>
                             <div class="post-footer">
                                 <div class="post-author">
-                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=60" alt="">
+                                    <img src="images/david.webp" alt="">
                                     <div><div class="post-author-name">Karthik S.</div><div class="post-author-date">8 Jun 2026</div></div>
                                 </div>
                                 <div class="post-actions">
-                                    <button><i class="fa-regular fa-heart"></i> 147</button>
-                                    <button><i class="fa-regular fa-comment"></i> 26</button>
+                                    <a href="404.html" class="fa-regular fa-heart" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-heart"></i> 147</a>
+                                    <a href="404.html" class="fa-regular fa-comment" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-comment"></i> 26</a>
                                 </div>
                             </div>
                         </div>
@@ -487,7 +499,7 @@
                     <!-- POST 5 -->
                     <div class="post-card reveal" data-cat="community" style="transition-delay:.25s">
                         <div class="post-img">
-                            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=600" alt="Post">
+                            <img src="images/pexels-milan-rout-1620544-5829607.webp" alt="Post">
                             <div class="post-overlay"></div>
                             <span class="post-cat-tag community">Community</span>
                             <span class="post-read-time"><i class="fa-solid fa-clock"></i> 7 min</span>
@@ -497,12 +509,12 @@
                             <p>240 rural women graduated from our digital skills programme in 2025. Today, 78% run their own micro-businesses, collectively earning over ₹40 lakh monthly.</p>
                             <div class="post-footer">
                                 <div class="post-author">
-                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=60" alt="">
+                                    <img src="images/p3.webp" alt="">
                                     <div><div class="post-author-name">Deepika Rao</div><div class="post-author-date">1 Jun 2026</div></div>
                                 </div>
                                 <div class="post-actions">
-                                    <button><i class="fa-regular fa-heart"></i> 198</button>
-                                    <button><i class="fa-regular fa-comment"></i> 47</button>
+                                    <a href="404.html" class="fa-regular fa-heart" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-heart"></i> 198</a>
+                                    <a href="404.html" class="fa-regular fa-comment" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-comment"></i> 47</a>
                                 </div>
                             </div>
                         </div>
@@ -511,7 +523,7 @@
                     <!-- POST 6 -->
                     <div class="post-card reveal" data-cat="impact" style="transition-delay:.3s">
                         <div class="post-img">
-                            <img src="https://images.unsplash.com/photo-1531266752426-aad472b7bbf4?q=80&w=600" alt="Post">
+                            <img src="images/photo-1531266752426-aad472b7bbf4.webp" alt="Post">
                             <div class="post-overlay"></div>
                             <span class="post-cat-tag impact">Impact</span>
                             <span class="post-read-time"><i class="fa-solid fa-clock"></i> 10 min</span>
@@ -521,12 +533,12 @@
                             <p>94% of every rupee donated goes directly to programmes. In this open report, we break down exactly how your contributions were spent across all 18 active causes in Q1 2026.</p>
                             <div class="post-footer">
                                 <div class="post-author">
-                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=60" alt="">
+                                    <img src="images/david.webp" alt="">
                                     <div><div class="post-author-name">Karthik S.</div><div class="post-author-date">25 May 2026</div></div>
                                 </div>
                                 <div class="post-actions">
-                                    <button><i class="fa-regular fa-heart"></i> 310</button>
-                                    <button><i class="fa-regular fa-comment"></i> 63</button>
+                                    <a href="404.html" class="fa-regular fa-heart" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-heart"></i> 310</a>
+                                    <a href="404.html" class="fa-regular fa-comment" style="text-decoration: none; display: inline-block;"><i class="fa-regular fa-comment"></i> 63</a>
                                 </div>
                             </div>
                         </div>
@@ -534,9 +546,7 @@
 
                 </div>
 
-                <div class="load-more-wrap">
-                    <button class="btn btn-ghost" id="loadMoreBtn" onclick="loadMore()"><i class="fa-solid fa-arrow-rotate-right"></i> Load More Articles</button>
-                </div>
+                
             </div>
 
             <!-- SIDEBAR -->
@@ -568,28 +578,28 @@
                     <h4><i class="fa-solid fa-fire"></i> Popular Posts</h4>
                     <div class="popular-posts">
                         <div class="pop-post">
-                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=100" alt="">
+                            <img src="./images/photo-1509099836639-18ba1795216d.webp" alt="">
                             <div>
                                 <h5><a href="404.html">50,000 Lives Changed: 2025 Impact Report</a></h5>
                                 <p><i class="fa-solid fa-eye"></i> 4.2K views</p>
                             </div>
                         </div>
                         <div class="pop-post">
-                            <img src="https://images.unsplash.com/photo-1531266752426-aad472b7bbf4?q=80&w=100" alt="">
+                            <img src="images/photo-1531266752426-aad472b7bbf4.webp" alt="">
                             <div>
                                 <h5><a href="404.html">Where Does Your Money Go?</a></h5>
                                 <p><i class="fa-solid fa-eye"></i> 3.1K views</p>
                             </div>
                         </div>
                         <div class="pop-post">
-                            <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=100" alt="">
+                            <img src="images/photo-1516627145497-ae6968895b74.webp" alt="">
                             <div>
                                 <h5><a href="404.html">Mobile Clinics: Healthcare at Your Doorstep</a></h5>
                                 <p><i class="fa-solid fa-eye"></i> 2.8K views</p>
                             </div>
                         </div>
                         <div class="pop-post">
-                            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=100" alt="">
+                            <img src="images/pexels-milan-rout-1620544-5829607.webp" alt="">
                             <div>
                                 <h5><a href="404.html">Women Who Changed Their Village</a></h5>
                                 <p><i class="fa-solid fa-eye"></i> 2.4K views</p>
@@ -617,43 +627,13 @@
                     </div>
                 </div>
 
-                <!-- Newsletter -->
-                <div class="side-nl">
-                    <h4><i class="fa-solid fa-envelope"></i> Newsletter</h4>
-                    <p>Get the latest stories and impact updates delivered to your inbox every week.</p>
-                    <div class="side-nl-input">
-                        <input type="email" placeholder="Your email address" id="sideNlEmail">
-                        <button class="side-nl-btn" onclick="sideSubscribe()">Subscribe <i class="fa-solid fa-paper-plane"></i></button>
-                    </div>
-                    <p class="side-nl-note" id="sideNlMsg"><i class="fa-solid fa-lock"></i> We respect your privacy.</p>
-                </div>
+               
             </aside>
         </div>
     </div>
 </section>
 
-<!-- ============================= NEWSLETTER BANNER ============================= -->
-<section class="nl-banner">
-    <div class="container nl-inner">
-        <div class="nl-text reveal-l">
-            <span class="section-tag">Stay Informed</span>
-            <h2>Never Miss a Story</h2>
-            <p>Join 8,000+ subscribers who get weekly field updates, impact stories, and behind-the-scenes content from Stackly NGO's work across Salem.</p>
-        </div>
-        <div class="nl-form-main reveal-r">
-            <div class="nl-form-row">
-                <input type="email" placeholder="Enter your email address" id="mainNlEmail">
-                <button onclick="mainSubscribe()">Subscribe</button>
-            </div>
-            <div class="nl-badges">
-                <span class="nl-badge"><i class="fa-solid fa-check"></i> Weekly digest</span>
-                <span class="nl-badge"><i class="fa-solid fa-check"></i> No spam</span>
-                <span class="nl-badge"><i class="fa-solid fa-check"></i> Unsubscribe anytime</span>
-            </div>
-            <p id="mainNlMsg" style="color:var(--teal);font-size:.88rem;font-weight:700;display:none;margin-top:10px"><i class="fa-solid fa-circle-check"></i> Welcome aboard! Check your inbox.</p>
-        </div>
-    </div>
-</section>
+
 
 <!-- ============================= CTA ============================= -->
 <section class="cta-section">
@@ -664,66 +644,113 @@
             <h2>Every Share Amplifies<br>a Voice That Matters</h2>
             <p>Read, share, and help our stories reach the people who can make a difference. Your voice is our greatest amplifier.</p>
             <div class="cta-btns">
-                <button class="btn btn-teal"><i class="fa-solid fa-heart"></i> Support Our Mission</button>
-                <button class="btn btn-yellow"><i class="fa-solid fa-pen-nib"></i> Submit Your Story</button>
+                <a href="404.html" class="btn btn-teal" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-heart"></i> Support Our Mission</a>
+                <a href="404.html" class="btn btn-yellow" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-pen-nib"></i> Submit Your Story</a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ============================= FOOTER ============================= -->
-<div class="footer-wave"><svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#1a1a1a" fill-opacity="1" d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg></div>
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Hope in Action</h3>
-                <p>Together, we can rebuild lives and restore dignity.</p>
-                <h4 style="font-size:1rem;margin:30px 0 10px;">Our Mission:</h4>
-                <p>We provide immediate and long-term support, offering essential resources — food, water, medical care, and shelter.</p>
-                <div style="display:flex;gap:15px;align-items:center;margin-top:20px;">
-                    <i class="fa-solid fa-phone" style="color:var(--yellow);font-size:1.5rem;"></i>
-                    <div><span style="display:block;font-size:.8rem;color:#999;">Call Us</span><strong style="color:#fff;">+ 1 233 587 36</strong></div>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Info :</h4>
-                <ul>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Emergency Aid</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Medical Assistance</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Psychosocial Support</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Education for Children</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Sustainable Solutions</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contacts :</h4>
-                <ul>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Assistance</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> contact@stacklyngo.org</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Donate Online</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> donation@stacklyngo.org</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Salem, Tamil Nadu</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Recent News :</h4>
-                <div style="display:flex;gap:15px;margin-bottom:20px;align-items:center;">
-                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=100" alt="" style="width:60px;height:60px;object-fit:cover;">
-                    <div><h4 style="margin:0;font-size:.95rem;color:#fff;">Make an Impact</h4><p style="font-size:.8rem;">Lorem ipsum dolor sit...</p></div>
-                </div>
-                <div style="display:flex;gap:15px;align-items:center;">
-                    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=100" alt="" style="width:60px;height:60px;object-fit:cover;">
-                    <div><h4 style="margin:0;font-size:.95rem;color:#fff;">Join the Cause</h4><p style="font-size:.8rem;">Lorem ipsum dolor sit...</p></div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
-            <div class="f-newsletter" style="margin:0;"><input type="email" placeholder="Email"><button>Send</button></div>
-        </div>
+    <!-- 12. FOOTER -->
+    <div class="footer-wave">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="#1a1a1a" fill-opacity="1"
+                d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+            </path>
+        </svg>
     </div>
-</footer>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo-link" style="display: inline-block; margin-bottom: 15px;"><img src="images/whitelogo.webp" alt="Stackly Logo" class="footer-logo" style="height: 45px; width: auto; vertical-align: middle;"></a>
+                    <p>Together, we can rebuild lives and restore dignity.</p>
+                    <h4 style="font-size: 1rem; margin: 30px 0 10px;">Our Mission:</h4>
+                    <p>We provide immediate and long-term support to refugees, offering essential resources food, water,
+                        medical care, and shelter.</p>
+                    <div style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
+                        <i class="fa-solid fa-phone" style="color: var(--yellow); font-size: 1.5rem;"></i>
+                        <div>
+                            <span style="display: block; font-size: 0.8rem; color: #999;">Call Us</span>
+                            <strong style="color: white;">+ 1 233 587 36</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Info :</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> HOME</a></li>
+                        <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> ABOUT</a></li>
+                        <li><a href="causes.html"><i class="fa-solid fa-chevron-right"></i> CAUSES</a></li>
+                        <li><a href="events.html"><i class="fa-solid fa-chevron-right"></i> EVENTS</a></li>
+                        <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> BLOG</a></li>
+                        <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contacts :</h4>
+                    <ul>
+                        <ul class="social-links">
+    <li>
+        <a href="https://facebook.com" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+    </li>
+
+    <li>
+        <a href="https://instagram.com" target="_blank">
+            <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+    </li>
+
+    <li>
+        <a href="https://linkedin.com" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+        </a>
+    </li>
+
+    <li>
+        <a href="https://youtube.com" target="_blank">
+            <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+    </li>
+</ul>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Recent News :</h4>
+                    <div class="l-post">
+                        <img src="./images/pexels-tkirkgoz-11576242.webp" alt="News"
+                            style="width: 60px; height: 60px;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem;">Make an Impact</h4>
+                            <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
+                        </div>
+                    </div>
+                    <div class="l-post">
+                        <img src="images/photo-1542810634-71277d95dcbb.webp" alt="News"
+                            style="width: 60px; height: 60px;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem;">Join the Cause</h4>
+                            <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
+                <div class="newsletter" style="margin: 0; display: flex; align-items: center;">
+                    <input type="email" placeholder="Email" class="footer-nl-email" style="padding: 8px 12px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: white; outline: none; width: 200px;">
+                    <button class="footer-nl-btn" style="background: var(--yellow); color: var(--text-dark); border: none; padding: 10px 18px; font-weight: 700; border-radius: 4px; cursor: pointer; margin-left: 8px; font-size: 0.85rem;" onclick="const inp=this.previousElementSibling; if(inp && inp.value && inp.value.includes('@')){window.location.href='404.html'}else{alert('Please enter a valid email address.')}">Send</button>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 <!-- ============================= SCRIPTS ============================= -->
 <script>
@@ -764,7 +791,8 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observ
 
 /* ---- Category Filter ---- */
 const catTabs = document.querySelectorAll('.cat-tab');
-catTabs.forEach(tab => tab.addEventListener('click', () => {
+catTabs.forEach(tab => tab.addEventListener('click', (e) => {
+    e.preventDefault();
     catTabs.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     filterPosts();

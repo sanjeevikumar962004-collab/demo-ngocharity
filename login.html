@@ -32,12 +32,10 @@
             align-items: center;
             justify-content: center;
             padding: 60px 20px;
-            background: url('https://images.unsplash.com/photo-1593113565694-c6f1308a0d9b?q=80&w=1920') center/cover no-repeat;
+            background: var(--bg-light);
             position: relative;
         }
-        .auth-overlay {
-            position: absolute; inset: 0; background: linear-gradient(135deg, rgba(20,20,20,0.85), rgba(26,188,156,0.6));
-        }
+        .auth-overlay { display: none; }
         .auth-card {
             position: relative; z-index: 10;
             background: #fff;
@@ -45,7 +43,7 @@
             padding: 50px 45px;
             width: 100%;
             max-width: 480px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06); border: 1px solid var(--border);
             animation: fadeUp 0.8s ease both;
         }
         .auth-head { text-align: center; margin-bottom: 25px; }
@@ -87,6 +85,7 @@
 <section class="auth-section">
     <div class="auth-overlay"></div>
     <div class="auth-card">
+        <div style="text-align: center; margin-bottom: 20px;"><a href="index.html"><img src="images/whitelogo.webp" alt="Stackly Logo" style="height: 55px; width: auto; background: var(--teal); padding: 8px 16px; border-radius: 12px; display: inline-block;"></a></div>
         <div class="auth-head">
             <h2>Welcome Back</h2>
             <p>Log in to continue your impact journey.</p>
@@ -163,6 +162,18 @@
         btn.disabled = true;
         
         const role = document.getElementById('loginRole').value;
+        const userEmail = email.value.trim();
+        localStorage.setItem('userEmail', userEmail);
+        
+        let namePart = userEmail.split('@')[0];
+        namePart = namePart.replace(/[0-9]/g, '').replace(/[^a-zA-Z]/g, ' ').trim();
+        if(!namePart) namePart = 'User';
+        let finalName = namePart.split(' ').map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(' ');
+        let fName = finalName.split(' ')[0];
+        
+        localStorage.setItem('userFullName', finalName);
+        localStorage.setItem('userFname', fName);
+        
         setTimeout(() => {
             btn.innerHTML = '<i class="fa-solid fa-check"></i> Login Successful';
             btn.style.background = 'var(--green)';

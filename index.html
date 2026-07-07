@@ -120,11 +120,11 @@
 
         /* --- 0. HEADER SECTION --- */
         .main-header {
-            position: absolute;
+            position: fixed; background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             top: 0;
             left: 0;
             width: 100%;
-            padding: 25px 0;
+            padding: 15px 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             font-family: "Times New Roman", Times, serif;
@@ -201,14 +201,15 @@
         /* --- 1. HERO SECTION --- */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1920') center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./images/hero.webp') center/cover;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-        }
+        
+            padding-top: 100px;}
 
         .hero h1 {
             font-size: 5.5rem;
@@ -538,15 +539,15 @@
             position: absolute;
             left: 0;
             top: 0;
-            width: 45%;
+            width: 33%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000') no-repeat center/cover;
+            background: url('images/home hero.webp') no-repeat center/cover;
         }
 
         .donation-grid {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 60px;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
             align-items: center;
             position: relative;
             z-index: 1;
@@ -895,7 +896,12 @@
         }
 
         .event-row .btn {
-            padding: 16px 36px;
+            width: 220px;
+            height: 54px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
             border-radius: 8px;
             font-size: 1rem;
             text-transform: uppercase;
@@ -1397,182 +1403,7 @@
             color: #4caf50;
         }
 
-        .ai-chat-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 9999;
-            background: var(--blue);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            border: none;
-        }
-
-        .ai-chat-btn:hover {
-            transform: scale(1.1);
-            background: #2980b9;
-        }
-
-        .ai-chat-window {
-            position: fixed;
-            bottom: 90px;
-            left: 20px;
-            z-index: 9999;
-            width: 350px;
-            height: 450px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transform: scale(0);
-            transform-origin: bottom left;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .ai-chat-window.active {
-            transform: scale(1);
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .ai-chat-header {
-            background: var(--blue);
-            color: white;
-            padding: 15px 20px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ai-chat-header button {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-            transition: 0.2s;
-        }
-
-        .ai-chat-header button:hover {
-            transform: scale(1.2);
-        }
-
-        .ai-chat-body {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            background: #f4f7f6;
-        }
-
-        .chat-msg {
-            padding: 12px 16px;
-            border-radius: 18px;
-            max-width: 85%;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            animation: fadeIn 0.3s;
-        }
-
-        .chat-msg.bot {
-            background: white;
-            color: var(--text-dark);
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .chat-msg.user {
-            background: var(--blue);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-            box-shadow: 0 2px 5px rgba(26, 115, 232, 0.2);
-        }
-
-        .chat-loading {
-            display: flex;
-            gap: 4px;
-            padding: 12px 16px;
-            background: white;
-            align-self: flex-start;
-            border-radius: 18px;
-            border-bottom-left-radius: 4px;
-        }
-
-        .chat-loading span {
-            width: 6px;
-            height: 6px;
-            background: var(--text-light);
-            border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out both;
-        }
-
-        .chat-loading span:nth-child(1) {
-            animation-delay: -0.32s;
-        }
-
-        .chat-loading span:nth-child(2) {
-            animation-delay: -0.16s;
-        }
-
-        .ai-chat-input {
-            display: flex;
-            padding: 15px;
-            border-top: 1px solid var(--border-color);
-            background: white;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .ai-chat-input input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 25px;
-            outline: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .ai-chat-input input:focus {
-            border-color: var(--blue);
-        }
-
-        .ai-chat-input button {
-            background: var(--blue);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .ai-chat-input button:hover {
-            background: #2980b9;
-            transform: translateX(2px);
-        }
+        /* Chat Bot styles removed */
 
         @keyframes fadeIn {
             from {
@@ -1609,6 +1440,22 @@
             .blog-layout,
             .footer-grid {
                 grid-template-columns: 1fr;
+            }
+            .donation-area::before {
+                display: none;
+            }
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .solutions-text {
+                padding: 25px 20px;
+            }
+            .solutions-text h2 {
+                font-size: 2rem;
+            }
+            .icon-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             /* --- Mobile Fixes for Yellow Strip --- */
@@ -1785,7 +1632,7 @@
     <!-- 0. HEADER SECTION -->
     <header class="main-header">
         <div class="container header-container">
-            <a href="index.html" class="logo">Stackly<span>.</span></a>
+            <a href="index.html" class="logo"><img src="images/whitelogo.webp" alt="Stackly Logo" style="height: 40px; vertical-align: middle;"></a>
 
             <nav class="nav-menu">
                 <ul class="nav-list">
@@ -1798,7 +1645,7 @@
                     <li><a href="login.html"><i class="fa-solid fa-user"></i> Login</a></li>
                 </ul>
                 <div class="nav-action">
-                    <button class="btn btn-teal" style="padding: 10px 24px;">Donate Now</button>
+                    <a href="404.html" class="btn btn-teal" style="text-decoration: none; display: inline-block; padding: 10px 24px;">Donate Now</a>
                 </div>
             </nav>
 
@@ -1813,200 +1660,27 @@
         <div class="container">
             <h1>Act <span class="highlight">Today</span></h1>
             <p>Your donation can change lives today</p>
-            <button class="btn btn-teal"><i class="fa-solid fa-heart"></i> Donate Now</button>
+            <a href="404.html" class="btn btn-teal" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-heart"></i> Donate Now</a>
         </div>
     </section>
+
+    
 
     <!-- 2. YELLOW STRIP -->
     <div class="yellow-strip-wrapper">
         <div class="yellow-strip">
             <div class="yellow-strip-left">
-                <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=400" alt="Running Kids">
+                <img src="images/photo-1516627145497-ae6968895b74.webp" alt="Running Kids">
                 <div>
                     <h2>Be the Change</h2>
                     <p>Your donation has the power to transform lives and protect our planet.</p>
                 </div>
             </div>
-            <button class="btn btn-teal">All Causes</button>
+            <a href="404.html" class="btn btn-teal" style="text-decoration: none; display: inline-block;">All Causes</a>
         </div>
     </div>
 
-    <!-- 3. COMPASSION & STATS -->
-    <section class="compassion-section">
-        <div class="container compassion-grid">
-            <div class="left-stats">
-                <div class="stat-block">
-                    <span>• Be the Difference</span>
-                    <div class="num counter" data-target="15">0</div>
-                    <p>Every Donation Counts</p>
-                </div>
-                <div class="stat-block">
-                    <div class="num counter" data-target="271">0</div>
-                    <p>Supporting Everyone</p>
-                </div>
-            </div>
-            <div class="compassion-content">
-                <h2>Guiding with Compassion and<br>Empowering Communities</h2>
-                <div class="compassion-inner">
-                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600"
-                        alt="Smiling Woman">
-                    <div>
-                        <p>We are dedicated to creating a brighter future for those in need through collective effort.
-                            At Stackly in Salem, we ensure every resource reaches those who need it most.</p>
-                        <p>We connect people to meaningful causes. Together, we create a lifeline for those who need it
-                            most.</p>
-                    </div>
-                </div>
-                <div class="compassion-links">
-                    <a href="#">Sustainable Solutions <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="#">Emergency Aid Relief <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="#">Empowerment <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. JOIN OUR MISSION -->
-    <section class="mission-section">
-        <div class="container">
-            <div class="section-header">
-                <span>Together, We Can Make a Real Impact</span>
-                <h2>Join Our Mission to Save Lives</h2>
-            </div>
-
-            <div class="mission-row">
-                <div class="mission-text">
-                    <span class="big-num">01</span>
-                    <h3>Responding to Crises</h3>
-                    <p>In times of crisis, every second counts. Our organization is committed to providing immediate
-                        relief.</p>
-                    <ul class="mission-list">
-                        <li><i class="fa-solid fa-check"></i> Immediate Relief</li>
-                        <li><i class="fa-solid fa-check"></i> Emergency Support</li>
-                        <li><i class="fa-solid fa-check"></i> Direct Impact</li>
-                    </ul>
-                    <button class="btn btn-red">Learn More</button>
-                </div>
-                <div class="mission-img">
-                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=800"
-                        alt="Child in need">
-                </div>
-            </div>
-
-            <div class="mission-row">
-                <div class="mission-text">
-                    <span class="big-num">02</span>
-                    <h3>Building a Foundation</h3>
-                    <p>Our mission is to empower local communities in Salem by providing essential resources through
-                        training programs.</p>
-                    <ul class="mission-list">
-                        <li><i class="fa-solid fa-check"></i> Long-Term Change</li>
-                        <li><i class="fa-solid fa-check"></i> Empowerment</li>
-                        <li><i class="fa-solid fa-check"></i> Sustainable Solutions</li>
-                    </ul>
-                </div>
-                <div class="mission-img">
-                    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800"
-                        alt="Women carrying water">
-                </div>
-            </div>
-
-            <div class="mission-row">
-                <div class="mission-text">
-                    <span class="big-num">03</span>
-                    <h3>Protecting Our Planet</h3>
-                    <p>Protecting our planet is essential to creating a better future for all. Our environmental
-                        programs focus on sustainability.</p>
-                    <ul class="mission-list">
-                        <li><i class="fa-solid fa-check"></i> Educational Support</li>
-                        <li><i class="fa-solid fa-check"></i> Youth Development</li>
-                        <li><i class="fa-solid fa-check"></i> Resource Access</li>
-                    </ul>
-                </div>
-                <div class="mission-img">
-                    <img src="https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?q=80&w=800"
-                        alt="Children playing">
-                </div>
-            </div>
-
-            <div class="mission-row">
-                <div class="mission-text">
-                    <span class="big-num">04</span>
-                    <h3>Making a Difference</h3>
-                    <p>With every step, we're moving closer to a world where no one is left behind. From feeding the
-                        hungry to providing shelter.</p>
-                    <ul class="mission-list">
-                        <li><i class="fa-solid fa-check"></i> Environmental</li>
-                        <li><i class="fa-solid fa-check"></i> Restoring Nature</li>
-                        <li><i class="fa-solid fa-check"></i> Clean Energy</li>
-                    </ul>
-                    <button class="btn btn-blue">Donate Now</button>
-                </div>
-                <div class="mission-img">
-                    <img src="https://images.unsplash.com/photo-1531266752426-aad472b7bbf4?q=80&w=800"
-                        alt="Woman working">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. DONATION WIDGET & ICONS -->
-    <section class="donation-area">
-        <div class="container donation-grid">
-            <div class="donation-widget">
-                <h3>How much would you like to donate today?</h3>
-                <p>All donations directly impact our organization and help us.</p>
-                <div class="amount-grid">
-                    <button class="amount-btn active">$10.00</button>
-                    <button class="amount-btn">$25.00</button>
-                    <button class="amount-btn">$50.00</button>
-                    <button class="amount-btn">$100.00</button>
-                    <button class="amount-btn">$250.00</button>
-                    <button class="amount-btn">$500.00</button>
-                </div>
-                <button class="btn btn-red">Donate now <i class="fa-solid fa-arrow-right"></i></button>
-                <div class="secure-txt"><i class="fa-solid fa-lock"></i> 100% Secure Donation</div>
-
-                <div id="ai-impact-result" class="ai-impact">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="ai-impact-text">Select an amount to see
-                        its impact...</span>
-                </div>
-            </div>
-
-            <div class="solutions-text">
-                <span style="font-size: 0.85rem; font-weight:700; color:var(--text-dark);">• Personalized Support for a
-                    Better Tomorrow</span>
-                <h2>Solutions for Every Need,<br>Transforming Lives</h2>
-                <p>Every donation, every contribution fuels initiatives that transform lives and uplift communities in
-                    need. From providing emergency relief to supporting long-term change.</p>
-
-                <div class="icon-grid">
-                    <div class="icon-box">
-                        <i class="fa-solid fa-truck-medical"></i>
-                        <h4>Emergency</h4>
-                        <p>We provide immediate aid in times of disaster, including assistance.</p>
-                    </div>
-                    <div class="icon-box">
-                        <i class="fa-solid fa-hand-holding-heart"></i>
-                        <h4>Support</h4>
-                        <p>Our long-term initiatives focus on education, vocational training.</p>
-                    </div>
-                    <div class="icon-box">
-                        <i class="fa-solid fa-hands-holding"></i>
-                        <h4>Assistance</h4>
-                        <p>We work to protect and restore natural ecosystems, focusing.</p>
-                    </div>
-                    <div class="icon-box">
-                        <i class="fa-solid fa-seedling"></i>
-                        <h4>Sustainable</h4>
-                        <p>From offering safe refuge to providing essential services.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. 3-COLUMN STATS & HOW IT HELPS -->
+        <!-- 6. 3-COLUMN STATS & HOW IT HELPS -->
     <section class="helps-section">
         <div class="container helps-grid">
             <div class="vert-stats">
@@ -2025,7 +1699,7 @@
             </div>
 
             <div class="helps-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=800"
+                <img src="images/photo-1502086223501-7ea6ecd79368.webp"
                     alt="Mother and Child">
                 <div class="big-changes-box">
                     <h3>Big changes</h3>
@@ -2054,68 +1728,13 @@
         </div>
     </section>
 
-    <!-- 7. EVENTS LIST -->
-    <section class="events-section">
-        <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 20px;">
-                <span>• Join Our Activities</span>
-                <h2>Upcoming Events</h2>
-            </div>
 
-            <div class="events-container">
-                <div class="event-row">
-                    <div class="event-date">
-                        <div class="day">01</div>
-                        <div class="month">Jan</div>
-                    </div>
-                    <div class="event-info">
-                        <h3>Give Hope, Create Change</h3>
-                        <p>Sed lectus felis id porta vestibulum. Maecenas sed neque ac risus cursus</p>
-                    </div>
-                    <button class="btn btn-teal">Learn More</button>
-                </div>
-                <div class="event-row">
-                    <div class="event-date">
-                        <div class="day">10</div>
-                        <div class="month">Feb</div>
-                    </div>
-                    <div class="event-info">
-                        <h3>Together, We Can Help</h3>
-                        <p>Pellentesque efficitur massa ut est posuere cursus. Mauris imperdiet, nibh</p>
-                    </div>
-                    <button class="btn btn-yellow">Explore Details</button>
-                </div>
-                <div class="event-row">
-                    <div class="event-date">
-                        <div class="day">12</div>
-                        <div class="month">Mar</div>
-                    </div>
-                    <div class="event-info">
-                        <h3>Make a Difference Today</h3>
-                        <p>Vel porta pretium, lacus lorem ultricies sem, luctus consequat purus ante quis</p>
-                    </div>
-                    <button class="btn btn-blue">Find Out More</button>
-                </div>
-                <div class="event-row">
-                    <div class="event-date">
-                        <div class="day">27</div>
-                        <div class="month">Apr</div>
-                    </div>
-                    <div class="event-info">
-                        <h3>Support a Better Future</h3>
-                        <p>Ut tempus sodales nunc et euismod. Praesent dictum non neque vel aliquam.</p>
-                    </div>
-                    <button class="btn btn-red">Get Involved</button>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 8. SCROLL VIDEO TEXT SECTION -->
+       <!-- 8. SCROLL VIDEO TEXT SECTION -->
     <section class="scroll-video-section" id="scroll-video-section">
         <div class="sticky-container">
             <video class="bg-video" autoplay loop muted playsinline
-                poster="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1920">
+                poster="./images/pexels-milan-rout-1620544-5829607.webp">
                 <source
                     src="https://assets.mixkit.co/videos/preview/mixkit-multiracial-people-holding-hands-43183-large.mp4"
                     type="video/mp4">
@@ -2127,52 +1746,7 @@
         </div>
     </section>
 
-    <!-- 9. $120 TRANSFORM SECTION -->
-    <section class="transform-section">
-        <div class="container">
-            <span>Give Hope, Create Change</span>
-            <h2>Your Generosity Transforms Lives for a Better Tomorrow</h2>
-
-            <div class="tags">
-                <span><i class="fa-solid fa-asterisk"></i> Empowerment</span>
-                <span><i class="fa-solid fa-heart"></i> Compassion</span>
-                <span><i class="fa-solid fa-asterisk"></i> Support</span>
-                <span><i class="fa-solid fa-heart"></i> Impact</span>
-            </div>
-
-            <div class="transform-grid">
-                <div class="transform-img">
-                    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800"
-                        alt="Woman holding baby">
-                </div>
-                <div class="transform-content">
-                    <div class="badge">Make Change</div>
-                    <h3>Transform Lives with Every Contribution</h3>
-                    <div class="price">$ 120</div>
-                    <p>Your donation is more than just a gift, it's a beacon of hope for those in need. Together we can
-                        bring relief to vulnerable communities, create lasting opportunities for growth, and address
-                        critical global challenges like poverty, environmental degradation, and displacement.</p>
-
-                    <div class="t-links">
-                        <span><i class="fa-solid fa-layer-group"></i> Direct Impact</span>
-                        <span><i class="fa-solid fa-globe"></i> Global Reach</span>
-                        <span><i class="fa-solid fa-lightbulb"></i> Solutions</span>
-                    </div>
-
-                    <div class="author-box">
-                        <img src="https://images.unsplash.com/photo-1531123414780-fee6a849b2db?q=80&w=200"
-                            alt="Samantha Anderson">
-                        <div>
-                            <h5>Samantha Anderson</h5>
-                            <p>Every interaction is an opportunity to make a positive impact</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 10. PROGRESS & FACES -->
+       <!-- 10. PROGRESS & FACES -->
     <section class="progress-section">
         <div class="container progress-grid">
             <div class="progress-content">
@@ -2208,22 +1782,216 @@
                     </div>
                 </div>
                 <br>
-                <button class="btn btn-teal">More Info</button>
+                <a href="404.html" class="btn btn-teal" style="text-decoration: none; display: inline-block;">More Info</a>
             </div>
 
             <div class="faces-grid">
-                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1531266752426-aad472b7bbf4?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1544717302-de2939b7ef71?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=300" alt="Face">
-                <img src="https://images.unsplash.com/photo-1531123414780-fee6a849b2db?q=80&w=300" alt="Face">
+                <img src="images/photo-1502086223501-7ea6ecd79368.webp" alt="Face">
+                <img src="images/photo-1531266752426-aad472b7bbf4.webp" alt="Face">
+                <img src="images/pexels-milan-rout-1620544-5829607.webp" alt="Face">
+                <img src="images/photo-1489710437720-ebb67ec84dd2.webp" alt="Face">
+                <img src="images/photo-1516627145497-ae6968895b74.webp" alt="Face">
+                <img src="images/photo-1542810634-71277d95dcbb.webp" alt="Face">
+                <img src="images/pexels-svetlana-photographer-2149375332-33117727.webp" alt="Face">
+                <img src="images/photo-1509099836639-18ba1795216d.webp" alt="Face">
+                <img src="images/pexels-gustavo-fring-7156163.webp" alt="Face">
             </div>
         </div>
     </section>
+
+    <!-- 4. JOIN OUR MISSION -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="section-header">
+                <span>Together, We Can Make a Real Impact</span>
+                <h2>Join Our Mission to Save Lives</h2>
+            </div>
+
+            <div class="mission-row">
+                <div class="mission-text">
+                    <span class="big-num">01</span>
+                    <h3>Responding to Crises</h3>
+                    <p>In times of crisis, every second counts. Our organization is committed to providing immediate
+                        relief.</p>
+                    <ul class="mission-list">
+                        <li><i class="fa-solid fa-check"></i> Immediate Relief</li>
+                        <li><i class="fa-solid fa-check"></i> Emergency Support</li>
+                        <li><i class="fa-solid fa-check"></i> Direct Impact</li>
+                    </ul>
+                    <a href="404.html" class="btn btn-red" style="text-decoration: none; display: inline-block;">Learn More</a>
+                </div>
+                <div class="mission-img">
+                    <img src="images/photo-1516627145497-ae6968895b74.webp"
+                        alt="Child in need">
+                </div>
+            </div>
+
+            <div class="mission-row">
+                <div class="mission-text">
+                    <span class="big-num">02</span>
+                    <h3>Building a Foundation</h3>
+                    <p>Our mission is to empower local communities in Salem by providing essential resources through
+                        training programs.</p>
+                    <ul class="mission-list">
+                        <li><i class="fa-solid fa-check"></i> Long-Term Change</li>
+                        <li><i class="fa-solid fa-check"></i> Empowerment</li>
+                        <li><i class="fa-solid fa-check"></i> Sustainable Solutions</li>
+                    </ul>
+                </div>
+                <div class="mission-img">
+                    <img src="images/photo-1542810634-71277d95dcbb.webp"
+                        alt="Women carrying water">
+                </div>
+            </div>
+
+            <div class="mission-row">
+                <div class="mission-text">
+                    <span class="big-num">03</span>
+                    <h3>Protecting Our Planet</h3>
+                    <p>Protecting our planet is essential to creating a better future for all. Our environmental
+                        programs focus on sustainability.</p>
+                    <ul class="mission-list">
+                        <li><i class="fa-solid fa-check"></i> Educational Support</li>
+                        <li><i class="fa-solid fa-check"></i> Youth Development</li>
+                        <li><i class="fa-solid fa-check"></i> Resource Access</li>
+                    </ul>
+                </div>
+                <div class="mission-img">
+                    <img src="images/photo-1489710437720-ebb67ec84dd2.webp"
+                        alt="Children playing">
+                </div>
+            </div>
+
+            <div class="mission-row">
+                <div class="mission-text">
+                    <span class="big-num">04</span>
+                    <h3>Making a Difference</h3>
+                    <p>With every step, we're moving closer to a world where no one is left behind. From feeding the
+                        hungry to providing shelter.</p>
+                    <ul class="mission-list">
+                        <li><i class="fa-solid fa-check"></i> Environmental</li>
+                        <li><i class="fa-solid fa-check"></i> Restoring Nature</li>
+                        <li><i class="fa-solid fa-check"></i> Clean Energy</li>
+                    </ul>
+                    <a href="404.html" class="btn btn-blue" style="text-decoration: none; display: inline-block;">Donate Now</a>
+                </div>
+                <div class="mission-img">
+                    <img src="images/photo-1531266752426-aad472b7bbf4.webp"
+                        alt="Woman working">
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+
+
+
+    <!-- 7. EVENTS LIST -->
+    <section class="events-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 20px;">
+                <span>• Join Our Activities</span>
+                <h2>Upcoming Events</h2>
+            </div>
+
+            <div class="events-container">
+                <div class="event-row">
+                    <div class="event-date">
+                        <div class="day">01</div>
+                        <div class="month">Jan</div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Give Hope, Create Change</h3>
+                        <p>Sed lectus felis id porta vestibulum. Maecenas sed neque ac risus cursus</p>
+                    </div>
+                    <a href="404.html" class="btn btn-teal" style="text-decoration: none;">Learn More</a>
+                </div>
+                <div class="event-row">
+                    <div class="event-date">
+                        <div class="day">10</div>
+                        <div class="month">Feb</div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Together, We Can Help</h3>
+                        <p>Pellentesque efficitur massa ut est posuere cursus. Mauris imperdiet, nibh</p>
+                    </div>
+                    <a href="404.html" class="btn btn-yellow" style="text-decoration: none;">Learn More</a>
+                </div>
+                <div class="event-row">
+                    <div class="event-date">
+                        <div class="day">12</div>
+                        <div class="month">Mar</div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Make a Difference Today</h3>
+                        <p>Vel porta pretium, lacus lorem ultricies sem, luctus consequat purus ante quis</p>
+                    </div>
+                    <a href="404.html" class="btn btn-blue" style="text-decoration: none;">Learn More</a>
+                </div>
+                <div class="event-row">
+                    <div class="event-date">
+                        <div class="day">27</div>
+                        <div class="month">Apr</div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Support a Better Future</h3>
+                        <p>Ut tempus sodales nunc et euismod. Praesent dictum non neque vel aliquam.</p>
+                    </div>
+                    <a href="404.html" class="btn btn-red" style="text-decoration: none;">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+
+    <!-- 9. $120 TRANSFORM SECTION -->
+    <section class="transform-section">
+        <div class="container">
+            <span>Give Hope, Create Change</span>
+            <h2>Your Generosity Transforms Lives for a Better Tomorrow</h2>
+
+            <div class="tags">
+                <span><i class="fa-solid fa-asterisk"></i> Empowerment</span>
+                <span><i class="fa-solid fa-heart"></i> Compassion</span>
+                <span><i class="fa-solid fa-asterisk"></i> Support</span>
+                <span><i class="fa-solid fa-heart"></i> Impact</span>
+            </div>
+
+            <div class="transform-grid">
+                <div class="transform-img">
+                    <img src="images/photo-1542810634-71277d95dcbb.webp"
+                        alt="Woman holding baby">
+                </div>
+                <div class="transform-content">
+                    <div class="badge">Make Change</div>
+                    <h3>Transform Lives with Every Contribution</h3>
+                    <div class="price">$ 120</div>
+                    <p>Your donation is more than just a gift, it's a beacon of hope for those in need. Together we can
+                        bring relief to vulnerable communities, create lasting opportunities for growth, and address
+                        critical global challenges like poverty, environmental degradation, and displacement.</p>
+
+                    <div class="t-links">
+                        <span><i class="fa-solid fa-layer-group"></i> Direct Impact</span>
+                        <span><i class="fa-solid fa-globe"></i> Global Reach</span>
+                        <span><i class="fa-solid fa-lightbulb"></i> Solutions</span>
+                    </div>
+
+                    <div class="author-box">
+                        <img src="./images/p3.webp"
+                            alt="Samantha Anderson">
+                        <div>
+                            <h5>Samantha Anderson</h5>
+                            <p>Every interaction is an opportunity to make a positive impact</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
 
     <!-- 11. BLOG / EVENTS -->
     <section class="blog-section">
@@ -2232,13 +2000,13 @@
                 <span>Change Lives</span>
                 <h2>Stay Updated on Center Events</h2>
                 <p>Discover the latest updates, inspiring stories, and impactful projects from around the world.</p>
-                <button class="btn btn-blue" style="margin-top: 20px;">View All</button>
+                <a href="404.html" class="btn btn-blue" style="text-decoration: none; display: inline-block; margin-top: 20px;">View All</a>
             </div>
 
             <div class="blog-layout">
                 <div class="blog-cards">
                     <div class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600" alt="Blog">
+                        <img src="./images/home hero.webp" alt="Blog">
                         <div class="blog-overlay">
                             <span class="date">January 31, 2025</span>
                             <h3>Your Help Matters</h3>
@@ -2246,7 +2014,7 @@
                         </div>
                     </div>
                     <div class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=600" alt="Blog">
+                        <img src="images/photo-1542810634-71277d95dcbb.webp" alt="Blog">
                         <div class="blog-overlay">
                             <span class="date" style="background: var(--blue);">January 31, 2025</span>
                             <h3>Be the Change</h3>
@@ -2254,7 +2022,7 @@
                         </div>
                     </div>
                     <div class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?q=80&w=600" alt="Blog">
+                        <img src="images/photo-1489710437720-ebb67ec84dd2.webp" alt="Blog">
                         <div class="blog-overlay">
                             <span class="date" style="background: var(--red);">January 31, 2025</span>
                             <h3>Join the Cause</h3>
@@ -2262,7 +2030,7 @@
                         </div>
                     </div>
                     <div class="blog-card">
-                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600" alt="Blog">
+                        <img src="images/photo-1516627145497-ae6968895b74.webp" alt="Blog">
                         <div class="blog-overlay">
                             <span class="date" style="background: var(--yellow); color: #000;">January 31, 2025</span>
                             <h3>Make an Impact</h3>
@@ -2276,21 +2044,21 @@
                         style="width: 100%; padding: 12px; margin-bottom: 30px; border: 1px solid var(--border-color);">
                     <h3>Latest Posts</h3>
                     <div class="l-post">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=150" alt="Post">
+                        <img src="./images/image.webp" alt="Post">
                         <div>
                             <h4>Make an Impact</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                         </div>
                     </div>
                     <div class="l-post">
-                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=150" alt="Post">
+                        <img src="images/photo-1542810634-71277d95dcbb.webp" alt="Post">
                         <div>
                             <h4>Join the Cause</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                         </div>
                     </div>
                     <div class="l-post">
-                        <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=150" alt="Post">
+                        <img src="images/photo-1516627145497-ae6968895b74.webp" alt="Post">
                         <div>
                             <h4>Together We Can</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
@@ -2313,7 +2081,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>Hope in Action</h3>
+                    <a href="index.html" class="footer-logo-link" style="display: inline-block; margin-bottom: 15px;"><img src="images/whitelogo.webp" alt="Stackly Logo" class="footer-logo" style="height: 45px; width: auto; vertical-align: middle;"></a>
                     <p>Together, we can rebuild lives and restore dignity.</p>
                     <h4 style="font-size: 1rem; margin: 30px 0 10px;">Our Mission:</h4>
                     <p>We provide immediate and long-term support to refugees, offering essential resources food, water,
@@ -2330,29 +2098,52 @@
                 <div class="footer-col">
                     <h4>Info :</h4>
                     <ul>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Emergency Aid</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Medical Assistance</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Psychosocial Support</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Education for Children</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Sustainable Solutions</a></li>
+                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> HOME</a></li>
+                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> ABOUT</a></li>
+                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> CAUSES</a></li>
+                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> EVENTS</a></li>
+                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> BLOG</a></li>
+                        <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> CONTACT</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Contacts :</h4>
                     <ul>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Assistance</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> contact@stacklyngo.org</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Donate Online</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> donation@stacklyngo.org</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Salem, Tamil Nadu</a></li>
+                        <ul class="social-links">
+    <li>
+        <a href="https://facebook.com" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+    </li>
+
+    <li>
+        <a href="https://instagram.com" target="_blank">
+            <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+    </li>
+
+   
+
+    <li>
+        <a href="https://linkedin.com" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+        </a>
+    </li>
+
+    <li>
+        <a href="https://youtube.com" target="_blank">
+            <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+    </li>
+</ul>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>Recent News :</h4>
                     <div class="l-post">
-                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=100" alt="News"
+                        <img src="./images/pexels-tkirkgoz-11576242.webp" alt="News"
                             style="width: 60px; height: 60px;">
                         <div>
                             <h4 style="margin: 0; font-size: 0.95rem;">Make an Impact</h4>
@@ -2360,7 +2151,7 @@
                         </div>
                     </div>
                     <div class="l-post">
-                        <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=100" alt="News"
+                        <img src="images/photo-1542810634-71277d95dcbb.webp" alt="News"
                             style="width: 60px; height: 60px;">
                         <div>
                             <h4 style="margin: 0; font-size: 0.95rem;">Join the Cause</h4>
@@ -2372,31 +2163,15 @@
 
             <div class="footer-bottom">
                 <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
-                <div class="newsletter" style="margin: 0;">
-                    <input type="email" placeholder="Email">
-                    <button>Send</button>
+                <div class="newsletter" style="margin: 0; display: flex; align-items: center;">
+                    <input type="email" placeholder="Email" class="footer-nl-email" style="padding: 8px 12px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: white; outline: none; width: 200px;">
+                    <button class="footer-nl-btn" style="background: var(--yellow); color: var(--text-dark); border: none; padding: 10px 18px; font-weight: 700; border-radius: 4px; cursor: pointer; margin-left: 8px; font-size: 0.85rem;" onclick="const inp=this.previousElementSibling; if(inp && inp.value && inp.value.includes('@')){window.location.href='404.html'}else{alert('Please enter a valid email address.')}">Send</button>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- AI CHATBOT WIDGET -->
-    <button class="ai-chat-btn" id="ai-chat-toggle" title="Chat with Stackly AI"><i
-            class="fa-solid fa-robot"></i></button>
-    <div class="ai-chat-window" id="ai-chat-window">
-        <div class="ai-chat-header">
-            <div><i class="fa-solid fa-hand-holding-heart"></i> Stackly AI Assistant</div>
-            <button id="ai-chat-close"><i class="fa-solid fa-times"></i></button>
-        </div>
-        <div class="ai-chat-body" id="ai-chat-body">
-            <div class="chat-msg bot">Hello! I'm the Stackly AI Assistant. How can I help you learn more about our
-                missions in Salem or how your donations make a difference?</div>
-        </div>
-        <div class="ai-chat-input">
-            <input type="text" id="ai-chat-input-field" placeholder="Ask me anything...">
-            <button id="ai-chat-send"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </div>
+    <!-- Chat Bot widget removed -->
 
     <!-- INTERACTION LOGIC -->
     <script>
@@ -2482,91 +2257,7 @@
                 });
             });
 
-            // --- AI Chatbot Logic ---
-            const chatToggleBtn = document.getElementById('ai-chat-toggle');
-            const chatWindow = document.getElementById('ai-chat-window');
-            const chatCloseBtn = document.getElementById('ai-chat-close');
-            const chatBody = document.getElementById('ai-chat-body');
-            const chatInput = document.getElementById('ai-chat-input-field');
-            const chatSendBtn = document.getElementById('ai-chat-send');
-
-            chatToggleBtn.addEventListener('click', () => {
-                chatWindow.classList.add('active');
-                chatToggleBtn.style.transform = 'scale(0)';
-            });
-
-            chatCloseBtn.addEventListener('click', () => {
-                chatWindow.classList.remove('active');
-                chatToggleBtn.style.transform = 'scale(1)';
-            });
-
-            const appendMessage = (text, sender) => {
-                const msgDiv = document.createElement('div');
-                msgDiv.classList.add('chat-msg', sender);
-                msgDiv.innerText = text;
-                chatBody.appendChild(msgDiv);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            };
-
-            const showTypingIndicator = () => {
-                const indicator = document.createElement('div');
-                indicator.classList.add('chat-loading');
-                indicator.id = 'chat-typing-indicator';
-                indicator.innerHTML = '<span></span><span></span><span></span>';
-                chatBody.appendChild(indicator);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            };
-
-            const removeTypingIndicator = () => {
-                const indicator = document.getElementById('chat-typing-indicator');
-                if (indicator) indicator.remove();
-            };
-
-            const handleSend = async () => {
-                const text = chatInput.value.trim();
-                if (!text) return;
-
-                appendMessage(text, 'user');
-                chatInput.value = '';
-                showTypingIndicator();
-
-                // Update chat history
-                chatHistory.push({ role: "user", parts: [{ text: text }] });
-
-                try {
-                    const payload = {
-                        contents: chatHistory,
-                        systemInstruction: {
-                            parts: [{ text: "You are StacklyBot, a friendly, professional, and concise assistant for Stackly NGO based in Salem, Tamil Nadu. Answer questions about the NGO's mission to provide emergency relief, sustainable solutions, and community empowerment. Keep answers to a maximum of 2-3 short sentences. Encourage donations." }]
-                        }
-                    };
-
-                    const response = await fetch(GEMINI_API_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const data = await response.json();
-                    removeTypingIndicator();
-
-                    if (data.candidates && data.candidates[0].content.parts[0].text) {
-                        const botResponse = data.candidates[0].content.parts[0].text;
-                        appendMessage(botResponse, 'bot');
-                        chatHistory.push({ role: "model", parts: [{ text: botResponse }] });
-                    } else {
-                        appendMessage("I'm sorry, I'm having trouble connecting right now. Please try again later.", 'bot');
-                    }
-                } catch (error) {
-                    removeTypingIndicator();
-                    appendMessage("Oops, something went wrong on my end. Please reach out to contact@stacklyngo.org.", 'bot');
-                }
-            };
-
-            chatSendBtn.addEventListener('click', handleSend);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleSend();
-            });
+            // Chat Bot logic removed
 
             // --- Scroll Logic for Parallax & Video Text ---
             const scrollSection = document.getElementById('scroll-video-section');

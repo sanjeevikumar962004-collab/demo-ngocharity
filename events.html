@@ -48,7 +48,21 @@
         .section-tag::after{content:' —'}
 
         /* ===== HEADER ===== */
-        .main-header{position:absolute;top:0;left:0;width:100%;padding:25px 0;z-index:1000;background:transparent;border-bottom:1px solid rgba(255,255,255,.15);font-family:"Times New Roman",Times,serif}
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1000;
+            background: rgba(15, 15, 15, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            font-family: "Times New Roman", Times, serif;
+            transition: background 0.3s ease;
+        }
         .header-container{display:flex;justify-content:space-between;align-items:center}
         .logo{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.5px}
         .logo span{color:var(--yellow)}
@@ -61,8 +75,9 @@
         .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer}
 
         /* ===== HERO ===== */
-        .events-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
-        .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1920') center/cover no-repeat;transform:scale(1.1);will-change:transform}
+        .events-hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center
+            padding-top: 120px;}
+        .hero-bg{position:absolute;inset:0;background:url('./images/heroo.webp') center/cover no-repeat;transform:scale(1.1);will-change:transform}
         .hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(18,18,18,.88) 0%,rgba(52,152,219,.25) 100%)}
         .hero-content{position:relative;z-index:2;color:#fff;max-width:960px;padding:0 20px}
         .hero-breadcrumb{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);padding:8px 20px;border-radius:50px;font-size:.9rem;font-weight:600;margin-bottom:30px;animation:fadeDown .8s ease both}
@@ -97,7 +112,7 @@
         .upcoming-head h2{font-size:clamp(2rem,4vw,3.2rem);margin-top:14px}
 
         .featured-event{display:grid;grid-template-columns:1.2fr 1fr;gap:0;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.12);margin-bottom:60px}
-        .fe-img{position:relative;height:520px;overflow:hidden}
+        .fe-img{position:relative;height:100%;min-height:520px;overflow:hidden}
         .fe-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
         .featured-event:hover .fe-img img{transform:scale(1.05)}
         .fe-date-badge{position:absolute;top:30px;left:30px;background:#fff;border-radius:18px;padding:16px 20px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.15);min-width:80px}
@@ -280,7 +295,7 @@
         .nl-check i{color:var(--teal)}
 
         /* ===== CTA ===== */
-        .cta-section{padding:120px 0;background:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1920') center/cover no-repeat;position:relative;text-align:center}
+        .cta-section{padding:120px 0;background:url('images/pexels-gustavo-fring-7156163.webp') center/cover no-repeat;position:relative;text-align:center}
         .cta-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(20,20,20,.9) 0%,rgba(26,188,156,.4) 100%)}
         .cta-content{position:relative;z-index:1;max-width:700px;margin:0 auto}
         .cta-content .section-tag{color:var(--yellow)}
@@ -321,7 +336,7 @@
         .reveal-r.in-view{opacity:1;transform:translateX(0)}
 
         /* ===== RESPONSIVE ===== */
-        @media(max-width:1100px){.featured-event{grid-template-columns:1fr}.fe-img{height:350px}.hero-cal{display:none}.gallery-grid{grid-template-columns:repeat(2,1fr)}.gallery-item:nth-child(1){grid-column:span 2}}
+        @media(max-width:1100px){.featured-event{grid-template-columns:1fr}.fe-img{height:350px;min-height:auto}.hero-cal{display:none}.gallery-grid{grid-template-columns:repeat(2,1fr)}.gallery-item:nth-child(1){grid-column:span 2}}
         @media(max-width:992px){
             .ev-card{grid-template-columns:220px 1fr;grid-template-rows:auto auto}.ev-actions{grid-column:span 2;flex-direction:row;justify-content:space-between;border-left:none;border-top:1px solid var(--border)}.volunteer-grid,.newsletter-inner,.footer-grid{grid-template-columns:1fr}.vol-stat-bubble{left:20px;bottom:20px}
             .nav-menu{position:fixed;top:0;right:-100%;width:300px;height:100vh;background:#fff;flex-direction:column;align-items:flex-start;padding:100px 30px;box-shadow:-5px 0 15px rgba(0,0,0,.1);transition:.4s cubic-bezier(.77,0,.175,1);z-index:1000}
@@ -339,7 +354,7 @@
 <!-- ============================= HEADER ============================= -->
 <header class="main-header">
     <div class="container header-container">
-        <a href="index.html" class="logo">Stackly<span>.</span></a>
+        <a href="index.html" class="logo"><img src="images/whitelogo.webp" alt="Stackly Logo" style="height: 40px; vertical-align: middle;"></a>
         
         <nav class="nav-menu" id="navMenu">
             <ul class="nav-list">
@@ -384,22 +399,9 @@
         </div>
     </div>
 
-    <!-- mini calendar widget -->
-    <div class="hero-cal">
-        <div class="cal-widget">
-            <div class="cal-month">
-                <i class="fa-solid fa-chevron-left"></i>
-                <span id="calWidgetMonth">July 2026</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-            <div class="cal-days-header">
-                <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-            </div>
-            <div class="cal-days" id="calWidgetDays"></div>
-        </div>
-    </div>
+   
 
-    <div class="scroll-hint"><div class="scroll-wheel"></div></div>
+   
 </section>
 
 <!-- ============================= FEATURED EVENT ============================= -->
@@ -412,7 +414,7 @@
         </div>
         <div class="featured-event reveal">
             <div class="fe-img">
-                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=900" alt="Hope Gala">
+                <img src="./images/pexels-svetlana-photographer-2149375332-33117727.webp" alt="Hope Gala">
                 <div class="fe-date-badge">
                     <div class="day">25</div>
                     <div class="mon">Jul</div>
@@ -434,7 +436,7 @@
                     <div class="fe-bar-bg"><div class="fe-bar-fill" data-width="80%" id="featuredBar"></div></div>
                 </div>
                 <div class="fe-actions">
-                    <button class="btn btn-teal" onclick="openRegModal('Hope Gala 2026 — An Evening of Impact','Sat, 25 Jul 2026 · 6:30 PM','Salem Convention Centre','₹1,500','https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600')">
+                    <button class="btn btn-teal" onclick="openRegModal('Hope Gala 2026 — An Evening of Impact','Sat, 25 Jul 2026 · 6:30 PM','Salem Convention Centre','₹1,500','images/photo-1488521787991-ed7bbaae773c.webp')">
                         <i class="fa-solid fa-circle-check"></i> Register Now
                     </button>
                     <button class="btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.2);" onclick="shareEvent()">
@@ -452,12 +454,12 @@
         <!-- Filter Bar -->
         <div class="ev-filter reveal">
             <div class="ev-tabs" id="evTabs">
-                <button class="ev-tab active" data-filter="all">All Events</button>
-                <button class="ev-tab" data-filter="fundraiser"><i class="fa-solid fa-hand-holding-dollar"></i> Fundraiser</button>
-                <button class="ev-tab" data-filter="volunteer"><i class="fa-solid fa-hands-helping"></i> Volunteer</button>
-                <button class="ev-tab" data-filter="workshop"><i class="fa-solid fa-chalkboard-user"></i> Workshop</button>
-                <button class="ev-tab" data-filter="community"><i class="fa-solid fa-people-group"></i> Community</button>
-                <button class="ev-tab" data-filter="awareness"><i class="fa-solid fa-bullhorn"></i> Awareness</button>
+                <a href="#" class="ev-tab active" data-filter="all" style="text-decoration: none; display: inline-block;">All Events</a>
+                <a href="#" class="ev-tab" data-filter="fundraiser" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-hand-holding-dollar"></i> Fundraiser</a>
+                <a href="#" class="ev-tab" data-filter="volunteer" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-hands-helping"></i> Volunteer</a>
+                <a href="#" class="ev-tab" data-filter="workshop" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-chalkboard-user"></i> Workshop</a>
+                <a href="#" class="ev-tab" data-filter="community" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-people-group"></i> Community</a>
+                <a href="#" class="ev-tab" data-filter="awareness" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-bullhorn"></i> Awareness</a>
             </div>
             <div class="ev-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -471,7 +473,7 @@
             <!-- EVENT 1 -->
             <div class="ev-card reveal" data-cat="volunteer" data-title="Community Tree Planting Day">
                 <div class="ev-img">
-                    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=600" alt="Tree Planting">
+                    <img src="images/photo-1542810634-71277d95dcbb.webp" alt="Tree Planting">
                     <div class="ev-img-overlay"></div>
                     <div class="ev-date-chip"><div class="d">12</div><div class="m">Jul</div></div>
                 </div>
@@ -490,15 +492,15 @@
                 </div>
                 <div class="ev-actions">
                     <div class="ev-spots-left"><i class="fa-solid fa-circle fa-xs"></i> 48 spots left</div>
-                    <button class="btn btn-teal register-btn" onclick="openRegModal('Community Tree Planting Day','Sat, 12 Jul 2026 · 7:00 AM','Attur Reserve Forest','Free','https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=600')">Register</button>
-                    <button class="ev-share" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
+                    <button class="btn btn-teal register-btn" onclick="openRegModal('Community Tree Planting Day','Sat, 12 Jul 2026 · 7:00 AM','Attur Reserve Forest','Free','images/photo-1542810634-71277d95dcbb.webp')">Register</button>
+                    <a href="404.html" class="ev-share" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-share-nodes"></i></a>
                 </div>
             </div>
 
             <!-- EVENT 2 -->
             <div class="ev-card reveal" data-cat="workshop" data-title="Digital Skills Workshop for Women">
                 <div class="ev-img">
-                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=600" alt="Workshop">
+                    <img src="images/pexels-milan-rout-1620544-5829607.webp" alt="Workshop">
                     <div class="ev-img-overlay"></div>
                     <div class="ev-date-chip"><div class="d">19</div><div class="m">Jul</div></div>
                 </div>
@@ -517,15 +519,15 @@
                 </div>
                 <div class="ev-actions">
                     <div class="ev-spots-left"><i class="fa-solid fa-circle fa-xs"></i> 12 spots left</div>
-                    <button class="btn btn-teal register-btn" onclick="openRegModal('Digital Skills Workshop for Women','Sat–Sun, 19–20 Jul 2026','Stackly Community Hall','₹200','https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=600')">Register</button>
-                    <button class="ev-share" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
+                    <button class="btn btn-teal register-btn" onclick="openRegModal('Digital Skills Workshop for Women','Sat–Sun, 19–20 Jul 2026','Stackly Community Hall','₹200','images/pexels-milan-rout-1620544-5829607.webp')">Register</button>
+                    <a href="404.html" class="ev-share" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-share-nodes"></i></a>
                 </div>
             </div>
 
             <!-- EVENT 3 -->
             <div class="ev-card reveal" data-cat="fundraiser" data-title="Charity Run for Education">
                 <div class="ev-img">
-                    <img src="https://images.unsplash.com/photo-1531266752426-aad472b7bbf4?q=80&w=600" alt="Charity Run">
+                    <img src="images/photo-1531266752426-aad472b7bbf4.webp" alt="Charity Run">
                     <div class="ev-img-overlay"></div>
                     <div class="ev-date-chip"><div class="d">25</div><div class="m">Jul</div></div>
                 </div>
@@ -544,15 +546,15 @@
                 </div>
                 <div class="ev-actions">
                     <div class="ev-spots-left"><i class="fa-solid fa-circle fa-xs"></i> 76 spots left</div>
-                    <button class="btn btn-teal register-btn" onclick="openRegModal('Charity Run for Education','Fri, 25 Jul 2026 · 5:30 AM','Yercaud Foothills, Salem','₹500','https://images.unsplash.com/photo-1531266752426-aad472b7bbf4?q=80&w=600')">Register</button>
-                    <button class="ev-share" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
+                    <button class="btn btn-teal register-btn" onclick="openRegModal('Charity Run for Education','Fri, 25 Jul 2026 · 5:30 AM','Yercaud Foothills, Salem','₹500','images/photo-1531266752426-aad472b7bbf4.webp')">Register</button>
+                    <a href="404.html" class="ev-share" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-share-nodes"></i></a>
                 </div>
             </div>
 
             <!-- EVENT 4 -->
             <div class="ev-card reveal" data-cat="awareness" data-title="Health Awareness Camp">
                 <div class="ev-img">
-                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600" alt="Health Camp">
+                    <img src="images/photo-1516627145497-ae6968895b74.webp" alt="Health Camp">
                     <div class="ev-img-overlay"></div>
                     <div class="ev-date-chip"><div class="d">03</div><div class="m">Aug</div></div>
                 </div>
@@ -571,15 +573,15 @@
                 </div>
                 <div class="ev-actions">
                     <div class="ev-spots-left" style="color:var(--green)"><i class="fa-solid fa-circle fa-xs"></i> Open entry</div>
-                    <button class="btn btn-teal register-btn" onclick="openRegModal('Free Health Awareness Camp','Sun, 3 Aug 2026 · 8:00 AM','Salem District Headquarters','Free','https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600')">Register</button>
-                    <button class="ev-share" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
+                    <button class="btn btn-teal register-btn" onclick="openRegModal('Free Health Awareness Camp','Sun, 3 Aug 2026 · 8:00 AM','Salem District Headquarters','Free','images/photo-1516627145497-ae6968895b74.webp')">Register</button>
+                    <a href="404.html" class="ev-share" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-share-nodes"></i></a>
                 </div>
             </div>
 
             <!-- EVENT 5 -->
             <div class="ev-card reveal" data-cat="community" data-title="Back to School Stationery Drive">
                 <div class="ev-img">
-                    <img src="https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?q=80&w=600" alt="Stationery Drive">
+                    <img src="images/photo-1489710437720-ebb67ec84dd2.webp" alt="Stationery Drive">
                     <div class="ev-img-overlay"></div>
                     <div class="ev-date-chip"><div class="d">10</div><div class="m">Aug</div></div>
                 </div>
@@ -598,15 +600,15 @@
                 </div>
                 <div class="ev-actions">
                     <div class="ev-spots-left"><i class="fa-solid fa-circle fa-xs"></i> 33 spots left</div>
-                    <button class="btn btn-teal register-btn" onclick="openRegModal('Back-to-School Stationery Drive','Sun, 10 Aug 2026 · 9:00 AM','Salem Government Schools','Free','https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?q=80&w=600')">Register</button>
-                    <button class="ev-share" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
+                    <button class="btn btn-teal register-btn" onclick="openRegModal('Back-to-School Stationery Drive','Sun, 10 Aug 2026 · 9:00 AM','Salem Government Schools','Free','images/photo-1489710437720-ebb67ec84dd2.webp')">Register</button>
+                    <a href="404.html" class="ev-share" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-share-nodes"></i></a>
                 </div>
             </div>
 
             <!-- EVENT 6 -->
             <div class="ev-card reveal" data-cat="fundraiser" data-title="Diwali for a Cause Gala Dinner">
                 <div class="ev-img">
-                    <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600" alt="Diwali Gala">
+                    <img src="images/photo-1502086223501-7ea6ecd79368.webp" alt="Diwali Gala">
                     <div class="ev-img-overlay"></div>
                     <div class="ev-date-chip"><div class="d">22</div><div class="m">Oct</div></div>
                 </div>
@@ -625,8 +627,8 @@
                 </div>
                 <div class="ev-actions">
                     <div class="ev-spots-left"><i class="fa-solid fa-circle fa-xs"></i> 120 spots left</div>
-                    <button class="btn btn-teal register-btn" onclick="openRegModal('Diwali for a Cause — Gala Dinner','Wed, 22 Oct 2026 · 7:00 PM','Hotel Grand View, Salem','₹2,000','https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600')">Register</button>
-                    <button class="ev-share" title="Share"><i class="fa-solid fa-share-nodes"></i></button>
+                    <button class="btn btn-teal register-btn" onclick="openRegModal('Diwali for a Cause — Gala Dinner','Wed, 22 Oct 2026 · 7:00 PM','Hotel Grand View, Salem','₹2,000','images/photo-1502086223501-7ea6ecd79368.webp')">Register</button>
+                    <a href="404.html" class="ev-share" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-share-nodes"></i></a>
                 </div>
             </div>
 
@@ -644,9 +646,9 @@
         </div>
         <div class="big-cal reveal">
             <div class="big-cal-header">
-                <button class="cal-nav-btn" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+                <a href="404.html" class="cal-nav-btn" style="text-decoration: none;"><i class="fa-solid fa-chevron-left"></i></a>
                 <h3 id="bigCalTitle">July 2026</h3>
-                <button class="cal-nav-btn" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+                <a href="404.html" class="cal-nav-btn" style="text-decoration: none;"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
             <div class="big-cal-days-header">
                 <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
@@ -666,7 +668,7 @@
         </div>
         <div class="gallery-grid reveal">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800" alt="Event">
+                <img src="./images/pexels-dev-raj-30037406-11344273.webp" alt="Event">
                 <div class="gallery-overlay">
                     <div class="go-tag">Fundraiser</div>
                     <h4>Hope Gala 2025</h4>
@@ -674,7 +676,7 @@
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=600" alt="Event">
+                <img src="images/photo-1542810634-71277d95dcbb.webp" alt="Event">
                 <div class="gallery-overlay">
                     <div class="go-tag">Volunteer</div>
                     <h4>Green Salem Drive</h4>
@@ -682,7 +684,7 @@
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1531266752426-aad472b7bbf4?q=80&w=600" alt="Event">
+                <img src="images/photo-1531266752426-aad472b7bbf4.webp" alt="Event">
                 <div class="gallery-overlay">
                     <div class="go-tag">Workshop</div>
                     <h4>Women's Tech Workshop</h4>
@@ -690,7 +692,7 @@
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=600" alt="Event">
+                <img src="images/photo-1516627145497-ae6968895b74.webp" alt="Event">
                 <div class="gallery-overlay">
                     <div class="go-tag">Community</div>
                     <h4>School Kit Distribution</h4>
@@ -698,7 +700,7 @@
                 </div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600" alt="Event">
+                <img src="images/photo-1502086223501-7ea6ecd79368.webp" alt="Event">
                 <div class="gallery-overlay">
                     <div class="go-tag">Awareness</div>
                     <h4>Health Camp 2025</h4>
@@ -713,7 +715,7 @@
 <section class="volunteer-section">
     <div class="container volunteer-grid">
         <div class="vol-img-wrap reveal-l">
-            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=900" alt="Volunteer">
+            <img src="images/pexels-gustavo-fring-7156163.webp" alt="Volunteer">
             <div class="vol-stat-bubble">
                 <div class="vsb-num">1,200+</div>
                 <div class="vsb-lbl">Active Volunteers</div>
@@ -746,7 +748,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-teal" onclick="openRegModal('Volunteer Registration','Multiple Dates','Various Locations in Salem','Free','https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=600')">
+            <button class="btn btn-teal" onclick="openRegModal('Volunteer Registration','Multiple Dates','Various Locations in Salem','Free','images/pexels-gustavo-fring-7156163.webp')">
                 <i class="fa-solid fa-hands-clapping"></i> Become a Volunteer
             </button>
         </div>
@@ -764,7 +766,7 @@
         <div class="nl-form reveal-r">
             <div class="nl-input-row">
                 <input type="email" placeholder="Enter your email address" id="nlEmail">
-                <button onclick="subscribeNewsletter()">Subscribe</button>
+                <button onclick="const inp=this.previousElementSibling; if(inp && inp.value && inp.value.includes('@')){window.location.href='404.html'}else{alert('Please enter a valid email address.')}">Subscribe</button>
             </div>
             <div class="nl-checks">
                 <div class="nl-check"><i class="fa-solid fa-check"></i> Early event access</div>
@@ -788,67 +790,114 @@
                 <button class="btn btn-teal" onclick="document.getElementById('eventsListSection').scrollIntoView({behavior:'smooth'})">
                     <i class="fa-solid fa-calendar-plus"></i> Register for an Event
                 </button>
-                <button class="btn btn-yellow">
+                <a href="404.html" class="btn btn-yellow" style="text-decoration: none; display: inline-block;">
                     <i class="fa-solid fa-heart"></i> Donate to Events Fund
-                </button>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ============================= FOOTER ============================= -->
-<div class="footer-wave"><svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="#1a1a1a" fill-opacity="1" d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg></div>
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>Hope in Action</h3>
-                <p>Together, we can rebuild lives and restore dignity.</p>
-                <h4 style="font-size:1rem;margin:30px 0 10px;">Our Mission:</h4>
-                <p>We provide immediate and long-term support, offering essential resources — food, water, medical care, and shelter.</p>
-                <div style="display:flex;gap:15px;align-items:center;margin-top:20px;">
-                    <i class="fa-solid fa-phone" style="color:var(--yellow);font-size:1.5rem;"></i>
-                    <div><span style="display:block;font-size:.8rem;color:#999;">Call Us</span><strong style="color:#fff;">+ 1 233 587 36</strong></div>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Info :</h4>
-                <ul>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Emergency Aid</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Medical Assistance</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Psychosocial Support</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Education for Children</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Sustainable Solutions</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contacts :</h4>
-                <ul>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Assistance</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> contact@stacklyngo.org</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Donate Online</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> donation@stacklyngo.org</a></li>
-                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Salem, Tamil Nadu</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Recent News :</h4>
-                <div style="display:flex;gap:15px;margin-bottom:20px;align-items:center;">
-                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=100" alt="" style="width:60px;height:60px;object-fit:cover;">
-                    <div><h4 style="margin:0;font-size:.95rem;color:#fff;">Make an Impact</h4><p style="font-size:.8rem;">Lorem ipsum dolor sit...</p></div>
-                </div>
-                <div style="display:flex;gap:15px;align-items:center;">
-                    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=100" alt="" style="width:60px;height:60px;object-fit:cover;">
-                    <div><h4 style="margin:0;font-size:.95rem;color:#fff;">Join the Cause</h4><p style="font-size:.8rem;">Lorem ipsum dolor sit...</p></div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
-            <div class="f-newsletter" style="margin:0;"><input type="email" placeholder="Email"><button>Send</button></div>
-        </div>
+    <!-- 12. FOOTER -->
+    <div class="footer-wave">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="#1a1a1a" fill-opacity="1"
+                d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,133.3C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+            </path>
+        </svg>
     </div>
-</footer>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo-link" style="display: inline-block; margin-bottom: 15px;"><img src="images/whitelogo.webp" alt="Stackly Logo" class="footer-logo" style="height: 45px; width: auto; vertical-align: middle;"></a>
+                    <p>Together, we can rebuild lives and restore dignity.</p>
+                    <h4 style="font-size: 1rem; margin: 30px 0 10px;">Our Mission:</h4>
+                    <p>We provide immediate and long-term support to refugees, offering essential resources food, water,
+                        medical care, and shelter.</p>
+                    <div style="display: flex; gap: 15px; align-items: center; margin-top: 20px;">
+                        <i class="fa-solid fa-phone" style="color: var(--yellow); font-size: 1.5rem;"></i>
+                        <div>
+                            <span style="display: block; font-size: 0.8rem; color: #999;">Call Us</span>
+                            <strong style="color: white;">+ 1 233 587 36</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Info :</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> HOME</a></li>
+                        <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> ABOUT</a></li>
+                        <li><a href="causes.html"><i class="fa-solid fa-chevron-right"></i> CAUSES</a></li>
+                        <li><a href="events.html"><i class="fa-solid fa-chevron-right"></i> EVENTS</a></li>
+                        <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> BLOG</a></li>
+                        <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contacts :</h4>
+                    <ul>
+                        <ul class="social-links">
+    <li>
+        <a href="https://facebook.com" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i> Facebook
+        </a>
+    </li>
+
+    <li>
+        <a href="https://instagram.com" target="_blank">
+            <i class="fa-brands fa-instagram"></i> Instagram
+        </a>
+    </li>
+
+    <li>
+        <a href="https://linkedin.com" target="_blank">
+            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+        </a>
+    </li>
+
+    <li>
+        <a href="https://youtube.com" target="_blank">
+            <i class="fa-brands fa-youtube"></i> YouTube
+        </a>
+    </li>
+</ul>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Recent News :</h4>
+                    <div class="l-post">
+                        <img src="./images/pexels-tkirkgoz-11576242.webp" alt="News"
+                            style="width: 60px; height: 60px;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem;">Make an Impact</h4>
+                            <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
+                        </div>
+                    </div>
+                    <div class="l-post">
+                        <img src="images/photo-1542810634-71277d95dcbb.webp" alt="News"
+                            style="width: 60px; height: 60px;">
+                        <div>
+                            <h4 style="margin: 0; font-size: 0.95rem;">Join the Cause</h4>
+                            <p style="font-size: 0.8rem;">Lorem ipsum dolor sit...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 Stackly NGO. All Rights Reserved.</div>
+                <div class="newsletter" style="margin: 0; display: flex; align-items: center;">
+                    <input type="email" placeholder="Email" class="footer-nl-email" style="padding: 8px 12px; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: white; outline: none; width: 200px;">
+                    <button class="footer-nl-btn" style="background: var(--yellow); color: var(--text-dark); border: none; padding: 10px 18px; font-weight: 700; border-radius: 4px; cursor: pointer; margin-left: 8px; font-size: 0.85rem;" onclick="const inp=this.previousElementSibling; if(inp && inp.value && inp.value.includes('@')){window.location.href='404.html'}else{alert('Please enter a valid email address.')}">Send</button>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 <!-- ============================= REGISTRATION MODAL ============================= -->
 <div class="modal-overlay" id="regModal">
@@ -943,7 +992,8 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r,.fe-bar-fill').forEach(el
 
 /* ---- Filter Tabs ---- */
 const evTabs = document.querySelectorAll('.ev-tab');
-evTabs.forEach(tab => tab.addEventListener('click', () => {
+evTabs.forEach(tab => tab.addEventListener('click', (e) => {
+    e.preventDefault();
     evTabs.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     filterEvents();
@@ -1032,13 +1082,7 @@ document.getElementById('nextMonth').addEventListener('click', () => { if (++cal
 
 /* ---- Registration Modal ---- */
 function openRegModal(title, date, location, fee, img) {
-    document.getElementById('modalTitle').textContent    = title;
-    document.getElementById('modalDate').textContent     = date;
-    document.getElementById('modalLocation').textContent = location;
-    document.getElementById('modalFee').textContent      = fee;
-    document.getElementById('modalImg').src              = img;
-    document.getElementById('regModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    window.location.href = '404.html';
 }
 function closeRegModal() {
     document.getElementById('regModal').classList.remove('open');
@@ -1107,9 +1151,17 @@ function shareEvent() { navigator.share ? navigator.share({ title: 'Stackly NGO 
 
 function subscribeNewsletter() {
     const e = document.getElementById('nlEmail');
-    if (!e.value.trim()) return;
-    document.getElementById('nlMsg').style.display = 'block';
-    e.value = '';
+    const val = e.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(val)) {
+        alert('Please enter a valid email address.');
+        e.style.borderColor = 'var(--red)';
+        e.focus();
+    } else {
+        e.style.borderColor = '';
+        alert('Thank you for subscribing! Redirecting to confirmation page...');
+        window.location.href = '404.html';
+    }
 }
 </script>
 </body>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Stackly NGO</title>
-    <meta name="description" content="Stackly NGO admin panel — manage donors, causes, events, and system analytics.">
+    <meta name="description" content="Stackly NGO admin panel - manage donors, causes, events, and system analytics.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -23,182 +23,267 @@
         body{font-family:var(--font);background:var(--bg);color:var(--text-dark);display:flex;min-height:100vh;overflow-x:hidden}
 
         /* SIDEBAR */
-        .sidebar{width:260px;min-height:100vh;background:var(--sidebar-bg);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100}
-        .s-logo{padding:26px 22px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
-        .s-logo a{font-size:1.65rem;font-weight:800;color:white;text-decoration:none}
+        .sidebar{width:240px;min-height:100vh;background:var(--sidebar-bg);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:1000;transition:transform 0.3s ease;}
+        .s-logo{padding:24px 20px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+        .s-logo a{font-size:1.55rem;font-weight:800;color:white;text-decoration:none}
         .s-logo a span{color:var(--teal)}
-        .s-logo small{display:block;color:var(--text-light);font-size:.7rem;margin-top:2px}
-        .s-admin{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.06)}
-        .a-ava{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:white;flex-shrink:0}
-        .a-meta h4{color:white;font-size:.88rem;font-weight:700}
-        .a-meta p{color:var(--red);font-size:.68rem;font-weight:700;display:flex;align-items:center;gap:4px}
+        .s-logo small{display:block;color:var(--text-light);font-size:.68rem;margin-top:2px}
+        .s-admin{display:flex;align-items:center;gap:11px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+        .a-ava{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--purple));display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:white;flex-shrink:0}
+        .a-meta h4{color:white;font-size:.84rem;font-weight:700}
+        .a-meta p{color:var(--red);font-size:.66rem;font-weight:700;display:flex;align-items:center;gap:4px}
         .s-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pd 2s infinite;display:inline-block}
         @keyframes pd{0%,100%{opacity:1}50%{opacity:.4}}
-        .s-nav{flex:1;padding:14px 0;overflow-y:auto}
-        .s-sec{font-size:.65rem;font-weight:800;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.5px;padding:14px 22px 5px}
-        .s-item{display:flex;align-items:center;gap:12px;padding:11px 22px;color:rgba(255,255,255,.48);font-size:.86rem;font-weight:600;cursor:pointer;transition:.25s;text-decoration:none;border-left:3px solid transparent}
+        .s-nav{flex:1;padding:12px 0;overflow-y:auto}
+        .s-sec{font-size:.62rem;font-weight:800;color:rgba(255,255,255,.22);text-transform:uppercase;letter-spacing:1.5px;padding:12px 20px 4px}
+        .s-item{display:flex;align-items:center;gap:11px;padding:10px 20px;color:rgba(255,255,255,.46);font-size:.84rem;font-weight:600;cursor:pointer;transition:.22s;text-decoration:none;border-left:3px solid transparent;border-top:none;border-right:none;border-bottom:none;background:none;width:100%;text-align:left}
         .s-item:hover{color:white;background:rgba(255,255,255,.04)}
         .s-item.active{color:var(--teal);background:var(--sidebar-active);border-left-color:var(--teal)}
-        .s-item i{width:17px;text-align:center}
-        .s-badge{margin-left:auto;background:var(--red);color:white;font-size:.65rem;font-weight:800;padding:2px 6px;border-radius:20px}
-        .s-foot{padding:16px 22px;border-top:1px solid rgba(255,255,255,.06)}
-        .s-logout{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.38);font-size:.83rem;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none}
+        .s-item i{width:16px;text-align:center;flex-shrink:0}
+        .s-badge{margin-left:auto;background:var(--red);color:white;font-size:.62rem;font-weight:800;padding:2px 6px;border-radius:20px}
+        .s-foot{padding:14px 20px;border-top:1px solid rgba(255,255,255,.06)}
+        .s-logout{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.38);font-size:.82rem;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none}
         .s-logout:hover{color:var(--red)}
 
         /* MAIN */
-        .main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh}
-        .topbar{background:white;padding:14px 30px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:50}
-        .t-left h1{font-size:1.25rem;font-weight:800;color:var(--text-dark)}
-        .t-left p{font-size:.78rem;color:var(--text-gray);margin-top:2px}
-        .t-right{display:flex;align-items:center;gap:12px}
-        .t-btn{width:36px;height:36px;border-radius:9px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-gray);font-size:.9rem;transition:.2s;position:relative}
+        .main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
+        .topbar{background:white;padding:13px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:50}
+        .t-title-wrapper h1{font-size:1.2rem;font-weight:800;color:var(--text-dark)}
+        .t-title-wrapper p{font-size:.76rem;color:var(--text-gray);margin-top:2px}
+        .t-right{display:flex;align-items:center;gap:10px}
+        .t-btn{width:36px;height:36px;border-radius:9px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-gray);font-size:.88rem;transition:.2s;position:relative}
         .t-btn:hover{background:var(--red);color:white;border-color:var(--red)}
         .n-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--red);border:2px solid white}
-        .pb{padding:26px 30px;flex:1}
+        .pb{padding:24px 28px;flex:1}
+
+        /* SECTIONS */
+        .section{display:none}
+        .section.active{display:block;animation:fsu .4s ease both}
+        @keyframes fsu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
         /* STAT CARDS */
-        .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
-        .sc{background:var(--card);border-radius:16px;padding:22px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.3s;animation:fsu .6s ease both}
+        .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+        .sc{background:var(--card);border-radius:14px;padding:20px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:.3s;min-width:0}
         .sc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-        .sc:nth-child(1){animation-delay:.05s}.sc:nth-child(2){animation-delay:.1s}.sc:nth-child(3){animation-delay:.15s}.sc:nth-child(4){animation-delay:.2s}
-        @keyframes fsu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-        .sc::before{content:'';position:absolute;top:0;right:0;width:65px;height:65px;border-radius:0 16px 0 100%;opacity:.08}
-        .r1::before{background:var(--red)} .r2::before{background:var(--blue)} .r3::before{background:var(--green)} .r4::before{background:var(--orange)}
-        .si{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:13px}
-        .r1 .si{background:rgba(231,76,60,.12);color:var(--red)} .r2 .si{background:rgba(52,152,219,.12);color:var(--blue)} .r3 .si{background:rgba(46,204,113,.12);color:var(--green)} .r4 .si{background:rgba(230,126,34,.12);color:var(--orange)}
-        .sv{font-size:1.9rem;font-weight:800;color:var(--text-dark);line-height:1}
-        .sl{font-size:.76rem;color:var(--text-gray);font-weight:600;margin-top:6px}
-        .sc-trend{margin-top:11px;font-size:.73rem;font-weight:700;display:flex;align-items:center;gap:4px}
-        .up{color:var(--green)} .dn{color:var(--red)}
+        .sc::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;border-radius:0 14px 0 100%;opacity:.08}
+        .r1::before{background:var(--red)}.r2::before{background:var(--blue)}.r3::before{background:var(--green)}.r4::before{background:var(--orange)}
+        .si{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:11px}
+        .r1 .si{background:rgba(231,76,60,.12);color:var(--red)}.r2 .si{background:rgba(52,152,219,.12);color:var(--blue)}.r3 .si{background:rgba(46,204,113,.12);color:var(--green)}.r4 .si{background:rgba(230,126,34,.12);color:var(--orange)}
+        .sv{font-size:1.8rem;font-weight:800;color:var(--text-dark);line-height:1}
+        .sl{font-size:.74rem;color:var(--text-gray);font-weight:600;margin-top:5px}
+        .sc-trend{margin-top:9px;font-size:.71rem;font-weight:700;display:flex;align-items:center;gap:4px}
+        .up{color:var(--green)}.dn{color:var(--red)}
 
         /* CARDS */
-        .cg{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-bottom:18px}
-        .card{background:var(--card);border-radius:16px;padding:22px;box-shadow:var(--shadow);animation:fsu .7s ease both}
-        .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-        .ct{font-size:.97rem;font-weight:800;color:var(--text-dark)}
-        .cs{font-size:.73rem;color:var(--text-gray);margin-top:2px}
-        .ca{font-size:.78rem;color:var(--red);font-weight:700;text-decoration:none;transition:.2s}
+        .cg{display:grid;grid-template-columns:1fr 300px;gap:16px;margin-bottom:16px}
+        .card{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);min-width:0}
+        .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+        .ct{font-size:.94rem;font-weight:800;color:var(--text-dark)}
+        .cs{font-size:.72rem;color:var(--text-gray);margin-top:2px}
+        .ca{font-size:.76rem;color:var(--red);font-weight:700;text-decoration:none;transition:.2s}
         .ca:hover{color:#c0392b}
 
         /* BAR CHART */
-        .bar-chart{display:flex;align-items:flex-end;gap:7px;height:165px;border-bottom:2px solid var(--border);margin-bottom:7px}
-        .bg2{display:flex;flex-direction:column;align-items:center;flex:1;height:100%}
+        .bar-chart{display:flex;align-items:flex-end;gap:6px;height:155px;border-bottom:2px solid var(--border);margin-bottom:6px;overflow-x:auto;padding-bottom:5px}
+        .bg2{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;min-width:45px}
         .bi2{display:flex;align-items:flex-end;gap:2px;width:100%;height:100%}
         .b2{border-radius:5px 5px 0 0;flex:1;transition:height 1.2s cubic-bezier(.34,1.56,.64,1);cursor:pointer;position:relative}
         .b2:hover{filter:brightness(1.12)}
-        .btt{position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--text-dark);color:white;font-size:.66rem;font-weight:700;padding:3px 6px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:.2s}
+        .btt{position:absolute;top:-26px;left:50%;transform:translateX(-50%);background:var(--text-dark);color:white;font-size:.64rem;font-weight:700;padding:3px 6px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:.2s}
         .b2:hover .btt{opacity:1}
-        .bl2{font-size:.63rem;color:var(--text-gray);font-weight:600;margin-top:5px}
-        .cleg{display:flex;gap:16px;margin-top:12px}
-        .li2{display:flex;align-items:center;gap:5px;font-size:.73rem;color:var(--text-gray);font-weight:600}
+        .bl2{font-size:.61rem;color:var(--text-gray);font-weight:600;margin-top:5px}
+        .cleg{display:flex;gap:14px;margin-top:10px}
+        .li2{display:flex;align-items:center;gap:5px;font-size:.71rem;color:var(--text-gray);font-weight:600}
         .ld{width:9px;height:9px;border-radius:3px}
 
         /* DONUT */
-        .dw{display:flex;align-items:center;gap:18px}
-        .dl{flex:1;display:flex;flex-direction:column;gap:9px}
+        .dw{display:flex;align-items:center;gap:16px}
+        .dl{flex:1;display:flex;flex-direction:column;gap:8px}
         .dr{display:flex;align-items:center;justify-content:space-between}
-        .dleft{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--text-gray);font-weight:600}
+        .dleft{display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--text-gray);font-weight:600}
         .ddot{width:8px;height:8px;border-radius:50%}
-        .dpct{font-size:.78rem;font-weight:800;color:var(--text-dark)}
+        .dpct{font-size:.76rem;font-weight:800;color:var(--text-dark)}
 
         /* TABLE */
-        .tbl-wrap{overflow-x:auto;margin-top:4px}
-        table{width:100%;border-collapse:collapse;font-size:.84rem}
-        thead th{font-size:.7rem;font-weight:800;color:var(--text-gray);text-transform:uppercase;letter-spacing:.8px;padding:10px 12px;text-align:left;border-bottom:2px solid var(--border);white-space:nowrap}
+        .tbl-wrap{overflow-x:auto}
+        table{width:100%;border-collapse:collapse;font-size:.82rem}
+        thead th{font-size:.68rem;font-weight:800;color:var(--text-gray);text-transform:uppercase;letter-spacing:.8px;padding:9px 11px;text-align:left;border-bottom:2px solid var(--border);white-space:nowrap}
         tbody tr{transition:.2s;border-bottom:1px solid var(--border)}
         tbody tr:last-child{border-bottom:none}
         tbody tr:hover{background:#fafbff}
-        tbody td{padding:12px 12px;color:var(--text-dark);font-weight:600}
-        .tbl-ava{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:white;margin-right:8px}
-        .status-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700}
+        tbody td{padding:11px 11px;color:var(--text-dark);font-weight:600}
+        .tbl-ava{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:800;color:white;margin-right:7px}
+        .status-pill{display:inline-block;padding:3px 9px;border-radius:20px;font-size:.68rem;font-weight:700}
         .pill-g{background:rgba(46,204,113,.12);color:var(--green)}
         .pill-y{background:rgba(241,196,15,.12);color:#b7950b}
         .pill-r{background:rgba(231,76,60,.12);color:var(--red)}
-        .tbl-action{cursor:pointer;color:var(--blue);font-size:.8rem;font-weight:700;transition:.2s;background:none;border:none}
+        .tbl-action{cursor:pointer;color:var(--blue);font-size:.78rem;font-weight:700;transition:.2s;background:none;border:none}
         .tbl-action:hover{color:var(--text-dark)}
 
-        /* LOWER GRID */
-        .lg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px}
+        /* 3 COL */
+        .lg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
 
         /* ALERTS */
-        .alert-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;margin-bottom:10px;border:1px solid}
+        .alert-item{display:flex;gap:11px;align-items:flex-start;padding:11px;border-radius:10px;margin-bottom:9px;border:1px solid}
         .alert-item:last-child{margin-bottom:0}
-        .al-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+        .al-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0}
         .alt-r{background:rgba(231,76,60,.08);border-color:rgba(231,76,60,.2)}.alt-r .al-icon{background:rgba(231,76,60,.1);color:var(--red)}
         .alt-y{background:rgba(241,196,15,.06);border-color:rgba(241,196,15,.3)}.alt-y .al-icon{background:rgba(241,196,15,.12);color:#b7950b}
         .alt-g{background:rgba(46,204,113,.06);border-color:rgba(46,204,113,.2)}.alt-g .al-icon{background:rgba(46,204,113,.1);color:var(--green)}
-        .al-body strong{font-size:.82rem;color:var(--text-dark);font-weight:700}
-        .al-body p{font-size:.73rem;color:var(--text-gray);margin-top:2px}
-        .al-time{font-size:.68rem;color:var(--text-light);font-weight:600;white-space:nowrap;margin-left:auto}
+        .al-body strong{font-size:.8rem;color:var(--text-dark);font-weight:700}
+        .al-body p{font-size:.71rem;color:var(--text-gray);margin-top:2px}
+        .al-time{font-size:.66rem;color:var(--text-light);font-weight:600;white-space:nowrap;margin-left:auto}
 
         /* TOP CAUSES */
-        .tc-item{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+        .tc-item{display:flex;gap:11px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
         .tc-item:last-child{border-bottom:none}
-        .tc-rank{width:26px;height:26px;border-radius:7px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:var(--text-gray);flex-shrink:0}
+        .tc-rank{width:24px;height:24px;border-radius:7px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--text-gray);flex-shrink:0}
         .tc-info{flex:1}
-        .tc-name{font-size:.82rem;font-weight:700;color:var(--text-dark)}
-        .tc-bar{height:5px;background:var(--bg);border-radius:5px;overflow:hidden;margin-top:5px}
+        .tc-name{font-size:.8rem;font-weight:700;color:var(--text-dark)}
+        .tc-bar{height:5px;background:var(--bg);border-radius:5px;overflow:hidden;margin-top:4px}
         .tc-fill{height:100%;border-radius:5px;width:0;transition:width 1.3s cubic-bezier(.34,1.56,.64,1)}
-        .tc-amt{font-size:.8rem;font-weight:800;color:var(--text-dark);white-space:nowrap}
+        .tc-amt{font-size:.78rem;font-weight:800;color:var(--text-dark);white-space:nowrap}
 
         /* CHAT */
-        .chat-card{display:flex;flex-direction:column;height:400px}
-        .cmsg{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:2px 0;margin-bottom:12px}
+        .chat-card{display:flex;flex-direction:column;height:370px}
+        .cmsg{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:9px;padding:2px 0;margin-bottom:11px}
         .cmsg::-webkit-scrollbar{width:3px}.cmsg::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-        .bub{max-width:82%;padding:10px 13px;border-radius:14px;font-size:.83rem;line-height:1.5;animation:bi .3s ease}
+        .bub{max-width:82%;padding:9px 12px;border-radius:13px;font-size:.81rem;line-height:1.5;animation:bi .3s ease}
         @keyframes bi{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
         .bub.in{background:var(--bg);color:var(--text-dark);border-bottom-left-radius:4px;align-self:flex-start}
         .bub.out{background:linear-gradient(135deg,var(--red),#c0392b);color:white;border-bottom-right-radius:4px;align-self:flex-end}
-        .bm2{font-size:.67rem;color:var(--text-light);margin-top:2px}
+        .bm2{font-size:.65rem;color:var(--text-light);margin-top:2px}
         .bm2.r{text-align:right}
-        .cinp{display:flex;gap:8px;align-items:center;background:var(--bg);border-radius:12px;padding:7px 7px 7px 13px}
-        .cii{flex:1;border:none;background:transparent;outline:none;font-family:var(--font);font-size:.84rem;color:var(--text-dark)}
+        .cinp{display:flex;gap:8px;align-items:center;background:var(--bg);border-radius:11px;padding:6px 6px 6px 12px}
+        .cii{flex:1;border:none;background:transparent;outline:none;font-family:var(--font);font-size:.82rem;color:var(--text-dark)}
         .cii::placeholder{color:var(--text-light)}
-        .csd{width:34px;height:34px;border-radius:9px;background:var(--red);color:white;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;font-size:.82rem}
+        .csd{width:32px;height:32px;border-radius:9px;background:var(--red);color:white;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;font-size:.8rem}
         .csd:hover{background:#c0392b;transform:scale(1.05)}
 
         /* LINE CHART */
-        .lsvg{width:100%;height:90px;overflow:visible}
+        .lsvg{width:100%;height:85px;overflow:visible}
 
-        /* CAUSE PROGRESS */
-        .cp{margin-bottom:16px}
-        .cph{display:flex;justify-content:space-between;margin-bottom:6px}
-        .cpn{font-size:.82rem;font-weight:700;color:var(--text-dark)}
-        .cpp{font-size:.78rem;font-weight:700}
-        .cpb{height:7px;background:var(--bg);border-radius:10px;overflow:hidden}
-        .cpf{height:100%;border-radius:10px;width:0;transition:width 1.4s cubic-bezier(.34,1.56,.64,1)}
+        /* SECTION HEADERS */
+        .sec-header{margin-bottom:22px}
+        .sec-header h2{font-size:1.3rem;font-weight:800;color:var(--text-dark)}
+        .sec-header p{font-size:.8rem;color:var(--text-gray);margin-top:4px}
 
-        @media(max-width:1200px){.sg{grid-template-columns:1fr 1fr}.cg{grid-template-columns:1fr}.lg3{grid-template-columns:1fr}}
-        @media(max-width:768px){.sidebar{width:0;overflow:hidden}.main{margin-left:0}.pb{padding:16px 12px}.topbar{padding:12px 12px}.sg{grid-template-columns:1fr 1fr}}
+        /* DONORS GRID */
+        .donors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+        .donor-card{background:var(--card);border-radius:14px;padding:18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:13px;transition:.25s}
+        .donor-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+        .d-ava{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:white;flex-shrink:0}
+        .d-info h4{font-size:.88rem;font-weight:700;color:var(--text-dark)}
+        .d-info p{font-size:.72rem;color:var(--text-gray);margin-top:2px}
+        .d-amt{font-size:.9rem;font-weight:800;color:var(--green)}
+
+        /* SEARCH */
+        .search-bar{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:11px;padding:10px 16px;box-shadow:var(--shadow);margin-bottom:16px;border:1px solid var(--border)}
+        .search-bar i{color:var(--text-gray)}
+        .search-bar input{flex:1;border:none;background:transparent;outline:none;font-family:var(--font);font-size:.85rem;color:var(--text-dark)}
+        .search-bar input::placeholder{color:var(--text-light)}
+
+        /* FILTER PILLS */
+        .filter-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+        .f-pill{padding:6px 14px;border-radius:20px;font-size:.74rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--card);color:var(--text-gray);transition:.2s}
+        .f-pill.active,.f-pill:hover{background:var(--red);color:white;border-color:var(--red)}
+
+        /* REPORTS */
+        .report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+        .report-card{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--shadow);cursor:pointer;transition:.25s;border:2px solid transparent}
+        .report-card:hover{border-color:var(--red);transform:translateY(-2px)}
+        .rep-icon{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:12px}
+        .report-card h3{font-size:.9rem;font-weight:800;color:var(--text-dark);margin-bottom:4px}
+        .report-card p{font-size:.74rem;color:var(--text-gray)}
+        .dl-btn{margin-top:12px;display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:700;color:var(--red);text-decoration:none}
+
+        /* SETTINGS */
+        .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .set-card{background:var(--card);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+        .set-card h3{font-size:.94rem;font-weight:800;color:var(--text-dark);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+        .set-card h3 i{color:var(--red)}
+        .set-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+        .set-row:last-child{border-bottom:none}
+        .set-label{font-size:.82rem;font-weight:600;color:var(--text-dark)}
+        .set-desc{font-size:.7rem;color:var(--text-gray);margin-top:2px}
+        .toggle{width:42px;height:22px;border-radius:20px;background:#ddd;position:relative;cursor:pointer;transition:.3s;flex-shrink:0}
+        .toggle.on{background:var(--teal)}
+        .toggle::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:white;transition:.3s}
+        .toggle.on::after{left:23px}
+        .set-input{width:100%;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);font-family:var(--font);font-size:.82rem;color:var(--text-dark);outline:none;margin-top:6px;transition:.2s}
+        .set-input:focus{border-color:var(--red)}
+        .save-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:var(--red);color:white;border-radius:9px;border:none;font-family:var(--font);font-size:.82rem;font-weight:700;cursor:pointer;transition:.2s;margin-top:14px}
+        .save-btn:hover{background:#c0392b}
+
+        /* SECURITY */
+        .sec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .sec-card{background:var(--card);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+        .sec-card h3{font-size:.94rem;font-weight:800;color:var(--text-dark);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+        .sec-card h3 i{color:var(--red)}
+        .log-item{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+        .log-item:last-child{border-bottom:none}
+        .log-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0}
+        .log-body strong{font-size:.8rem;color:var(--text-dark);font-weight:700}
+        .log-body p{font-size:.7rem;color:var(--text-gray);margin-top:1px}
+        .log-time{font-size:.65rem;color:var(--text-light);margin-left:auto;white-space:nowrap}
+
+        /* CAUSES MANAGEMENT */
+        .cause-mgmt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+        .cause-mgmt-card{background:var(--card);border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:.25s;border-top:4px solid}
+        .cause-mgmt-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+        .cause-mgmt-card h4{font-size:.88rem;font-weight:800;color:var(--text-dark);margin-bottom:6px}
+        .cause-mgmt-card .c-meta{font-size:.72rem;color:var(--text-gray);margin-bottom:12px}
+        .c-prog{height:6px;background:var(--bg);border-radius:6px;overflow:hidden;margin-bottom:8px}
+        .c-prog-fill{height:100%;border-radius:6px;width:0;transition:width 1.3s cubic-bezier(.34,1.56,.64,1)}
+        .c-footer{display:flex;justify-content:space-between;align-items:center}
+        .c-raised{font-size:.8rem;font-weight:800;color:var(--text-dark)}
+        .c-pct{font-size:.72rem;font-weight:700}
+        .action-row{display:flex;gap:6px;margin-top:10px;align-items:center}
+        .act-pill{padding:4px 10px;border-radius:7px;font-size:.7rem;font-weight:700;border:none;cursor:pointer;transition:.2s}
+        .act-edit{background:rgba(52,152,219,.12);color:var(--blue)}
+        .act-del{background:rgba(231,76,60,.12);color:var(--red)}
+        .act-edit:hover{background:var(--blue);color:white}
+        .act-del:hover{background:var(--red);color:white}
+
+        /* DONATIONS */
+        .don-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+        .don-stat{background:var(--card);border-radius:14px;padding:20px 16px;box-shadow:var(--shadow);text-align:center}
+        .don-stat .val{font-size:1.6rem;font-weight:800;margin-bottom:4px}
+        .don-stat .lbl{font-size:.74rem;color:var(--text-gray);font-weight:600}
+
+        @media(max-width:1200px){.sg{grid-template-columns:1fr 1fr}.cg{grid-template-columns:1fr}.lg3{grid-template-columns:1fr}.donors-grid{grid-template-columns:1fr 1fr}.report-grid{grid-template-columns:1fr}.settings-grid{grid-template-columns:1fr}.sec-grid{grid-template-columns:1fr}.cause-mgmt-grid{grid-template-columns:1fr 1fr}.don-summary{grid-template-columns:1fr}}
+        @media(max-width:768px){.sidebar{transform:translateX(-100%);}.sidebar.open{transform:translateX(0);box-shadow:4px 0 24px rgba(0,0,0,0.5);}.main{margin-left:0}.pb{padding:14px 12px}.topbar{padding:11px 12px; display:flex; flex-wrap:wrap; align-items:center;}.sg{grid-template-columns:1fr 1fr}.donors-grid{grid-template-columns:1fr}.cause-mgmt-grid{grid-template-columns:1fr} .mobile-toggle { display:block !important; margin-right:12px; font-size:1.2rem; cursor:pointer; color:var(--text-dark); order:1; } .t-right { order:2; margin-left:auto; } .t-title-wrapper { order:3; width:100%; margin-top:10px; } .sidebar-close { display: block !important; position: absolute; right: 15px; top: 20px; font-size: 1.25rem; color: rgba(255,255,255,0.7); cursor: pointer; }}
+        @media(max-width:480px){.sg{grid-template-columns:1fr !important;}}
+        .mobile-toggle, .sidebar-close { display: none; }
     </style>
 </head>
 <body>
 
 <aside class="sidebar">
-    <div class="s-logo">
-        <a href="index.html">Stackly<span>.</span></a>
+    <div class="s-logo" style="position: relative;">
+        <a href="index.html" style="display: block; margin-bottom: 5px;"><img src="images/whitelogo.webp" alt="Stackly Logo" style="height: 38px; width: auto; vertical-align: middle;"></a>
         <small>Admin Control Panel</small>
+        <i class="fa-solid fa-xmark sidebar-close" onclick="document.querySelector('.sidebar').classList.remove('open')"></i>
     </div>
     <div class="s-admin">
-        <div class="a-ava">SA</div>
+        <div class="a-ava" style="overflow: hidden;"><img src="images/elena.webp" alt="SA" style="width: 100%; height: 100%; object-fit: cover;"></div>
         <div class="a-meta">
             <h4>Super Admin</h4>
             <p><span class="s-dot"></span> Administrator</p>
         </div>
     </div>
     <nav class="s-nav">
-        <div class="s-sec">Overview</div>
-        <a href="#" class="s-item active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
-        <a href="#" class="s-item"><i class="fa-solid fa-users"></i> Donors <span class="s-badge">128</span></a>
-        <a href="#" class="s-item"><i class="fa-solid fa-hand-holding-heart"></i> Causes <span class="s-badge">14</span></a>
-        <a href="events.html" class="s-item"><i class="fa-solid fa-calendar-days"></i> Events</a>
+        <div class="s-sec">Main</div>
+        <button id="nav-dashboard" class="s-item active" onclick="showSection('dashboard',this)"><i class="fa-solid fa-gauge-high"></i> Dashboard</button>
+        <button id="nav-donors" class="s-item" onclick="showSection('donors',this)"><i class="fa-solid fa-users"></i> Donors <span class="s-badge">128</span></button>
+        <button id="nav-causes" class="s-item" onclick="showSection('causes',this)"><i class="fa-solid fa-hand-holding-heart"></i> Causes</button>
+        <a href="404.html" class="s-item"><i class="fa-solid fa-calendar-days"></i> Events</a>
         <div class="s-sec">Management</div>
-        <a href="#" class="s-item"><i class="fa-solid fa-money-bill-wave"></i> Donations</a>
-        <a href="#" class="s-item"><i class="fa-solid fa-file-invoice"></i> Reports</a>
-        <a href="#" class="s-item"><i class="fa-solid fa-bell"></i> Alerts <span class="s-badge">3</span></a>
+        <button id="nav-donations" class="s-item" onclick="showSection('donations',this)"><i class="fa-solid fa-money-bill-wave"></i> Donations</button>
+        <button id="nav-reports" class="s-item" onclick="showSection('reports',this)"><i class="fa-solid fa-file-invoice"></i> Reports</button>
         <div class="s-sec">System</div>
-        <a href="#" class="s-item"><i class="fa-solid fa-gear"></i> Settings</a>
-        <a href="#" class="s-item"><i class="fa-solid fa-shield-halved"></i> Security</a>
+        <button id="nav-settings" class="s-item" onclick="showSection('settings',this)"><i class="fa-solid fa-gear"></i> Settings</button>
+        <button id="nav-security" class="s-item" onclick="showSection('security',this)"><i class="fa-solid fa-shield-halved"></i> Security</button>
     </nav>
     <div class="s-foot">
         <a href="login.html" class="s-logout"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
@@ -207,196 +292,286 @@
 
 <div class="main">
     <div class="topbar">
-        <div class="t-left">
-            <h1>Admin Dashboard &#9876;</h1>
+        <i class="fa-solid fa-bars mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')"></i>
+        <div class="t-title-wrapper">
+            <h1 id="pageTitle">Admin Dashboard</h1>
             <p id="aDate">Loading...</p>
         </div>
         <div class="t-right">
-            <div class="t-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <div class="t-btn"><i class="fa-solid fa-bell"></i><div class="n-dot"></div></div>
-            <div class="t-btn"><i class="fa-solid fa-envelope"></i></div>
-            <div class="a-ava" style="width:34px;height:34px;font-size:.85rem">SA</div>
+            <div class="t-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div class="t-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-bell"></i><div class="n-dot"></div></div>
+            <div class="t-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-envelope"></i></div>
+            <div class="a-ava" style="width:34px;height:34px;overflow:hidden;"><img src="images/elena.webp" alt="SA" style="width:100%;height:100%;object-fit:cover;"></div>
         </div>
     </div>
 
     <div class="pb">
 
-        <!-- KPI CARDS -->
-        <div class="sg">
-            <div class="sc r1">
-                <div class="si"><i class="fa-solid fa-users"></i></div>
-                <div class="sv" data-count="1284">0</div>
-                <div class="sl">Total Donors</div>
-                <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +34 this week</div>
+        <!-- ===== DASHBOARD ===== -->
+        <div id="sec-dashboard" class="section active">
+            <div class="sg">
+                <div class="sc r1"><div class="si"><i class="fa-solid fa-users"></i></div><div class="sv" data-count="1284">0</div><div class="sl">Total Donors</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +34 this week</div></div>
+                <div class="sc r2"><div class="si"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="sv" data-count="892450">0</div><div class="sl">Total Donations (&#8377;)</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +22% vs last month</div></div>
+                <div class="sc r3"><div class="si"><i class="fa-solid fa-hands-holding-circle"></i></div><div class="sv" data-count="14">0</div><div class="sl">Active Causes</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> 3 fully funded</div></div>
+                <div class="sc r4"><div class="si"><i class="fa-solid fa-people-group"></i></div><div class="sv" data-count="5640">0</div><div class="sl">Lives Impacted</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +186 this month</div></div>
             </div>
-            <div class="sc r2">
-                <div class="si"><i class="fa-solid fa-indian-rupee-sign"></i></div>
-                <div class="sv" data-count="892450">0</div>
-                <div class="sl">Total Donations (&#8377;)</div>
-                <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +22% vs last month</div>
+            <div class="cg">
+                <div class="card">
+                    <div class="ch"><div><div class="ct">Donation Analytics</div><div class="cs">Monthly donations vs events funded &mdash; 2025</div></div><a href="404.html" class="ca">Export</a></div>
+                    <div class="bar-chart" id="aBarChart"></div>
+                    <div class="cleg">
+                        <div class="li2"><div class="ld" style="background:#e74c3c"></div>Donations</div>
+                        <div class="li2"><div class="ld" style="background:#3498db"></div>Events Funded</div>
+                        <div class="li2"><div class="ld" style="background:#2ecc71"></div>Targets Met</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="ch"><div><div class="ct">Cause Distribution</div><div class="cs">Allocation of funds</div></div></div>
+                    <div class="dw">
+                        <svg width="128" height="128" viewBox="0 0 128 128" id="aDSvg" style="flex-shrink:0"><circle cx="64" cy="64" r="48" fill="none" stroke="#f0f4f8" stroke-width="20"/></svg>
+                        <div class="dl" id="aDLeg"></div>
+                    </div>
+                    <div style="margin-top:14px">
+                        <div style="font-size:.71rem;font-weight:700;color:var(--text-gray);margin-bottom:6px">Monthly Growth Rate</div>
+                        <svg class="lsvg" id="aLineSvg" viewBox="0 0 280 70" preserveAspectRatio="none"></svg>
+                    </div>
+                </div>
             </div>
-            <div class="sc r3">
-                <div class="si"><i class="fa-solid fa-hands-holding-circle"></i></div>
-                <div class="sv" data-count="14">0</div>
-                <div class="sl">Active Causes</div>
-                <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> 3 fully funded</div>
+            <div class="card" style="margin-bottom:16px">
+                <div class="ch"><div><div class="ct">Recent Donors</div><div class="cs">Latest 6 transactions</div></div><a href="404.html" class="ca">View All</a></div>
+                <div class="tbl-wrap"><table><thead><tr><th>Donor</th><th>Amount</th><th>Cause</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="donorTable"></tbody></table></div>
             </div>
-            <div class="sc r4">
-                <div class="si"><i class="fa-solid fa-people-group"></i></div>
-                <div class="sv" data-count="5640">0</div>
-                <div class="sl">Lives Impacted</div>
-                <div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +186 this month</div>
+            <div class="lg3">
+                <div class="card">
+                    <div class="ch"><div><div class="ct">Top Causes</div><div class="cs">By donation amount</div></div><a href="404.html" class="ca" onclick="showSection('causes',document.getElementById('nav-causes'));return false;">Manage</a></div>
+                    <div class="tc-item"><div class="tc-rank">1</div><div class="tc-info"><div class="tc-name">Emergency Food Relief</div><div class="tc-bar"><div class="tc-fill" data-fill="91" style="background:var(--red)"></div></div></div><div class="tc-amt">&#8377;2.8L</div></div>
+                    <div class="tc-item"><div class="tc-rank">2</div><div class="tc-info"><div class="tc-name">Clean Water Initiative</div><div class="tc-bar"><div class="tc-fill" data-fill="78" style="background:var(--teal)"></div></div></div><div class="tc-amt">&#8377;2.1L</div></div>
+                    <div class="tc-item"><div class="tc-rank">3</div><div class="tc-info"><div class="tc-name">Education for All</div><div class="tc-bar"><div class="tc-fill" data-fill="65" style="background:var(--blue)"></div></div></div><div class="tc-amt">&#8377;1.7L</div></div>
+                    <div class="tc-item"><div class="tc-rank">4</div><div class="tc-info"><div class="tc-name">Women Empowerment</div><div class="tc-bar"><div class="tc-fill" data-fill="49" style="background:var(--purple)"></div></div></div><div class="tc-amt">&#8377;1.2L</div></div>
+                </div>
+                <div class="card">
+                    <div class="ch"><div><div class="ct">System Alerts</div><div class="cs">Requires attention</div></div><span style="background:var(--red);color:white;font-size:.7rem;font-weight:800;padding:3px 8px;border-radius:20px">3 New</span></div>
+                    <div class="alert-item alt-r"><div class="al-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="al-body"><strong>Cause Nearing Deadline</strong><p>Food Relief ends in 3 days &mdash; 91% funded</p></div><div class="al-time">1h ago</div></div>
+                    <div class="alert-item alt-y"><div class="al-icon"><i class="fa-solid fa-user-plus"></i></div><div class="al-body"><strong>12 New Registrations</strong><p>Pending approval from today's event</p></div><div class="al-time">3h ago</div></div>
+                    <div class="alert-item alt-g"><div class="al-icon"><i class="fa-solid fa-circle-check"></i></div><div class="al-body"><strong>Target Achieved!</strong><p>Clean Water Initiative fully funded &#127881;</p></div><div class="al-time">1d ago</div></div>
+                </div>
+                <div class="card chat-card">
+                    <div class="ch"><div><div class="ct"><i class="fa-solid fa-headset" style="color:var(--red);margin-right:6px"></i>Support Chat</div><div class="cs">Team communications</div></div><div style="display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--green);font-weight:700"><span class="s-dot"></span>8 online</div></div>
+                    <div class="cmsg" id="aChatMsgs">
+                        <div><div class="bub in">Good morning! Weekly report is ready for your review.</div><div class="bm2">Priya (Manager) &bull; 9:00 AM</div></div>
+                        <div><div class="bub in">June donations are up 22%! Great work team &#127881;</div><div class="bm2">Rajan (Finance) &bull; 9:15 AM</div></div>
+                        <div><div class="bub out">Excellent! Let's discuss new cause proposals today.</div><div class="bm2 r">Admin &bull; 9:20 AM</div></div>
+                        <div><div class="bub in">Food Relief is 91% funded &mdash; shall we announce it?</div><div class="bm2">Kumar (Field) &bull; 9:30 AM</div></div>
+                    </div>
+                    <div class="cinp"><input type="text" class="cii" id="aChatIn" placeholder="Send a message..."><a href="404.html" class="csd" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-paper-plane"></i></a></div>
+                </div>
             </div>
         </div>
 
-        <!-- CHARTS ROW -->
-        <div class="cg">
-            <div class="card" style="animation-delay:.25s">
-                <div class="ch">
-                    <div><div class="ct">Donation Analytics</div><div class="cs">Monthly donations vs events funded &mdash; 2025</div></div>
-                    <a href="#" class="ca">Export</a>
+        <!-- ===== DONORS ===== -->
+        <div id="sec-donors" class="section">
+            <div class="sec-header">
+                <h2><i class="fa-solid fa-users" style="color:var(--red);margin-right:8px"></i>Donor Management</h2>
+                <p>View, search, and manage all registered donors across the platform.</p>
+            </div>
+            <div class="sg">
+                <div class="sc r1"><div class="si"><i class="fa-solid fa-users"></i></div><div class="sv">1,284</div><div class="sl">Total Donors</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +34 this week</div></div>
+                <div class="sc r2"><div class="si"><i class="fa-solid fa-user-check"></i></div><div class="sv">1,141</div><div class="sl">Verified Donors</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> 88.8% verified</div></div>
+                <div class="sc r3"><div class="si"><i class="fa-solid fa-user-clock"></i></div><div class="sv">143</div><div class="sl">Pending Approval</div><div class="sc-trend dn"><i class="fa-solid fa-arrow-trend-down"></i> -12 today</div></div>
+                <div class="sc r4"><div class="si"><i class="fa-solid fa-star"></i></div><div class="sv">87</div><div class="sl">Gold Donors</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +5 this month</div></div>
+            </div>
+            <div class="search-bar"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search donors by name, email or cause..."></div>
+            <div class="filter-row">
+                <div class="f-pill active">All Donors</div>
+                <div class="f-pill">Verified</div>
+                <div class="f-pill">Pending</div>
+                <div class="f-pill">Gold Donors</div>
+                <div class="f-pill">This Month</div>
+            </div>
+            <div class="donors-grid" id="donorCards"></div>
+            <div class="card">
+                <div class="ch"><div><div class="ct">All Donor Transactions</div><div class="cs">Complete donation history</div></div><a href="404.html" class="ca">Export CSV</a></div>
+                <div class="tbl-wrap"><table><thead><tr><th>Donor</th><th>Total Donated</th><th>Cause</th><th>Last Donation</th><th>Status</th><th>Actions</th></tr></thead><tbody id="allDonorTable"></tbody></table></div>
+            </div>
+        </div>
+
+        <!-- ===== CAUSES ===== -->
+        <div id="sec-causes" class="section">
+            <div class="sec-header">
+                <h2><i class="fa-solid fa-hand-holding-heart" style="color:var(--red);margin-right:8px"></i>Cause Management</h2>
+                <p>Create, monitor, and manage all active and upcoming causes.</p>
+            </div>
+            <div class="sg">
+                <div class="sc r1"><div class="si"><i class="fa-solid fa-fire"></i></div><div class="sv">14</div><div class="sl">Active Causes</div><div class="sc-trend up"><i class="fa-solid fa-circle-check"></i> 3 fully funded</div></div>
+                <div class="sc r2"><div class="si"><i class="fa-solid fa-clock"></i></div><div class="sv">5</div><div class="sl">Upcoming</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> Starting next week</div></div>
+                <div class="sc r3"><div class="si"><i class="fa-solid fa-trophy"></i></div><div class="sv">28</div><div class="sl">Completed</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> All targets met</div></div>
+                <div class="sc r4"><div class="si"><i class="fa-solid fa-indian-rupee-sign"></i></div><div class="sv">8.9L</div><div class="sl">Total Raised</div><div class="sc-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +22% this month</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+                <div class="filter-row" style="margin:0">
+                    <div class="f-pill active">All</div>
+                    <div class="f-pill">Active</div>
+                    <div class="f-pill">Completed</div>
+                    <div class="f-pill">Upcoming</div>
                 </div>
-                <div class="bar-chart" id="aBarChart"></div>
-                <div style="display:flex;justify-content:space-between" id="aBarLabels"></div>
+                <button class="save-btn" style="margin:0" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i> Add New Cause</button>
+            </div>
+            <div class="cause-mgmt-grid" id="causeMgmtGrid"></div>
+        </div>
+
+        <!-- ===== DONATIONS ===== -->
+        <div id="sec-donations" class="section">
+            <div class="sec-header">
+                <h2><i class="fa-solid fa-money-bill-wave" style="color:var(--red);margin-right:8px"></i>Donations Overview</h2>
+                <p>Track all donation transactions and financial metrics.</p>
+            </div>
+            <div class="don-summary">
+                <div class="don-stat"><div class="val" style="color:var(--green)">&#8377;8,92,450</div><div class="lbl">Total Received</div></div>
+                <div class="don-stat"><div class="val" style="color:var(--blue)">&#8377;1,24,500</div><div class="lbl">This Month</div></div>
+                <div class="don-stat"><div class="val" style="color:var(--orange)">&#8377;6,847</div><div class="lbl">Average Donation</div></div>
+            </div>
+            <div class="card" style="margin-bottom:16px">
+                <div class="ch"><div><div class="ct">Donation Trends</div><div class="cs">Monthly breakdown &mdash; 2025</div></div><a href="404.html" class="ca">Download Report</a></div>
+                <div class="bar-chart" id="donBarChart"></div>
                 <div class="cleg">
-                    <div class="li2"><div class="ld" style="background:#e74c3c"></div>Donations</div>
-                    <div class="li2"><div class="ld" style="background:#3498db"></div>Events Funded</div>
-                    <div class="li2"><div class="ld" style="background:#2ecc71"></div>Targets Met</div>
+                    <div class="li2"><div class="ld" style="background:var(--red)"></div>Total</div>
+                    <div class="li2"><div class="ld" style="background:var(--blue)"></div>Online</div>
+                    <div class="li2"><div class="ld" style="background:var(--green)"></div>Offline</div>
                 </div>
             </div>
-            <div class="card" style="animation-delay:.3s">
-                <div class="ch"><div><div class="ct">Cause Distribution</div><div class="cs">Allocation of funds</div></div></div>
-                <div class="dw">
-                    <svg width="132" height="132" viewBox="0 0 132 132" id="aDSvg" style="flex-shrink:0">
-                        <circle cx="66" cy="66" r="50" fill="none" stroke="#f0f4f8" stroke-width="22"/>
-                    </svg>
-                    <div class="dl" id="aDLeg"></div>
-                </div>
-                <div style="margin-top:16px">
-                    <div style="font-size:.73rem;font-weight:700;color:var(--text-gray);margin-bottom:7px">Monthly Growth Rate</div>
-                    <svg class="lsvg" id="aLineSvg" viewBox="0 0 280 70" preserveAspectRatio="none"></svg>
-                </div>
+            <div class="card">
+                <div class="ch"><div><div class="ct">Recent Transactions</div><div class="cs">All donations this month</div></div><a href="404.html" class="ca">Export</a></div>
+                <div class="tbl-wrap"><table><thead><tr><th>Donor</th><th>Amount</th><th>Cause</th><th>Mode</th><th>Date</th><th>Status</th></tr></thead><tbody id="donTable"></tbody></table></div>
             </div>
         </div>
 
-        <!-- DONOR TABLE -->
-        <div class="card" style="animation-delay:.35s;margin-bottom:18px">
-            <div class="ch">
-                <div><div class="ct">Recent Donors</div><div class="cs">Latest 6 transactions</div></div>
-                <a href="#" class="ca">View All Donors</a>
+        <!-- ===== REPORTS ===== -->
+        <div id="sec-reports" class="section">
+            <div class="sec-header">
+                <h2><i class="fa-solid fa-file-invoice" style="color:var(--red);margin-right:8px"></i>Analytics &amp; Reports</h2>
+                <p>Download, view, and share detailed reports on all NGO activities.</p>
             </div>
-            <div class="tbl-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Donor</th><th>Amount</th><th>Cause</th><th>Date</th><th>Status</th><th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="donorTable"></tbody>
-                </table>
+            <div class="report-grid">
+                <div class="report-card" onclick="window.location.href='404.html'">
+                    <div class="rep-icon" style="background:rgba(231,76,60,.1);color:var(--red)"><i class="fa-solid fa-file-pdf"></i></div>
+                    <h3>Monthly Donations Report</h3>
+                    <p>Full breakdown of all donations received in June 2025.</p>
+                    <a class="dl-btn" href="404.html"><i class="fa-solid fa-download"></i> Download PDF</a>
+                </div>
+                <div class="report-card" onclick="window.location.href='404.html'">
+                    <div class="rep-icon" style="background:rgba(52,152,219,.1);color:var(--blue)"><i class="fa-solid fa-file-excel"></i></div>
+                    <h3>Donor Analytics Report</h3>
+                    <p>Demographics, retention rates and donor growth &mdash; Q2 2025.</p>
+                    <a class="dl-btn" href="404.html"><i class="fa-solid fa-download"></i> Download Excel</a>
+                </div>
+                <div class="report-card" onclick="window.location.href='404.html'">
+                    <div class="rep-icon" style="background:rgba(46,204,113,.1);color:var(--green)"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Impact Assessment Report</h3>
+                    <p>Lives impacted, goals achieved, and field reports for H1 2025.</p>
+                    <a class="dl-btn" href="404.html"><i class="fa-solid fa-download"></i> Download PDF</a>
+                </div>
+                <div class="report-card" onclick="window.location.href='404.html'">
+                    <div class="rep-icon" style="background:rgba(155,89,182,.1);color:var(--purple)"><i class="fa-solid fa-calendar-check"></i></div>
+                    <h3>Events Summary Report</h3>
+                    <p>Attendance, registrations, and outcomes of all events in 2025.</p>
+                    <a class="dl-btn" href="404.html"><i class="fa-solid fa-download"></i> Download PDF</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="ch"><div><div class="ct">Scheduled Reports</div><div class="cs">Auto-generated on a fixed schedule</div></div></div>
+                <div class="tbl-wrap"><table><thead><tr><th>Report Name</th><th>Frequency</th><th>Last Generated</th><th>Next Scheduled</th><th>Action</th></tr></thead>
+                <tbody>
+                    <tr><td>Monthly Donation Summary</td><td><span class="status-pill pill-g">Monthly</span></td><td>Jul 1, 2025</td><td>Aug 1, 2025</td><td><button class="tbl-action" onclick="window.location.href='404.html'">Run Now</button></td></tr>
+                    <tr><td>Weekly Donor Activity</td><td><span class="status-pill pill-y">Weekly</span></td><td>Jun 30, 2025</td><td>Jul 7, 2025</td><td><button class="tbl-action" onclick="window.location.href='404.html'">Run Now</button></td></tr>
+                    <tr><td>Annual Impact Report</td><td><span class="status-pill pill-r">Yearly</span></td><td>Jan 1, 2025</td><td>Jan 1, 2026</td><td><button class="tbl-action" onclick="window.location.href='404.html'">Preview</button></td></tr>
+                </tbody></table></div>
             </div>
         </div>
 
-        <!-- LOWER 3-COL -->
-        <div class="lg3">
-
-            <!-- TOP CAUSES -->
-            <div class="card" style="animation-delay:.4s">
-                <div class="ch"><div><div class="ct">Top Causes</div><div class="cs">By donation amount</div></div><a href="causes.html" class="ca">Manage</a></div>
-                <div class="tc-item">
-                    <div class="tc-rank">1</div>
-                    <div class="tc-info">
-                        <div class="tc-name">Emergency Food Relief</div>
-                        <div class="tc-bar"><div class="tc-fill" data-fill="91" style="background:var(--red)"></div></div>
-                    </div>
-                    <div class="tc-amt">&#8377;2.8L</div>
-                </div>
-                <div class="tc-item">
-                    <div class="tc-rank">2</div>
-                    <div class="tc-info">
-                        <div class="tc-name">Clean Water Initiative</div>
-                        <div class="tc-bar"><div class="tc-fill" data-fill="78" style="background:var(--teal)"></div></div>
-                    </div>
-                    <div class="tc-amt">&#8377;2.1L</div>
-                </div>
-                <div class="tc-item">
-                    <div class="tc-rank">3</div>
-                    <div class="tc-info">
-                        <div class="tc-name">Education for All</div>
-                        <div class="tc-bar"><div class="tc-fill" data-fill="65" style="background:var(--blue)"></div></div>
-                    </div>
-                    <div class="tc-amt">&#8377;1.7L</div>
-                </div>
-                <div class="tc-item">
-                    <div class="tc-rank">4</div>
-                    <div class="tc-info">
-                        <div class="tc-name">Women Empowerment</div>
-                        <div class="tc-bar"><div class="tc-fill" data-fill="49" style="background:var(--purple)"></div></div>
-                    </div>
-                    <div class="tc-amt">&#8377;1.2L</div>
-                </div>
-                <div class="tc-item">
-                    <div class="tc-rank">5</div>
-                    <div class="tc-info">
-                        <div class="tc-name">Green Salem Drive</div>
-                        <div class="tc-bar"><div class="tc-fill" data-fill="38" style="background:var(--green)"></div></div>
-                    </div>
-                    <div class="tc-amt">&#8377;0.9L</div>
-                </div>
+        <!-- ===== SETTINGS ===== -->
+        <div id="sec-settings" class="section">
+            <div class="sec-header">
+                <h2><i class="fa-solid fa-gear" style="color:var(--red);margin-right:8px"></i>System Settings</h2>
+                <p>Configure platform preferences, notifications, and admin options.</p>
             </div>
-
-            <!-- SYSTEM ALERTS -->
-            <div class="card" style="animation-delay:.45s">
-                <div class="ch"><div><div class="ct">System Alerts</div><div class="cs">Requires your attention</div></div><span class="s-badge" style="background:var(--red);color:white;font-size:.72rem;padding:3px 9px;border-radius:20px">3 New</span></div>
-                <div class="alert-item alt-r">
-                    <div class="al-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                    <div class="al-body">
-                        <strong>Cause Nearing Deadline</strong>
-                        <p>Food Relief cause ends in 3 days &mdash; 91% funded</p>
-                    </div>
-                    <div class="al-time">1h ago</div>
+            <div class="settings-grid">
+                <div class="set-card">
+                    <h3><i class="fa-solid fa-bell"></i> Notifications</h3>
+                    <div class="set-row"><div><div class="set-label">Email Alerts</div><div class="set-desc">Receive alerts via email</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                    <div class="set-row"><div><div class="set-label">SMS Notifications</div><div class="set-desc">Get SMS for critical events</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                    <div class="set-row"><div><div class="set-label">Donation Alerts</div><div class="set-desc">Notify on every donation</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                    <div class="set-row"><div><div class="set-label">Weekly Summary</div><div class="set-desc">Weekly digest every Monday</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
                 </div>
-                <div class="alert-item alt-y">
-                    <div class="al-icon"><i class="fa-solid fa-user-plus"></i></div>
-                    <div class="al-body">
-                        <strong>12 New Registrations</strong>
-                        <p>Pending approval from today's event</p>
-                    </div>
-                    <div class="al-time">3h ago</div>
+                <form class="set-card" id="adminOrgForm" onsubmit="window.location.href='404.html'; return false;">
+                    <h3><i class="fa-solid fa-building"></i> Organization Info</h3>
+                    <label style="font-size:.78rem;font-weight:700;color:var(--text-gray)">Organization Name *</label>
+                    <input class="set-input" id="adminOrgName" value="Stackly NGO" type="text" required>
+                    <span class="field-error-msg" id="adminOrgNameErr" style="color:var(--red); font-size:0.75rem; display:none; margin-top:4px;">Organization name is required</span>
+                    
+                    <label style="font-size:.78rem;font-weight:700;color:var(--text-gray);display:block;margin-top:10px">Admin Email *</label>
+                    <input class="set-input" id="adminEmailInput" value="admin@stackly.org" type="email" required>
+                    <span class="field-error-msg" id="adminEmailErr" style="color:var(--red); font-size:0.75rem; display:none; margin-top:4px;">Please enter a valid email address</span>
+                    
+                    <label style="font-size:.78rem;font-weight:700;color:var(--text-gray);display:block;margin-top:10px">Phone Number *</label>
+                    <input class="set-input" id="adminPhoneInput" value="9876543210" type="tel" required pattern="[0-9]{10}">
+                    <span class="field-error-msg" id="adminPhoneErr" style="color:var(--red); font-size:0.75rem; display:none; margin-top:4px;">Phone number must be exactly 10 digits</span>
+                    
+                    <button type="submit" class="save-btn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+                </form>
+                <div class="set-card">
+                    <h3><i class="fa-solid fa-palette"></i> Display</h3>
+                    <div class="set-row"><div><div class="set-label">Compact Sidebar</div><div class="set-desc">Show icons only in sidebar</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                    <div class="set-row"><div><div class="set-label">Animations</div><div class="set-desc">Enable UI micro-animations</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
                 </div>
-                <div class="alert-item alt-g">
-                    <div class="al-icon"><i class="fa-solid fa-circle-check"></i></div>
-                    <div class="al-body">
-                        <strong>Target Achieved!</strong>
-                        <p>Clean Water Initiative fully funded &#127881;</p>
-                    </div>
-                    <div class="al-time">1d ago</div>
-                </div>
-                <div class="alert-item alt-y">
-                    <div class="al-icon"><i class="fa-solid fa-file-export"></i></div>
-                    <div class="al-body">
-                        <strong>Monthly Report Ready</strong>
-                        <p>June 2025 analytics report generated</p>
-                    </div>
-                    <div class="al-time">2d ago</div>
-                </div>
+                <form class="set-card" id="adminDonationForm" onsubmit="window.location.href='404.html'; return false;">
+                    <h3><i class="fa-solid fa-indian-rupee-sign"></i> Donation Settings</h3>
+                    <label style="font-size:.78rem;font-weight:700;color:var(--text-gray)">Minimum Donation (&#8377;) *</label>
+                    <input class="set-input" id="adminMinDon" value="100" type="number" required min="1">
+                    <span class="field-error-msg" id="adminMinDonErr" style="color:var(--red); font-size:0.75rem; display:none; margin-top:4px;">Minimum donation must be at least 1</span>
+                    
+                    <label style="font-size:.78rem;font-weight:700;color:var(--text-gray);display:block;margin-top:10px">Tax Receipt Threshold (&#8377;) *</label>
+                    <input class="set-input" id="adminTaxThresh" value="500" type="number" required min="1">
+                    <span class="field-error-msg" id="adminTaxThreshErr" style="color:var(--red); font-size:0.75rem; display:none; margin-top:4px;">Tax threshold must be at least 1</span>
+                    
+                    <div class="set-row" style="margin-top:10px"><div><div class="set-label">Auto-issue Tax Receipts</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
             </div>
+        </div>
 
-            <!-- ADMIN CHAT -->
-            <div class="card chat-card" style="animation-delay:.5s">
-                <div class="ch">
-                    <div><div class="ct"><i class="fa-solid fa-headset" style="color:var(--red);margin-right:6px"></i>Support Chat</div><div class="cs">Team communications</div></div>
-                    <div style="display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--green);font-weight:700"><span class="s-dot"></span>8 online</div>
+        <!-- ===== SECURITY ===== -->
+        <div id="sec-security" class="section">
+            <div class="sec-header">
+                <h2><i class="fa-solid fa-shield-halved" style="color:var(--red);margin-right:8px"></i>Security Center</h2>
+                <p>Monitor access logs, manage permissions, and keep the system secure.</p>
+            </div>
+            <div class="sg">
+                <div class="sc r1"><div class="si"><i class="fa-solid fa-lock"></i></div><div class="sv" style="font-size:1.3rem">Safe</div><div class="sl">Security Status</div><div class="sc-trend up"><i class="fa-solid fa-circle-check"></i> All systems normal</div></div>
+                <div class="sc r2"><div class="si"><i class="fa-solid fa-key"></i></div><div class="sv">3</div><div class="sl">Active Sessions</div><div class="sc-trend up"><i class="fa-solid fa-desktop"></i> 2 desktop, 1 mobile</div></div>
+                <div class="sc r3"><div class="si"><i class="fa-solid fa-user-shield"></i></div><div class="sv" style="font-size:1.3rem">2FA On</div><div class="sl">Two-Factor Auth</div><div class="sc-trend up"><i class="fa-solid fa-shield-check"></i> Enabled for admin</div></div>
+                <div class="sc r4"><div class="si"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="sv">0</div><div class="sl">Failed Logins (24h)</div><div class="sc-trend up"><i class="fa-solid fa-check"></i> No suspicious activity</div></div>
+            </div>
+            <div class="sec-grid">
+                <div class="sec-card">
+                    <h3><i class="fa-solid fa-list-check"></i> Recent Access Logs</h3>
+                    <div class="log-item"><div class="log-icon" style="background:rgba(46,204,113,.1);color:var(--green)"><i class="fa-solid fa-right-to-bracket"></i></div><div class="log-body"><strong>Admin Login</strong><p>Chrome &bull; Windows &bull; 192.168.1.1</p></div><div class="log-time">10 min ago</div></div>
+                    <div class="log-item"><div class="log-icon" style="background:rgba(52,152,219,.1);color:var(--blue)"><i class="fa-solid fa-file-export"></i></div><div class="log-body"><strong>Report Exported</strong><p>June Monthly Report downloaded</p></div><div class="log-time">2h ago</div></div>
+                    <div class="log-item"><div class="log-icon" style="background:rgba(241,196,15,.1);color:#b7950b"><i class="fa-solid fa-user-pen"></i></div><div class="log-body"><strong>Donor Record Updated</strong><p>Arun Kumar profile modified</p></div><div class="log-time">5h ago</div></div>
+                    <div class="log-item"><div class="log-icon" style="background:rgba(231,76,60,.1);color:var(--red)"><i class="fa-solid fa-trash"></i></div><div class="log-body"><strong>Cause Deleted</strong><p>Expired cause removed by admin</p></div><div class="log-time">1d ago</div></div>
+                    <div class="log-item"><div class="log-icon" style="background:rgba(46,204,113,.1);color:var(--green)"><i class="fa-solid fa-right-to-bracket"></i></div><div class="log-body"><strong>Admin Login</strong><p>Mobile &bull; Safari &bull; 192.168.2.5</p></div><div class="log-time">2d ago</div></div>
                 </div>
-                <div class="cmsg" id="aChatMsgs">
-                    <div><div class="bub in">Good morning! Weekly report is ready for your review.</div><div class="bm2">Priya (Manager) &bull; 9:00 AM</div></div>
-                    <div><div class="bub in">June donations are up 22%! Great work team &#127881;</div><div class="bm2">Rajan (Finance) &bull; 9:15 AM</div></div>
-                    <div><div class="bub out">Excellent! Let's discuss the new cause proposals in today's meeting.</div><div class="bm2 r">Admin &bull; 9:20 AM</div></div>
-                    <div><div class="bub in">Food Relief cause is 91% funded &mdash; shall we announce it?</div><div class="bm2">Kumar (Field) &bull; 9:30 AM</div></div>
-                </div>
-                <div class="cinp">
-                    <input type="text" class="cii" id="aChatIn" placeholder="Send a message to the team...">
-                    <button class="csd" id="aChatSnd"><i class="fa-solid fa-paper-plane"></i></button>
+                <div class="sec-card">
+                    <h3><i class="fa-solid fa-sliders"></i> Security Settings</h3>
+                    <div class="set-row"><div><div class="set-label">Two-Factor Authentication</div><div class="set-desc">Require OTP for all logins</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                    <div class="set-row"><div><div class="set-label">Login Alerts</div><div class="set-desc">Email on new device login</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                    <div class="set-row"><div><div class="set-label">Session Timeout (30 min)</div><div class="set-desc">Auto logout when idle</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                    <div class="set-row"><div><div class="set-label">IP Whitelisting</div><div class="set-desc">Restrict access to known IPs</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                    <div style="margin-top:14px">
+                        <label style="font-size:.78rem;font-weight:700;color:var(--text-gray)">Change Admin Password</label>
+                        <input class="set-input" type="password" id="adminNewPass" placeholder="New password">
+                        <input class="set-input" type="password" id="adminConfirmPass" placeholder="Confirm password" style="margin-top:6px">
+                        <button class="save-btn" onclick="const p1=document.getElementById('adminNewPass').value; const p2=document.getElementById('adminConfirmPass').value; if(p1 && p2) { if(p1===p2) { alert('Password updated successfully!'); window.location.href='404.html'; } else { alert('Passwords do not match'); } } else { alert('Please fill in both password fields'); }"><i class="fa-solid fa-key"></i> Update Password</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -405,8 +580,125 @@
 </div>
 
 <script>
-// Date
 document.getElementById('aDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// Load saved email and name if exists on page load
+if (localStorage.getItem('userEmail')) {
+    const savedEmail = localStorage.getItem('userEmail');
+    if (document.getElementById('adminEmailInput')) {
+        document.getElementById('adminEmailInput').value = savedEmail;
+    }
+}
+if (localStorage.getItem('userFullName')) {
+    const savedName = localStorage.getItem('userFullName');
+    const aMetaH4 = document.querySelector('.a-meta h4');
+    if (aMetaH4) {
+        aMetaH4.textContent = savedName;
+    }
+}
+// Handle form submissions, validation and 404 redirection
+document.getElementById('adminOrgForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+    
+    // Org name validation
+    const orgName = document.getElementById('adminOrgName');
+    const orgNameErr = document.getElementById('adminOrgNameErr');
+    if (!orgName.value.trim()) {
+        orgNameErr.style.display = 'block';
+        orgName.style.borderColor = 'var(--red)';
+        valid = false;
+    } else {
+        orgNameErr.style.display = 'none';
+        orgName.style.borderColor = '';
+    }
+    
+    // Email validation
+    const email = document.getElementById('adminEmailInput');
+    const emailErr = document.getElementById('adminEmailErr');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value.trim())) {
+        emailErr.style.display = 'block';
+        email.style.borderColor = 'var(--red)';
+        valid = false;
+    } else {
+        emailErr.style.display = 'none';
+        email.style.borderColor = '';
+    }
+    
+    // Phone validation
+    const phone = document.getElementById('adminPhoneInput');
+    const phoneErr = document.getElementById('adminPhoneErr');
+    if (phone.value.length !== 10 || isNaN(phone.value)) {
+        phoneErr.style.display = 'block';
+        phone.style.borderColor = 'var(--red)';
+        valid = false;
+    } else {
+        phoneErr.style.display = 'none';
+        phone.style.borderColor = '';
+    }
+    
+    if (valid) {
+        // Save to localStorage to sync
+        localStorage.setItem('adminEmail', email.value.trim());
+        alert('Admin details validated successfully! Navigating to the confirmation page...');
+        window.location.href = '404.html';
+    }
+});
+
+document.getElementById('adminDonationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+    
+    const minDon = document.getElementById('adminMinDon');
+    const minDonErr = document.getElementById('adminMinDonErr');
+    if (parseFloat(minDon.value) <= 0 || !minDon.value) {
+        minDonErr.style.display = 'block';
+        minDon.style.borderColor = 'var(--red)';
+        valid = false;
+    } else {
+        minDonErr.style.display = 'none';
+        minDon.style.borderColor = '';
+    }
+    
+    const taxThresh = document.getElementById('adminTaxThresh');
+    const taxThreshErr = document.getElementById('adminTaxThreshErr');
+    if (parseFloat(taxThresh.value) <= 0 || !taxThresh.value) {
+        taxThreshErr.style.display = 'block';
+        taxThresh.style.borderColor = 'var(--red)';
+        valid = false;
+    } else {
+        taxThreshErr.style.display = 'none';
+        taxThresh.style.borderColor = '';
+    }
+    
+    if (valid) {
+        alert('Donation settings validated successfully! Navigating to the confirmation page...');
+        window.location.href = '404.html';
+    }
+});
+
+// Load saved email if exists on page load
+if (localStorage.getItem('adminEmail')) {
+    const savedEmail = localStorage.getItem('adminEmail');
+    if (document.getElementById('adminEmailInput')) {
+        document.getElementById('adminEmailInput').value = savedEmail;
+    }
+}
+
+function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.s-item').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-'+id).classList.add('active');
+    if(btn) btn.classList.add('active');
+    
+    document.querySelector('.sidebar').classList.remove('open');
+    
+    const titles = {dashboard:'Admin Dashboard',donors:'Donor Management',causes:'Cause Management',donations:'Donations Overview',reports:'Analytics & Reports',settings:'System Settings',security:'Security Center'};
+    document.getElementById('pageTitle').textContent = titles[id] || 'Admin Dashboard';
+    setTimeout(()=>{ document.querySelectorAll('.tc-fill,.c-prog-fill').forEach(el=>{ el.style.width=el.dataset.fill+'%'; }); }, 200);
+    if(id==='donations') setTimeout(buildDonBar, 100);
+}
 
 // Counters
 document.querySelectorAll('[data-count]').forEach(el=>{
@@ -415,21 +707,21 @@ document.querySelectorAll('[data-count]').forEach(el=>{
     const ti=setInterval(()=>{ c=Math.min(c+step,t); el.textContent=c.toLocaleString(); if(c>=t)clearInterval(ti); },25);
 });
 
-// Bar Chart
+// Dashboard Bar Chart
 const m2=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const d2=[12000,18000,14500,26000,19000,34000,24000,41000,31000,52000,44000,68000];
 const e2=[3000,5000,4000,8000,5500,10000,7000,12000,9000,16000,13000,20000];
 const g2=[8000,12000,9500,18000,13000,24000,17000,30000,22000,38000,32000,50000];
 const mx=Math.max(...d2);
-const abc=document.getElementById('aBarChart'), abl=document.getElementById('aBarLabels');
+const abc=document.getElementById('aBarChart');
 m2.forEach((mo,i)=>{
     const grp=document.createElement('div'); grp.className='bg2';
     const inner=document.createElement('div'); inner.className='bi2';
     [[d2[i],'#e74c3c'],[e2[i],'#3498db'],[g2[i],'#2ecc71']].forEach(([v,col])=>{
         const bar=document.createElement('div'); bar.className='b2';
-        const h=Math.round((v/mx)*145);
-        bar.style.cssText=`background:${col};height:0;flex:1;opacity:0.88`;
-        bar.innerHTML=`<span class="btt">&#8377;${(v/1000).toFixed(0)}k</span>`;
+        const h=Math.round((v/mx)*138);
+        bar.style.cssText='background:'+col+';height:0;flex:1;opacity:0.88';
+        bar.innerHTML='<span class="btt">&#8377;'+(v/1000).toFixed(0)+'k</span>';
         setTimeout(()=>{ bar.style.height=h+'px'; },300+i*55);
         inner.appendChild(bar);
     });
@@ -441,71 +733,138 @@ m2.forEach((mo,i)=>{
 
 // Donut
 const aDs=[{l:'Food Relief',p:32,c:'#e74c3c'},{l:'Clean Water',p:25,c:'#1abc9c'},{l:'Education',p:22,c:'#3498db'},{l:'Women Emp.',p:14,c:'#9b59b6'},{l:'Green Salem',p:7,c:'#2ecc71'}];
-const aS=document.getElementById('aDSvg'); let aA=-90; const acx=66,acy=66,ar=50;
+const aS=document.getElementById('aDSvg'); let aA=-90; const acx=64,acy=64,ar=48;
 aDs.forEach(d=>{
     const a=(d.p/100)*360, sr=(aA*Math.PI)/180, er=((aA+a)*Math.PI)/180;
     const x1=acx+ar*Math.cos(sr),y1=acy+ar*Math.sin(sr),x2=acx+ar*Math.cos(er),y2=acy+ar*Math.sin(er);
     const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-    p.setAttribute('d',`M ${x1} ${y1} A ${ar} ${ar} 0 ${a>180?1:0} 1 ${x2} ${y2}`);
-    p.setAttribute('fill','none'); p.setAttribute('stroke',d.c); p.setAttribute('stroke-width','22'); p.setAttribute('stroke-linecap','butt');
+    p.setAttribute('d','M '+x1+' '+y1+' A '+ar+' '+ar+' 0 '+(a>180?1:0)+' 1 '+x2+' '+y2);
+    p.setAttribute('fill','none'); p.setAttribute('stroke',d.c); p.setAttribute('stroke-width','20'); p.setAttribute('stroke-linecap','butt');
     aS.appendChild(p); aA+=a;
 });
 const at1=document.createElementNS('http://www.w3.org/2000/svg','text');
-at1.setAttribute('x',acx);at1.setAttribute('y',acy-6);at1.setAttribute('font-size','14');at1.setAttribute('font-weight','800');at1.setAttribute('fill','#1a1a2e');at1.setAttribute('text-anchor','middle');at1.setAttribute('dominant-baseline','middle');at1.textContent='₹8.9L'; aS.appendChild(at1);
+at1.setAttribute('x',acx);at1.setAttribute('y','58');at1.setAttribute('font-size','13');at1.setAttribute('font-weight','800');at1.setAttribute('fill','#1a1a2e');at1.setAttribute('text-anchor','middle');at1.textContent='\u20b98.9L'; aS.appendChild(at1);
 const at2=document.createElementNS('http://www.w3.org/2000/svg','text');
-at2.setAttribute('x',acx);at2.setAttribute('y',acy+11);at2.setAttribute('font-size','8');at2.setAttribute('fill','#64748b');at2.setAttribute('text-anchor','middle');at2.textContent='total funds'; aS.appendChild(at2);
+at2.setAttribute('x',acx);at2.setAttribute('y','74');at2.setAttribute('font-size','8');at2.setAttribute('fill','#64748b');at2.setAttribute('text-anchor','middle');at2.textContent='total funds'; aS.appendChild(at2);
 const aLeg=document.getElementById('aDLeg');
-aDs.forEach(d=>{ aLeg.innerHTML+=`<div class="dr"><div class="dleft"><div class="ddot" style="background:${d.c}"></div>${d.l}</div><span class="dpct">${d.p}%</span></div>`; });
+aDs.forEach(d=>{ aLeg.innerHTML+='<div class="dr"><div class="dleft"><div class="ddot" style="background:'+d.c+'"></div>'+d.l+'</div><span class="dpct">'+d.p+'%</span></div>'; });
 
-// Line chart
+// Line
 const lp=[30,52,41,70,58,84,68,91,75,100,88,100];
 const als=document.getElementById('aLineSvg');
-const lpStr=lp.map((v,i)=>`${(i/(lp.length-1))*280},${70-(v/100)*60}`).join(' ');
-als.innerHTML=`<defs><linearGradient id="alg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e74c3c" stop-opacity="0.25"/><stop offset="100%" stop-color="#e74c3c" stop-opacity="0"/></linearGradient></defs>
-<path d="M ${lpStr}" stroke="#e74c3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-<path d="M ${lpStr} L 280,70 L 0,70 Z" fill="url(#alg)"/>
-${lp.map((v,i)=>`<circle cx="${(i/(lp.length-1))*280}" cy="${70-(v/100)*60}" r="2.5" fill="#e74c3c"/>`).join('')}`;
+const lpStr=lp.map((v,i)=>(i/(lp.length-1)*280)+','+(70-v/100*60)).join(' ');
+als.innerHTML='<defs><linearGradient id="alg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e74c3c" stop-opacity="0.25"/><stop offset="100%" stop-color="#e74c3c" stop-opacity="0"/></linearGradient></defs><path d="M '+lpStr+'" stroke="#e74c3c" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M '+lpStr+' L 280,70 L 0,70 Z" fill="url(#alg)"/>'+lp.map((v,i)=>'<circle cx="'+(i/(lp.length-1)*280)+'" cy="'+(70-v/100*60)+'" r="2.5" fill="#e74c3c"/>').join('');
 
 // Donor Table
 const donors=[
-    {name:'Arun Kumar',init:'AK',col:'#e74c3c',amt:'₹5,000',cause:'Food Relief',date:'Jul 2, 2025',status:'Verified'},
-    {name:'Priya Sharma',init:'PS',col:'#9b59b6',amt:'₹2,500',cause:'Education',date:'Jul 2, 2025',status:'Verified'},
-    {name:'Rajan Patel',init:'RP',col:'#3498db',amt:'₹10,000',cause:'Clean Water',date:'Jul 1, 2025',status:'Verified'},
-    {name:'Meena Devi',init:'MD',col:'#2ecc71',amt:'₹1,000',cause:'Women Emp.',date:'Jul 1, 2025',status:'Pending'},
-    {name:'Suresh T',init:'ST',col:'#e67e22',amt:'₹7,500',cause:'Food Relief',date:'Jun 30, 2025',status:'Verified'},
-    {name:'Kavitha R',init:'KR',col:'#1abc9c',amt:'₹3,000',cause:'Green Salem',date:'Jun 30, 2025',status:'Pending'},
+    {name:'Arun Kumar',init:'AK',col:'#e74c3c',amt:'&#8377;5,000',cause:'Food Relief',date:'Jul 2, 2025',status:'Verified'},
+    {name:'Priya Sharma',init:'PS',col:'#9b59b6',amt:'&#8377;2,500',cause:'Education',date:'Jul 2, 2025',status:'Verified'},
+    {name:'Rajan Patel',init:'RP',col:'#3498db',amt:'&#8377;10,000',cause:'Clean Water',date:'Jul 1, 2025',status:'Verified'},
+    {name:'Meena Devi',init:'MD',col:'#2ecc71',amt:'&#8377;1,000',cause:'Women Emp.',date:'Jul 1, 2025',status:'Pending'},
+    {name:'Suresh T',init:'ST',col:'#e67e22',amt:'&#8377;7,500',cause:'Food Relief',date:'Jun 30, 2025',status:'Verified'},
+    {name:'Kavitha R',init:'KR',col:'#1abc9c',amt:'&#8377;3,000',cause:'Green Salem',date:'Jun 30, 2025',status:'Pending'},
 ];
 const tbl=document.getElementById('donorTable');
 donors.forEach(d=>{
     const pill=d.status==='Verified'?'pill-g':'pill-y';
-    tbl.innerHTML+=`<tr>
-        <td><span class="tbl-ava" style="background:${d.col}">${d.init}</span>${d.name}</td>
-        <td style="font-weight:800;color:var(--green)">${d.amt}</td>
-        <td>${d.cause}</td>
-        <td style="color:var(--text-gray)">${d.date}</td>
-        <td><span class="status-pill ${pill}">${d.status}</span></td>
-        <td><button class="tbl-action" onclick="alert('Viewing ${d.name}')"><i class="fa-solid fa-eye"></i> View</button></td>
-    </tr>`;
+    tbl.innerHTML+='<tr><td><span class="tbl-ava" style="background:'+d.col+'">'+d.init+'</span>'+d.name+'</td><td style="font-weight:800;color:var(--green)">'+d.amt+'</td><td>'+d.cause+'</td><td style="color:var(--text-gray)">'+d.date+'</td><td><span class="status-pill '+pill+'">'+d.status+'</span></td><td><button class="tbl-action" onclick="alert(\'Viewing '+d.name+'\')"><i class="fa-solid fa-eye"></i> View</button></td></tr>';
 });
 
-// Top causes & progress fills
-setTimeout(()=>{
-    document.querySelectorAll('.tc-fill').forEach(el=>{ el.style.width=el.dataset.fill+'%'; });
-},400);
+// TC fills on load
+setTimeout(()=>{ document.querySelectorAll('.tc-fill').forEach(el=>{ el.style.width=el.dataset.fill+'%'; }); },400);
 
-// Admin chat
+// Chat
 const acm=document.getElementById('aChatMsgs'),aci=document.getElementById('aChatIn'),acs=document.getElementById('aChatSnd');
-const areplies=["Understood! I'll update the team accordingly.","Report noted. Shall I prepare the summary?","Great progress! Let's keep the momentum going 💪","I'll coordinate with the field team right away.","Acknowledged. Meeting confirmed for 3 PM today."];
+const areplies=["Understood! I'll update the team accordingly.","Report noted. Shall I prepare the summary?","Great progress! Let's keep the momentum going!","I'll coordinate with the field team right away.","Acknowledged. Meeting confirmed for 3 PM today."];
 let ari=0;
 function adminSend(){
     const msg=aci.value.trim(); if(!msg)return;
     const t=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
-    acm.innerHTML+=`<div><div class="bub out">${msg}</div><div class="bm2 r">Admin &bull; ${t}</div></div>`;
+    acm.innerHTML+='<div><div class="bub out">'+msg+'</div><div class="bm2 r">Admin &bull; '+t+'</div></div>';
     aci.value=''; acm.scrollTop=acm.scrollHeight;
-    setTimeout(()=>{ acm.innerHTML+=`<div><div class="bub in">${areplies[ari++%areplies.length]}</div><div class="bm2">Team &bull; ${t}</div></div>`; acm.scrollTop=acm.scrollHeight; },900);
+    setTimeout(()=>{ acm.innerHTML+='<div><div class="bub in">'+areplies[ari++%areplies.length]+'</div><div class="bm2">Team &bull; '+t+'</div></div>'; acm.scrollTop=acm.scrollHeight; },900);
 }
 acs.addEventListener('click',adminSend);
 aci.addEventListener('keydown',e=>{ if(e.key==='Enter')adminSend(); });
+
+// Donors section
+const allDonors=[
+    {name:'Arun Kumar',init:'AK',col:'#e74c3c',total:'&#8377;42,000',cause:'Food Relief',date:'Jul 2, 2025',status:'Verified'},
+    {name:'Priya Sharma',init:'PS',col:'#9b59b6',total:'&#8377;18,500',cause:'Education',date:'Jul 2, 2025',status:'Verified'},
+    {name:'Rajan Patel',init:'RP',col:'#3498db',total:'&#8377;65,000',cause:'Clean Water',date:'Jul 1, 2025',status:'Verified'},
+    {name:'Meena Devi',init:'MD',col:'#2ecc71',total:'&#8377;7,000',cause:'Women Emp.',date:'Jul 1, 2025',status:'Pending'},
+    {name:'Suresh T',init:'ST',col:'#e67e22',total:'&#8377;33,000',cause:'Food Relief',date:'Jun 30, 2025',status:'Verified'},
+    {name:'Kavitha R',init:'KR',col:'#1abc9c',total:'&#8377;12,000',cause:'Green Salem',date:'Jun 30, 2025',status:'Pending'},
+    {name:'Vijay Kumar',init:'VK',col:'#e74c3c',total:'&#8377;89,500',cause:'Education',date:'Jun 29, 2025',status:'Verified'},
+    {name:'Lakshmi S',init:'LS',col:'#9b59b6',total:'&#8377;9,000',cause:'Clean Water',date:'Jun 29, 2025',status:'Verified'},
+    {name:'Mohan R',init:'MR',col:'#3498db',total:'&#8377;24,500',cause:'Food Relief',date:'Jun 28, 2025',status:'Verified'},
+];
+const dc=document.getElementById('donorCards');
+allDonors.slice(0,6).forEach(d=>{
+    dc.innerHTML+='<div class="donor-card"><div class="d-ava" style="background:'+d.col+'">'+d.init+'</div><div class="d-info" style="flex:1"><h4>'+d.name+'</h4><p>'+d.cause+'</p><p style="margin-top:3px;color:var(--text-light)">'+d.date+'</p></div><div style="text-align:right"><div class="d-amt">'+d.total+'</div><span class="status-pill '+(d.status==='Verified'?'pill-g':'pill-y')+'" style="margin-top:6px;display:block">'+d.status+'</span></div></div>';
+});
+const adt=document.getElementById('allDonorTable');
+allDonors.forEach(d=>{
+    const pill=d.status==='Verified'?'pill-g':'pill-y';
+    adt.innerHTML+='<tr><td><span class="tbl-ava" style="background:'+d.col+'">'+d.init+'</span>'+d.name+'</td><td style="font-weight:800;color:var(--green)">'+d.total+'</td><td>'+d.cause+'</td><td style="color:var(--text-gray)">'+d.date+'</td><td><span class="status-pill '+pill+'">'+d.status+'</span></td><td><a href="404.html" class="tbl-action" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-eye"></i> View</a></td></tr>';
+});
+
+// Filter pills
+document.querySelectorAll('.f-pill').forEach(p=>{ p.addEventListener('click',function(){ this.closest('.filter-row').querySelectorAll('.f-pill').forEach(x=>x.classList.remove('active')); this.classList.add('active'); }); });
+
+// Causes
+const causes=[
+    {name:'Emergency Food Relief',cat:'Food & Nutrition',raised:'&#8377;2.8L',target:'&#8377;3.1L',pct:91,col:'#e74c3c'},
+    {name:'Clean Water Initiative',cat:'Water & Sanitation',raised:'&#8377;2.1L',target:'&#8377;2.7L',pct:78,col:'#1abc9c'},
+    {name:'Education for All',cat:'Education',raised:'&#8377;1.7L',target:'&#8377;2.6L',pct:65,col:'#3498db'},
+    {name:'Women Empowerment',cat:'Social Welfare',raised:'&#8377;1.2L',target:'&#8377;2.5L',pct:48,col:'#9b59b6'},
+    {name:'Green Salem Drive',cat:'Environment',raised:'&#8377;0.9L',target:'&#8377;2.4L',pct:38,col:'#2ecc71'},
+    {name:'Health for Elderly',cat:'Healthcare',raised:'&#8377;0.4L',target:'&#8377;2.0L',pct:20,col:'#e67e22'},
+];
+const cmg=document.getElementById('causeMgmtGrid');
+causes.forEach(c=>{
+    cmg.innerHTML+='<div class="cause-mgmt-card" style="border-top-color:'+c.col+'"><h4>'+c.name+'</h4><div class="c-meta">'+c.cat+'</div><div class="c-prog"><div class="c-prog-fill" data-fill="'+c.pct+'" style="background:'+c.col+'"></div></div><div class="c-footer"><span class="c-raised">'+c.raised+' / '+c.target+'</span><span class="c-pct" style="color:'+c.col+'">'+c.pct+'%</span></div><div class="action-row"><a href="404.html" class="act-pill act-edit" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-pen"></i> Edit</a><a href="404.html" class="act-pill act-del" style="text-decoration: none; display: inline-block;"><i class="fa-solid fa-trash"></i> Delete</a><span class="status-pill pill-g" style="margin-left:auto">Active</span></div></div>';
+});
+
+// Donations bar
+function buildDonBar(){
+    const db=document.getElementById('donBarChart');
+    if(!db||db.children.length>0) return;
+    const tot=[12000,18000,14500,26000,19000,34000,24000,41000,31000,52000,44000,68000];
+    const onl=[8000,12000,9500,18000,13000,24000,17000,30000,22000,38000,32000,50000];
+    const off=tot.map((v,i)=>v-onl[i]);
+    const mx2=Math.max(...tot);
+    m2.forEach((mo,i)=>{
+        const grp=document.createElement('div'); grp.className='bg2';
+        const inner=document.createElement('div'); inner.className='bi2';
+        [[tot[i],'#e74c3c'],[onl[i],'#3498db'],[off[i],'#2ecc71']].forEach(([v,col])=>{
+            const bar=document.createElement('div'); bar.className='b2';
+            const h=Math.round((v/mx2)*138);
+            bar.style.cssText='background:'+col+';height:0;flex:1;opacity:0.88';
+            bar.innerHTML='<span class="btt">&#8377;'+(v/1000).toFixed(0)+'k</span>';
+            setTimeout(()=>{ bar.style.height=h+'px'; },200+i*50);
+            inner.appendChild(bar);
+        });
+        grp.appendChild(inner);
+        const lbl=document.createElement('div'); lbl.className='bl2'; lbl.textContent=mo;
+        grp.appendChild(lbl);
+        db.appendChild(grp);
+    });
+}
+
+// Donations table
+const donData=[
+    {name:'Arun Kumar',init:'AK',col:'#e74c3c',amt:'&#8377;5,000',cause:'Food Relief',mode:'Online',date:'Jul 2, 2025',status:'Verified'},
+    {name:'Rajan Patel',init:'RP',col:'#3498db',amt:'&#8377;10,000',cause:'Clean Water',mode:'Online',date:'Jul 1, 2025',status:'Verified'},
+    {name:'Vijay Kumar',init:'VK',col:'#e74c3c',amt:'&#8377;15,000',cause:'Education',mode:'Offline',date:'Jun 30, 2025',status:'Verified'},
+    {name:'Meena Devi',init:'MD',col:'#2ecc71',amt:'&#8377;1,000',cause:'Women Emp.',mode:'Online',date:'Jun 30, 2025',status:'Pending'},
+    {name:'Priya Sharma',init:'PS',col:'#9b59b6',amt:'&#8377;2,500',cause:'Education',mode:'Online',date:'Jun 29, 2025',status:'Verified'},
+];
+const dtt=document.getElementById('donTable');
+donData.forEach(d=>{
+    const pill=d.status==='Verified'?'pill-g':'pill-y';
+    dtt.innerHTML+='<tr><td><span class="tbl-ava" style="background:'+d.col+'">'+d.init+'</span>'+d.name+'</td><td style="font-weight:800;color:var(--green)">'+d.amt+'</td><td>'+d.cause+'</td><td><span class="status-pill pill-y">'+d.mode+'</span></td><td style="color:var(--text-gray)">'+d.date+'</td><td><span class="status-pill '+pill+'">'+d.status+'</span></td></tr>';
+});
 </script>
 </body>
 </html>
