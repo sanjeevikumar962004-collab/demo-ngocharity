@@ -7,8 +7,7 @@
     <meta name="description" content="Get in touch with Stackly NGO Salem. Contact us for donations, volunteering opportunities, partnership programs, or any inquiries. We are here to help.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
-    <!-- Leaflet JS for Interactive Maps -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <style>
         :root {
             --teal:#1abc9c; --teal-dark:#16a085;
@@ -347,9 +346,9 @@ body{overflow-x:hidden}
                 </form>
             </div>
 
-            <!-- Right Card: Leaflet Map -->
+            <!-- Right Card: Google Map -->
             <div class="map-wrapper reveal-r">
-                <div id="map"></div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.1616098770783!2d78.17140487505539!3d11.682956588526356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babefef7fd970bb%3A0xe11aef1a71994f9!2sStackly!5e0!3m2!1sen!2sin!4v1783405120789!5m2!1sen!2sin" style="border:0; width:100%; height:100%; min-height:400px; flex:1;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                 <div class="map-details">
                     <div>
                         <h4>Main Office Location</h4>
@@ -562,8 +561,7 @@ body{overflow-x:hidden}
     </footer>
 
 <!-- ============================= SCRIPTS ============================= -->
-<!-- Leaflet JS Map Engine -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
 /* ---- Mobile Menu ---- */
 const menuToggle = document.getElementById('menuToggle');
@@ -616,40 +614,7 @@ function toggleFaq(element) {
     }
 }
 
-/* ---- Leaflet Map Integration ---- */
-document.addEventListener('DOMContentLoaded', () => {
-    // Coordinates for Salem, Tamil Nadu, India [Latitude, Longitude]
-    const salemCoords = [11.6643, 78.1460];
-    
-    // Create the map container object
-    const map = L.map('map', {
-        center: salemCoords,
-        zoom: 13,
-        zoomControl: false // Disable default zoom control for cleaner UI
-    });
 
-    // Add zoom control at bottom-right
-    L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-    // Apply clean OpenStreetMap CartoDB Voyager tiles (premium styling without API key)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20
-    }).addTo(map);
-
-    // Create custom pin icon
-    const customIcon = L.divIcon({
-        className: 'custom-map-pin',
-        html: `<div style="background-color: var(--teal); width: 18px; height: 18px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 10px rgba(0,0,0,0.3); animation: pulse 2s infinite;"></div>`,
-        iconSize: [18, 18],
-        iconAnchor: [9, 9]
-    });
-
-    // Add marker to map
-    const marker = L.marker(salemCoords, { icon: customIcon }).addTo(map);
-    marker.bindPopup(`<strong>Stackly NGO Main Office</strong><br>12, MG Road, near Old Bus Stand, Salem.`).openPopup();
-});
 
 function handleContactPhone(input) {
     input.value = input.value.replace(/[^0-9]/g, '');
